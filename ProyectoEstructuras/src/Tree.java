@@ -19,12 +19,11 @@ public class Tree {
         this.order = order;
         this.hash = hash;
     }
+    public Tree(){
+        
+    }
     
     public void update() {}
-    public boolean isSwinged() {
-        return true;
-    }
-    public void swing() {}
     public void create() {}
     public void sort() {}
     public void setOrder(int n) {}
