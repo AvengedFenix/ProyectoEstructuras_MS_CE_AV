@@ -258,9 +258,11 @@ public class GUIProject extends javax.swing.JFrame {
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         // TODO add your handling code here:
-       adminPerson ap = new adminPerson("./personas.txt");
-       ap.cargarArchivo();
-       ap.setPersona(new Person("Juan", 20));
+        adminPerson ap = new adminPerson("./personas.txt");
+        ap.cargarArchivo();
+        ap.setPerson(new Person("Juan", 20));
+        ap.escribirArchivo();
+        
         jd_desempeno.pack();
         jd_desempeno.setLocationRelativeTo(null);
         jd_desempeno.setVisible(true);
