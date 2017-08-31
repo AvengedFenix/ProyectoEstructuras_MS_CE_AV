@@ -23,6 +23,7 @@ public class GUIProject extends javax.swing.JFrame {
     public GUIProject() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.pack();
     }
 
     /**
@@ -49,8 +50,8 @@ public class GUIProject extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
+        jMenu1 = new javax.swing.JMenu();
 
         jPanel2.setBackground(new java.awt.Color(255, 153, 0));
 
@@ -109,6 +110,7 @@ public class GUIProject extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 153, 153));
+        setSize(new java.awt.Dimension(760, 500));
 
         panel_p.setBackground(new java.awt.Color(0, 102, 102));
 
@@ -123,10 +125,10 @@ public class GUIProject extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(83, 83, 83)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(96, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addGap(79, 79, 79))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,6 +138,7 @@ public class GUIProject extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        TF_compresion.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
         TF_compresion.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 TF_compresionKeyPressed(evt);
@@ -143,6 +146,7 @@ public class GUIProject extends javax.swing.JFrame {
         });
 
         bt_go.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        bt_go.setForeground(new java.awt.Color(0, 102, 102));
         bt_go.setText("GO");
         bt_go.setVisible(false);
         bt_go.addActionListener(new java.awt.event.ActionListener() {
@@ -182,56 +186,48 @@ public class GUIProject extends javax.swing.JFrame {
         panel_pLayout.setHorizontalGroup(
             panel_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_pLayout.createSequentialGroup()
-                .addGroup(panel_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panel_pLayout.createSequentialGroup()
-                        .addGap(268, 268, 268)
-                        .addComponent(jLabel8))
-                    .addGroup(panel_pLayout.createSequentialGroup()
-                        .addGap(203, 203, 203)
-                        .addGroup(panel_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TF_compresion, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_pLayout.createSequentialGroup()
-                .addContainerGap(162, Short.MAX_VALUE)
-                .addGroup(panel_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_pLayout.createSequentialGroup()
-                        .addGroup(panel_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6))
-                        .addGap(172, 172, 172))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel_pLayout.createSequentialGroup()
-                        .addComponent(bt_go, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(318, 318, 318))))
+                .addGap(187, 187, 187)
+                .addGroup(panel_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel8)
+                    .addComponent(TF_compresion, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bt_go, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel5)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(182, Short.MAX_VALUE))
         );
         panel_pLayout.setVerticalGroup(
             panel_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_pLayout.createSequentialGroup()
                 .addGap(38, 38, 38)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
+                .addGap(50, 50, 50)
                 .addComponent(jLabel5)
                 .addGap(34, 34, 34)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addGap(28, 28, 28)
                 .addComponent(jLabel7)
                 .addGap(31, 31, 31)
                 .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addGap(41, 41, 41)
                 .addComponent(TF_compresion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bt_go)
-                .addGap(12, 12, 12))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         TF_compresion.setVisible(false);
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
 
         jMenu2.setText("Edit");
+        jMenu2.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
         jMenuBar1.add(jMenu2);
+
+        jMenu1.setText("File");
+        jMenu1.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
+        jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
 
@@ -239,15 +235,11 @@ public class GUIProject extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(panel_p, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(panel_p, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(panel_p, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(panel_p, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -277,6 +269,7 @@ public class GUIProject extends javax.swing.JFrame {
                 TF_compresion.setVisible(true);
         bt_go.setVisible(true);
         panel_p.updateUI();
+        this.pack();
     }//GEN-LAST:event_jLabel7MouseClicked
 
     /**
@@ -310,6 +303,7 @@ public class GUIProject extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new GUIProject().setVisible(true);
+
             }
         });
     }
