@@ -26,9 +26,11 @@ public class TreePersona {
         
     }
         
-    public TreePersona(String name, int evaluation) {
+    public TreePersona(String name, int evaluation, int order, int hash) {
         this.name = name;
         this.evaluation = evaluation;
+        this.order = order;
+        this.hash = hash;
     }
       
 
@@ -80,5 +82,10 @@ public class TreePersona {
 
     public void setHash(int hash) {
         this.hash = hash;
+    }
+    
+    public void setOrder(int n) {}
+    public int getOrder() {
+        return 0;
     }
 }
