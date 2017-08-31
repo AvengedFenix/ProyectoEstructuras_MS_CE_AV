@@ -66,4 +66,14 @@ public class Tree {
         this.subtrees = subtrees;
     }   
     
+    public void addTree(Tree x){
+        this.subtrees.add(x);
+    }
+    
+    public void addTrees(ArrayList<Tree> trees){
+        for (int i = 0; i < trees.size(); i++) {
+            this.subtrees.add(trees.get(i));
+        }
+    }
+    
 }
