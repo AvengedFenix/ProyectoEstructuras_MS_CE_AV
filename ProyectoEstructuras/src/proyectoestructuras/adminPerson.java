@@ -52,7 +52,7 @@ public class adminPerson {
     }
 
     //extra mutador
-    public void setPersona(Person p) {
+    public void setPerson(Person p) {
         this.listaPersonas.add(p);
     }
 
