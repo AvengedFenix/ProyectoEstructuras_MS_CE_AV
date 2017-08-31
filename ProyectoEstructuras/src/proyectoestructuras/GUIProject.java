@@ -5,7 +5,6 @@
  */
 package proyectoestructuras;
 
-import Panels.Panel1;
 import java.awt.Color;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -259,6 +258,9 @@ public class GUIProject extends javax.swing.JFrame {
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         // TODO add your handling code here:
+       adminPerson ap = new adminPerson("./personas.txt");
+       ap.cargarArchivo();
+       ap.setPersona(new Person("Juan", 20));
         jd_desempeno.pack();
         jd_desempeno.setLocationRelativeTo(null);
         jd_desempeno.setVisible(true);
@@ -266,7 +268,7 @@ public class GUIProject extends javax.swing.JFrame {
 
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
         // TODO add your handling code here:
-                TF_compresion.setVisible(true);
+        TF_compresion.setVisible(true);
         bt_go.setVisible(true);
         panel_p.updateUI();
         this.pack();
