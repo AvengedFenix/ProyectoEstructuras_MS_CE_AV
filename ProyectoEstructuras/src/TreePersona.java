@@ -104,6 +104,14 @@ public class TreePersona {
         
     }
     
+    public boolean isRoot(){
+        if(this.parent == null){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    
     
     public void setParent(TreePersona parent) {
         parent.addTree(this);
