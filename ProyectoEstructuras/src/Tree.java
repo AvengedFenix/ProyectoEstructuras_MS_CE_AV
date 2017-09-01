@@ -1,12 +1,10 @@
 import java.util.ArrayList;
 import javafx.scene.Node;
 
-/**
- * @author CJ
- */
+
 public class Tree {
     
-    /* Order Constants. */
+
     public final int PREV = 0;
     public final int SIMETRIC = 1;
     public final int POST = 2;
