@@ -11,35 +11,35 @@ import java.util.ArrayList;
  *
  * @author andre
  */
-public class TreePersona {
+public class TreePersona extends Tree {
+    
+    
 
-    private int hash;
-    private ArrayList<TreePersona> subtrees;
+
     private String name;
-    private int evaluation;
+    private int evaluation = 0;
     
     
 
-    private TreePersona parent = null;
 
     public TreePersona() {
         
     }
-        
-    public TreePersona(String name, int evaluation, int hash) {
+
+    public TreePersona(String name, int evaluation, int order, int hash, Tree parent) {
+        super(order, hash, parent);
         this.name = name;
         this.evaluation = evaluation;
+    }
 
-        this.hash = hash;
+    public TreePersona(String name, int order, int hash, Tree parent) {
+        super(order, hash, parent);
+        this.name = name;
     }
     
-    public TreePersona(int hash, TreePersona parent, String name, int evaluation) {
-        this.name = name;
-        this.evaluation = evaluation;
-        this.hash = hash;
-        this.parent = parent;
+    
         
-    }
+    
       
 
     public String getName() {
@@ -62,59 +62,4 @@ public class TreePersona {
         this.evaluation = evaluation;
     }
     
-    public ArrayList<TreePersona> getSubtrees() {
-        return subtrees;
-    }
-
-    public void setSubtrees(ArrayList<TreePersona> subtrees) {
-        this.subtrees = subtrees;
-    }   
-    
-    
-    
-    public void addTree(TreePersona x){
-        this.subtrees.add(x);
-    }
-    
-    public void addTrees(ArrayList<TreePersona> trees){
-        for (int i = 0; i < trees.size(); i++) {
-            this.subtrees.add(trees.get(i));
-        }
-    }
-    
-     public int getHash() {
-        return hash;
-    }
-
-    public void setHash(int hash) {
-        this.hash = hash;
-    }
-    
-    public void setOrder(int n) {}
-    public int getOrder() {
-        return 0;
-    }
-    
-    public boolean isLeaf(){
-        if(this.subtrees.isEmpty()){
-            return true;
-        }else{
-            return false;
-        }
-        
-    }
-    
-    public boolean isRoot(){
-        if(this.parent == null){
-            return true;
-        }else{
-            return false;
-        }
-    }
-    
-    
-    public void setParent(TreePersona parent) {
-        parent.addTree(this);
-        this.parent = parent;
-    }
 }

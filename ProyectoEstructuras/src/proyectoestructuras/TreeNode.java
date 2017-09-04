@@ -1,33 +1,36 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package proyectoestructuras;
+
 import java.util.ArrayList;
-import javafx.scene.Node;
 
-
-public class Tree {
-    
-
-    /*public final int PREV = 0;
-    public final int SIMETRIC = 1;
-    public final int POST = 2;*/
-    
+/**
+ *
+ * @author andre
+ */
+public class TreeNode {
     private int order;
     private int hash;
     
-    private ArrayList<Tree> subtrees = new ArrayList();
-    private Tree parent = null;
+    private ArrayList<TreeNode> children = new ArrayList();
+    private TreeNode parent = null;
 
-    public Tree(int order, int hash) {
+    public TreeNode(int order, int hash) {
         this.order = order;
         this.hash = hash;
     }
     
     
-    public Tree(int order, int hash, Tree parent) {
+    public TreeNode(int order, int hash, TreeNode parent) {
         this.order = order;
         this.hash = hash;
         this.parent = parent;
     }
     
-    public Tree(){
+    public TreeNode(){
         
     }
     
@@ -50,7 +53,9 @@ public class Tree {
     
         return null;
     }*/
-    public void begin() {}
+    public void begin() {
+        
+    }
     public int height() {
         return 0;
     }
@@ -66,30 +71,30 @@ public class Tree {
         this.hash = hash;
     }
 
-    public ArrayList<Tree> getSubtrees() {
-        return subtrees;
+    public ArrayList<TreeNode> getChildren() {
+        return children;
     }
 
-    public void setSubtrees(ArrayList<Tree> subtrees) {
-        this.subtrees = subtrees;
+    public void setChildren(ArrayList<TreeNode> children) {
+        this.children = children;
     }   
     
     
     
-    public void addTree(Tree x){
+    public void addTreeNode(TreeNode x){
         x.setParent(this);
-        this.subtrees.add(x);
+        this.children.add(x);
     }
     
-    public void addTrees(ArrayList<Tree> trees){
+    public void addTreeNodes(ArrayList<TreeNode> trees){
         for (int i = 0; i < trees.size(); i++) {
             trees.get(i).setParent(this);
-            this.subtrees.add(trees.get(i));
+            this.children.add(trees.get(i));
         }
     }
     
     public boolean isLeaf(){
-        if(this.subtrees.isEmpty()){
+        if(this.children.isEmpty()){
             return true;
         }else{
             return false;
@@ -98,8 +103,8 @@ public class Tree {
     }
     
     
-    public void setParent(Tree parent) {
-        parent.addTree(this);
+    public void setParent(TreeNode parent) {
+        parent.addTreeNode(this);
         this.parent = parent;
     }
     
@@ -120,11 +125,10 @@ public class Tree {
     }
     
     public boolean isParent(){
-        if(!this.subtrees.isEmpty()){
+        if(!this.children.isEmpty()){
             return true;
         }else{
             return false;
         }
     }
-    
 }
