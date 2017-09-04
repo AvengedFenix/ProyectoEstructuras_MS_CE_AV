@@ -45,6 +45,7 @@ public class adminPerson {
     public void setListaPersonas(ArrayList<Person> listaPersonas) {
         this.listaPersonas = listaPersonas;
     }
+    
 
     @Override
     public String toString() {
