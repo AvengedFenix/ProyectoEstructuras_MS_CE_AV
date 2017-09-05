@@ -5,7 +5,6 @@
  */
 package proyectoestructuras;
 
-import java.awt.Color;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -321,7 +320,9 @@ public class GUIProject extends javax.swing.JFrame {
         // TODO add your handling code here:
         adminPerson ap = new adminPerson("./personas.txt");
         ap.cargarArchivo();
-        ap.setPerson(new Person("Juan", 20));
+        Person p = new Person("Juan", 20);
+        ap.setPerson(p);
+
         ap.escribirArchivo();
         
         jd_desempeno.pack();

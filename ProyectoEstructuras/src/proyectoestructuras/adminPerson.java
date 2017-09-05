@@ -45,6 +45,10 @@ public class adminPerson {
     public void setListaPersonas(ArrayList<Person> listaPersonas) {
         this.listaPersonas = listaPersonas;
     }
+    
+    public ArrayList<Person> getLista(){
+        return listaPersonas;
+    }
 
     @Override
     public String toString() {
@@ -52,7 +56,7 @@ public class adminPerson {
     }
 
     //extra mutador
-    public void setPerson(Person p) {
+    public void setPerson(Person p){
         this.listaPersonas.add(p);
     }
 
