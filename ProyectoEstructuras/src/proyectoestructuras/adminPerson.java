@@ -46,9 +46,12 @@ public class adminPerson {
         this.listaPersonas = listaPersonas;
     }
     
+<<<<<<< HEAD
     public ArrayList<Person> getLista(){
         return listaPersonas;
     }
+=======
+>>>>>>> 21360ead128d25fc33e1caefad1afd66088bc9d1
 
     @Override
     public String toString() {
