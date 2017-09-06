@@ -15,7 +15,12 @@ public class TreeNode {
 
     private int order;
     private int hash;
+<<<<<<< HEAD
 
+=======
+    boolean visited = false;
+    
+>>>>>>> 96197c048dd986fdb6604bfb9fb1b2b4ce1614b0
     private ArrayList<TreeNode> children = new ArrayList();
     private TreeNode parent = null;
 
@@ -138,17 +143,51 @@ public class TreeNode {
             return false;
         }
     }
-
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     public TreeNode Lectura(TreeNode padre) {
         if (padre.getChildren().isEmpty()) {
+            
             return padre;
         } else {
             for (int i = 0; i < padre.getChildren().size()-1; i++) {
-                if (padre.getChildren().get(i).) {
-                    
+                if (padre.getChildren().get(i).getVisited() == true) {
+                    System.out.println("Already visited");
+                }else{
+                    return Lectura(padre.getChildren().get(i));
                 }
             }
-           // return padre.getChildren().get(0);
         }
+    }
+
+    
+ public boolean getVisited(){
+        return this.visited;
+    }
+    
+    public void setVisited(boolean visited){
+        this.visited = visited;
     }
 }
