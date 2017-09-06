@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class TreeNode {
 
     private int order;
+    private int evaluacion ;
     private int hash;
 <<<<<<< HEAD
 
@@ -189,5 +190,8 @@ public class TreeNode {
     
     public void setVisited(boolean visited){
         this.visited = visited;
+    }
+    public void Evaluar(){
+        
     }
 }
