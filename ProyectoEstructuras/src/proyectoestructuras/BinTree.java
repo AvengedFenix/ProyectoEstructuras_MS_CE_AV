@@ -152,6 +152,32 @@ public class BinTree {
     public boolean isDigit(String s){
         return Character.isDigit(s.charAt(0));    
     }
+    
+    
+   public void inorden(BinTree nodo) {
+        if (nodo != null) {
+            inorden(nodo.getLNode());
+            System.out.print(nodo.getInfo() + " ");
+            inorden(nodo.getRNode());
+        }
+    }
+    
+    public void preorden(BinTree nodo) {
+        if (nodo != null) {
+            System.out.print(nodo.getInfo() + " ");
+            inorden(nodo.getLNode());
+            inorden(nodo.getRNode());
+        }
+        
+    }
+    
+    public void postorden(BinTree nodo){
+        if(nodo != null){
+            postorden(nodo.getLNode());
+            postorden(nodo.getRNode());
+            System.out.print(nodo.getInfo() + " ");
+        }
+    }
 }
 
 
@@ -170,5 +196,7 @@ public static BinTree postf_toTree(String[] s){//ESTO TIENE QUE ESTAR EN EL MAIN
 
 
 */
+
+
 
 
