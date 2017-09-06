@@ -145,26 +145,6 @@ public class TreeNode {
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     public TreeNode Lectura(TreeNode padre) {
         if (padre.getChildren().isEmpty()) {
             
@@ -218,9 +198,7 @@ public class TreeNode {
                 x += this.getChildren().get(i).getEvaluacion();
             }
         this.setEvaluacion(x);
-        }
-        
-        
+        } 
     }
     
     public boolean allChildrenVisited(){
