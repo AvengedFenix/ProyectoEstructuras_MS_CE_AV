@@ -65,37 +65,52 @@ public class BinTree {
     }  
     
     
-    public int evaluar(BinTree root){
-        if(root == null){
+    public int evaluar(BinTree nodo){
+        if(nodo == null){
             return 0;
         }
         
-        if(root.getLNode() == null && root.getRNode() == null){
-            //System.out.println("info " + root.getInfo());
-            return Integer.parseInt(root.getInfo());
+        if(nodo.getLNode() == null && nodo.getRNode() == null){//esto significa que el nodo es leaf, por lo tanto es un numero
+            //System.out.println("info " + nodo.getInfo());
+            return Integer.parseInt(nodo.getInfo());
         }
         
-        int valor_l = evaluar(root.getLNode()); //evaluar left node
-        int valor_r = evaluar(root.getRNode()); // evaluar right node
+        int valor_l = evaluar(nodo.getLNode()); //evaluar left node
+        int valor_r = evaluar(nodo.getRNode()); // evaluar right node
 
-        if(root.getInfo().equals("+")){
+        String operator = nodo.getInfo();
+        switch(operator){
+            case "+":
+                return valor_l + valor_r;
+            case "-":
+                return valor_l - valor_r;
+            case "*":
+                return valor_l * valor_r;
+            case "/":
+                return valor_l / valor_r;
+            case "^":
+                return (int) Math.pow(valor_l, valor_r);
+        }
+        
+        /*
+        if(nodo.getInfo().equals("+")){
             //System.out.println("\n" + valor_l + " + " + valor_r + " = ");
             return valor_l + valor_r;
         }
         
-        else if(root.getInfo().equals("-")){
+        else if(nodo.getInfo().equals("-")){
             return valor_l - valor_r;
         }
         
-        else if(root.getInfo().equals("*")){
+        else if(nodo.getInfo().equals("*")){
             return valor_l * valor_r;
         }
         
-        else if (root.getInfo().equals("^")){
+        else if (nodo.getInfo().equals("^")){
             return (int) Math.pow(valor_l, valor_r);
-        }
+        }*/
         
-        else return valor_l / valor_r;
+        return 0;
     }
     
     public void postfixTree(String s, Stack<BinTree> stack){
@@ -105,16 +120,12 @@ public class BinTree {
         else{
             BinTree operatorNode = new BinTree(s);          
             
-            /*esto es sin ningun orden especifico pero siempre funciona
-            operatorNode.insertRNode(stack.pop());
-            operatorNode.insertLNode(stack.pop());
-            */
-            
-            //
-            BinTree popt1 = stack.pop();//nodo 1 del stack
-            BinTree popt2 = stack.pop();//nodo 2
+            BinTree rNodo = (stack.pop());//nodo derecho
+            BinTree lNodo = (stack.pop());
+            operatorNode.insertRNode(rNodo);//inserta nodo derecho
+            operatorNode.insertLNode(lNodo);
 
-            
+            /*
             if(isDigit(popt1.getInfo()) && !isDigit(popt2.getInfo())){//lo hice asi para que los nodos de los operadores siempre esten en el lado izquierdo
                 //si nodo 1 es digito y nodo 2 es operador, entonces el nodo 2 va a ser hijo izquierdo del operatorNode
                 operatorNode.insertLNode(popt2);
@@ -126,7 +137,8 @@ public class BinTree {
                 operatorNode.insertLNode(popt1);
                 operatorNode.insertRNode(popt2);
             }
-            //
+            */
+            
             
             System.out.println("Padre: " + operatorNode.getInfo());
             System.out.println("Left node: " + operatorNode.getLNode().getInfo());
@@ -142,9 +154,9 @@ public class BinTree {
     }
 }
 
-/*
 
-public static BinTree postf_toTree(String[] s){//ESTO TIENE QUE ESTAR EN EL MAIN o en una clase Tree que contenga un nodo root pero no se si es necesario
+/*
+public static BinTree postf_toTree(String[] s){//ESTO TIENE QUE ESTAR EN EL MAIN o en una clase Tree que contenga un nodo nodo pero no se si es necesario
         BinTree b = new BinTree();
         
         Stack<BinTree> stackTree = new Stack();

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class TreeNode {
     private int order;
     private int hash;
+    boolean visited = false;
     
     private ArrayList<TreeNode> children = new ArrayList();
     private TreeNode parent = null;
@@ -130,5 +131,13 @@ public class TreeNode {
         }else{
             return false;
         }
+    }
+    
+    public boolean getVisited(){
+        return this.visited;
+    }
+    
+    public void setVisited(boolean visited){
+        this.visited = visited;
     }
 }
