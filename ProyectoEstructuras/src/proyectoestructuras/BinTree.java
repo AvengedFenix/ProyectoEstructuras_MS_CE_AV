@@ -5,6 +5,8 @@
  */
 package proyectoestructuras;
 
+import java.util.Stack;
+
 /**
  *
  * @author andre
@@ -33,9 +35,17 @@ public class BinTree {
         this.LNode.setInfo(info);
     }
     
+    public void insertLNode(BinTree LNode){
+        this.LNode = LNode;
+    }
+    
     public void insertRNode(BinTree RNode, String info){
         this.RNode = RNode;
         this.RNode.setInfo(info);
+    }
+    
+    public void insertRNode(BinTree RNode){
+        this.RNode = RNode;
     }
     
     public void setInfo(String info){
@@ -52,8 +62,7 @@ public class BinTree {
     
     public BinTree getRNode(){
         return this.RNode;
-    }
-    
+    }  
     
     
     public int evaluar(BinTree root){
@@ -70,6 +79,7 @@ public class BinTree {
         int valor_r = evaluar(root.getRNode()); // evaluar right node
 
         if(root.getInfo().equals("+")){
+            //System.out.println("\n" + valor_l + " + " + valor_r + " = ");
             return valor_l + valor_r;
         }
         
@@ -88,4 +98,65 @@ public class BinTree {
         else return valor_l / valor_r;
     }
     
+    public void postfixTree(String s, Stack<BinTree> stack){
+        if(isDigit(s)){
+            stack.push(new BinTree(s));
+        }
+        else{
+            BinTree operatorNode = new BinTree(s);          
+            
+            /*esto es sin ningun orden especifico pero siempre funciona
+            operatorNode.insertRNode(stack.pop());
+            operatorNode.insertLNode(stack.pop());
+            */
+            
+            //
+            BinTree popt1 = stack.pop();//nodo 1 del stack
+            BinTree popt2 = stack.pop();//nodo 2
+
+            
+            if(isDigit(popt1.getInfo()) && !isDigit(popt2.getInfo())){//lo hice asi para que los nodos de los operadores siempre esten en el lado izquierdo
+                //si nodo 1 es digito y nodo 2 es operador, entonces el nodo 2 va a ser hijo izquierdo del operatorNode
+                operatorNode.insertLNode(popt2);
+                operatorNode.insertRNode(popt1);
+            }else if(isDigit(popt2.getInfo()) && !isDigit(popt1.getInfo())){
+                operatorNode.insertLNode(popt1);
+                operatorNode.insertRNode(popt2);
+            }else{//si los dos nodos son numeros son leaves
+                operatorNode.insertLNode(popt1);
+                operatorNode.insertRNode(popt2);
+            }
+            //
+            
+            System.out.println("Padre: " + operatorNode.getInfo());
+            System.out.println("Left node: " + operatorNode.getLNode().getInfo());
+            System.out.println("Right node: " + operatorNode.getRNode().getInfo());
+            System.out.println("");         
+
+            stack.push(operatorNode);
+        }
+    }
+    
+    public boolean isDigit(String s){
+        return Character.isDigit(s.charAt(0));    
+    }
 }
+
+/*
+
+public static BinTree postf_toTree(String[] s){//ESTO TIENE QUE ESTAR EN EL MAIN o en una clase Tree que contenga un nodo root pero no se si es necesario
+        BinTree b = new BinTree();
+        
+        Stack<BinTree> stackTree = new Stack();
+        
+        for (int i = 0; i < s.length; i++) {
+            b.postfixTree(s[i], stackTree);
+        }
+
+        return stackTree.pop();
+}
+
+
+*/
+
+
