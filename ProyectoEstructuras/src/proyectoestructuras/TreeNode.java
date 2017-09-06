@@ -16,10 +16,6 @@ public class TreeNode {
     private int order;
     private int evaluacion ;
     private int hash;
-<<<<<<< HEAD
-=======
-
->>>>>>> 37c3cffeab35c921598537e39358c6aff4eee081
     boolean visited = false;
     
     private ArrayList<TreeNode> children = new ArrayList();
@@ -148,26 +144,6 @@ public class TreeNode {
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     public TreeNode Lectura(TreeNode padre) {
         if (padre.getChildren().isEmpty()) {
             
@@ -221,9 +197,7 @@ public class TreeNode {
                 x += this.getChildren().get(i).getEvaluacion();
             }
         this.setEvaluacion(x);
-        }
-        
-        
+        } 
     }
     
     public boolean allChildrenVisited(){
