@@ -16,13 +16,17 @@ import java.util.Scanner;
  */
 public class Huffman {
     
+    private static ArrayList<Character> letters = new ArrayList();
+    private static ArrayList<Integer> freq = new ArrayList();
+    
     public static Map<Character,Integer> getCharFreq(String s) {
         Map<Character,Integer> charFreq = new HashMap<Character,Integer>();
+        int cont = 0;
             if (s != null) {
                 for (Character c : s.toCharArray()) {
                     Integer count = charFreq.get(c);
-                    int newCount = (count==null ? 1 : count+1);
-                    charFreq.put(c, newCount);
+                    int newCount = (count == null ? 1 : count+1);
+                    charFreq.put(c, newCount);     
                 }
             }
         return charFreq;
@@ -33,9 +37,17 @@ public class Huffman {
         Scanner sc = new Scanner(System.in);
         String s = sc.nextLine();
         System.out.println(s);
-        ArrayList letters = new ArrayList();
-        ArrayList freq = new ArrayList();
         
+        Map count = getCharFreq(s);
+        for (Character ch : s.toCharArray()) {
+            if (!letters.contains(ch)) {
+                letters.add(ch);
+                freq.add((int)count.get(ch));
+            }     
+        }
+        
+        for (int i = 0; i < letters.size(); i++) {
+            System.out.println(letters.get(i) + " " + freq.get(i));
+        }
     }
-    
 }
