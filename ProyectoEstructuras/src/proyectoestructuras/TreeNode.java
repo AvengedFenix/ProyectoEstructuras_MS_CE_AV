@@ -16,6 +16,10 @@ public class TreeNode {
     private int order;
     private int evaluacion ;
     private int hash;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 37c3cffeab35c921598537e39358c6aff4eee081
     boolean visited = false;
     
     private ArrayList<TreeNode> children = new ArrayList();
