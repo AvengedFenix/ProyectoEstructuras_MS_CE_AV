@@ -141,7 +141,25 @@ public class TreeNode {
     public void setVisited(boolean visited){
         this.visited = visited;
     }
-    public void Evaluar(){
+    
+    public int getEvaluacion(){
+        return this.evaluacion;
+    }
+    
+    public void setEvaluacion(int x){
+        this.evaluacion = x;
+    }
+    
+    public void Evaluar(TreeNode nodo){
+        int x = 0;
+        if(!nodo.getChildren().isEmpty()){
+            for (int i = 0; i < this.getChildren().size(); i++) {
+                x += this.getChildren().get(i).getEvaluacion();
+            }
+        nodo.setEvaluacion(x);
+        }
+        
         
     }
+    
 }
