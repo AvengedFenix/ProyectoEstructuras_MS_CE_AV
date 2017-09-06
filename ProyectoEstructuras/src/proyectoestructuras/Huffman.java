@@ -6,6 +6,7 @@
 package proyectoestructuras;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -49,5 +50,13 @@ public class Huffman {
         for (int i = 0; i < letters.size(); i++) {
             System.out.println(letters.get(i) + " " + freq.get(i));
         }
+        
+        Collections.sort(freq);
+        
+        for (int i = 0; i < letters.size(); i++) {
+            System.out.println(freq.get(i));
+        }
+        
+        
     }
 }
