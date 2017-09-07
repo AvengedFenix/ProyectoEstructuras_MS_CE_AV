@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class TreeNode {
 
     private int order;
-    private int evaluacion ;
+    private double evaluacion ;
     private int hash;
 
     boolean visited = false;
@@ -31,6 +31,10 @@ public class TreeNode {
         this.order = order;
         this.hash = hash;
         this.parent = parent;
+    }
+    
+    public TreeNode(double evaluacion){
+        this.evaluacion = evaluacion;
     }
 
     public TreeNode() {
@@ -114,7 +118,7 @@ public class TreeNode {
     }
 
     public void setParent(TreeNode parent) {
-        parent.addTreeNode(this);
+       // parent.addTreeNode(this);
         this.parent = parent;
     }
 
@@ -150,7 +154,7 @@ public class TreeNode {
             
             return padre;
         } else {
-            for (int i = 0; i < padre.getChildren().size()/*-1*/; i++) {
+            for (int i = 0; i < padre.getChildren().size()-1; i++) {
                 if (padre.getChildren().get(i).getVisited() == true) {
                     System.out.println("Already visited");
                 }else{
@@ -166,12 +170,24 @@ public class TreeNode {
         return null;
     }
 
+    public void evaluarPostorden(TreeNode nodo){
+        if(nodo != null){
+            for(int i = 0; i < nodo.getChildren().size(); i++){
+                evaluarPostorden(nodo.getChildren().get(i));
+            }
+            System.out.print("( " + nodo.getEvaluacion() + " )" + " ");
+            System.out.println(nodo.allChildrenVisited());
+            nodo.setVisited(true);
+            if(nodo.allChildrenVisited()) nodo.Evaluar();
+        }
+    }
+    
     public void recorridoPostorden(TreeNode nodo){
         if(nodo != null){
             for(int i = 0; i < nodo.getChildren().size(); i++){
                 recorridoPostorden(nodo.getChildren().get(i));
             }
-            System.out.print(nodo.getEvaluacion() + " ");
+            System.out.print("( " + nodo.getEvaluacion() + " )" + " ");
         }
     }
     
@@ -183,27 +199,37 @@ public class TreeNode {
         this.visited = visited;
     }
     
-    public int getEvaluacion(){
+    public double getEvaluacion(){
         return this.evaluacion;
     }
     
-    public void setEvaluacion(int x){
+    public void setEvaluacion(double x){
         this.evaluacion = x;
     }
     
     public void Evaluar(){
         int x = 0;
+        int cont = 0;
         if(!this.getChildren().isEmpty()){
             for (int i = 0; i < this.getChildren().size(); i++) {
                 x += this.getChildren().get(i).getEvaluacion();
+                cont++;
             }
+            
+            x /= cont;
         this.setEvaluacion(x);
-        } 
+        }else{
+            System.out.println("El nodo no tiene hijos");
+        }
     }
     
     public boolean allChildrenVisited(){
+        if(!this.children.isEmpty()){
         for (int i = 0; i < this.getChildren().size(); i++) {
             if(!this.getChildren().get(i).getVisited()) return false;
+        }
+        }else{
+            return false;
         }
         
         return true;
