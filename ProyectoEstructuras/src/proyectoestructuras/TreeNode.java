@@ -16,6 +16,7 @@ public class TreeNode {
     private int order;
     private double evaluacion ;
     private int hash;
+
     boolean visited = false;
     
     private ArrayList<TreeNode> children = new ArrayList();
