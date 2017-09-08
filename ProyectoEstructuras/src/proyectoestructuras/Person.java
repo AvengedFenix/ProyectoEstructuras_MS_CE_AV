@@ -9,17 +9,20 @@ package proyectoestructuras;
 
 public class Person {
     private String name;
-    private int evaluation;
+    private double evaluation;
 
     public Person() {
         
     }
         
-    public Person(String name, int evaluation) {
+    public Person(String name, double evaluation) {
         this.name = name;
         this.evaluation = evaluation;
     }
       
+    public Person(String name){
+        this.name = name;
+    }
 
     public String getName() {
         return name;
@@ -29,11 +32,11 @@ public class Person {
         this.name = name;
     }
 
-    public int getEvaluation() {
+    public double getEvaluation() {
         return evaluation;
     }
 
-    public void setEvaluation(int evaluation) {
+    public void setEvaluation(double evaluation) {
         this.evaluation = evaluation;
     }
     
