@@ -164,8 +164,10 @@ public class BinTree {
     
     public void preorden(BinTree nodo) {
         if (nodo != null) {
-            System.out.print(nodo.getInfo() + " ");
+            System.out.print("Root " + nodo.getInfo() + " \n");
+            System.out.println("Left Node:      "); 
             inorden(nodo.getLNode());
+            System.out.println("Right Node:     ");
             inorden(nodo.getRNode());
         }
         

@@ -36,11 +36,10 @@ public class Huffman {
     public static void main(String[] args) {
         System.out.println("Insert string: ");
         Scanner sc = new Scanner(System.in);
-        String s = sc.nextLine();
-        System.out.println(s);
+        String str = sc.nextLine();
         
-        Map count = getCharFreq(s);
-        for (Character ch : s.toCharArray()) {
+        Map count = getCharFreq(str);
+        for (Character ch : str.toCharArray()) {
             if (!letters.contains(ch)) {
                 letters.add(ch);
                 freq.add((int)count.get(ch));
@@ -53,9 +52,30 @@ public class Huffman {
         
         Collections.sort(freq);
         
-        for (int i = 0; i < letters.size(); i++) {
-            System.out.println(freq.get(i));
-        }
+        ArrayList<Integer> freq2 = freq;
+        /*for (int i = 0; i < freq.size(); i++) {
+            System.out.println(freq.get(i));*/
+            while (freq2.size() >= 2) {
+                System.out.println("\n");
+                for (int i = 0; i < freq2.size(); i++) {
+                   System.out.print(freq2.get(i) + " ");
+                }
+                System.out.println("\n");
+                
+                int num1 = freq2.get(0);
+                BinTree node1 = new BinTree(Integer.toString(num1)+ "+");
+                int num2 = freq2.get(1);
+                BinTree node2 = new BinTree(Integer.toString(num2) + "*");
+                int num = freq2.get(0) + freq2.get(1);
+                String info = Integer.toString(num);
+                BinTree node = new BinTree(node1, node2, info);
+                freq2.remove(1);
+                freq2.remove(0);
+                
+                node.preorden(node);
+            }
+        //}
+        
         
         
     }
