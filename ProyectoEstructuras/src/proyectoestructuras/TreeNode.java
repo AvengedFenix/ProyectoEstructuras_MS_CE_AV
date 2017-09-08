@@ -154,15 +154,18 @@ public class TreeNode {
             
             return padre;
         } else {
-            for (int i = 0; i < padre.getChildren().size()-1; i++) {
+            for (int i = 0; i < padre.getChildren().size(); i++) {
                 if (padre.getChildren().get(i).getVisited() == true) {
                     System.out.println("Already visited");
                 }else{
+                    
+                    padre.getChildren().get(i).setVisited(true);
                     return Lectura(padre.getChildren().get(i));
                 }
                 
                 if(padre.allChildrenVisited()){
                     padre.Evaluar();
+                    return padre;
                 }
             }
         }
