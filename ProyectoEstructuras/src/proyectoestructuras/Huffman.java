@@ -21,7 +21,7 @@ public class Huffman {
     private static ArrayList<Integer> freq = new ArrayList();
     
     public static Map<Character,Integer> getCharFreq(String s) {
-        Map<Character,Integer> charFreq = new HashMap<Character,Integer>();
+        Map<Character,Integer> charFreq = new HashMap<>();
         int cont = 0;
             if (s != null) {
                 for (Character c : s.toCharArray()) {

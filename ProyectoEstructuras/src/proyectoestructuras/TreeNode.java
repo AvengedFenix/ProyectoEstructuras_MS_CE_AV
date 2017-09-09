@@ -16,6 +16,9 @@ public class TreeNode {
     private int order;
     private double evaluacion ;
     private int hash;
+    
+    
+    Person persona;
 
     boolean visited = false;
     
@@ -154,20 +157,39 @@ public class TreeNode {
             
             return padre;
         } else {
-            for (int i = 0; i < padre.getChildren().size()-1; i++) {
+            for (int i = 0; i < padre.getChildren().size(); i++) {
                 if (padre.getChildren().get(i).getVisited() == true) {
                     System.out.println("Already visited");
                 }else{
+                    
+                    padre.getChildren().get(i).setVisited(true);
                     return Lectura(padre.getChildren().get(i));
                 }
                 
                 if(padre.allChildrenVisited()){
                     padre.Evaluar();
+                    return padre;
                 }
             }
         }
         
         return null;
+    }
+    
+    public double evaluarTree(TreeNode nodo){
+        double eval = 0;
+        if(nodo != null){
+            nodo.setVisited(true);
+            for (int i = 0; i < nodo.getChildren().size(); i++) {
+                evaluarTree(nodo.getChildren().get(i));
+            }
+              
+            if(nodo.isParent() && nodo.allChildrenVisited()){
+                eval += nodo.Eval();
+            }
+        }
+        
+        return eval;
     }
 
     public void evaluarPostorden(TreeNode nodo){
@@ -233,6 +255,36 @@ public class TreeNode {
         }
         
         return true;
+    }
+    
+    public double Eval(){
+        double x = 0;
+        if(this.isParent()){
+            for (int i = 0; i < this.getChildren().size(); i++) {
+                x += this.getChildren().get(i).getPersona().getEvaluation();
+            }
+            
+            x /= this.getChildrenCount();
+        this.getPersona().setEvaluation(x);
+        }
+        return x;
+    }
+    
+    public double getChildrenCount(){
+        double cont = 0;
+        for (int i = 0; i < this.getChildren().size(); i++) {
+            cont++;
+        }
+        
+        return cont;
+    }
+    
+    public Person getPersona(){
+        return this.persona;
+    }
+    
+    public void setPersona(Person persona){
+        this.persona = persona;
     }
     
 }
