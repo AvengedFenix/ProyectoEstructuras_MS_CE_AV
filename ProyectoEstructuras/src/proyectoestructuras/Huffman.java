@@ -53,28 +53,56 @@ public class Huffman {
         Collections.sort(freq);
         
         ArrayList<Integer> freq2 = freq;
-        /*for (int i = 0; i < freq.size(); i++) {
-            System.out.println(freq.get(i));*/
-            while (freq2.size() >= 2) {
+        ArrayList<BinTree> nodos = new ArrayList();
+        
+        
+        while (freq2.size() >= 2) {
                 System.out.println("\n");
                 for (int i = 0; i < freq2.size(); i++) {
                    System.out.print(freq2.get(i) + " ");
                 }
                 System.out.println("\n");
+               
+                BinTree node1 = new BinTree(Integer.toString(freq2.get(0)));
+                BinTree node2 = new BinTree(Integer.toString(freq2.get(1)));
                 
-                int num1 = freq2.get(0);
-                BinTree node1 = new BinTree(Integer.toString(num1)+ "+");
-                int num2 = freq2.get(1);
-                BinTree node2 = new BinTree(Integer.toString(num2) + "*");
                 int num = freq2.get(0) + freq2.get(1);
                 String info = Integer.toString(num);
                 BinTree node = new BinTree(node1, node2, info);
+                
                 freq2.remove(1);
                 freq2.remove(0);
                 
+                if (freq2.size() == 1)
+                {
+                    
+                    BinTree node3 = new BinTree(Integer.toString(freq2.get(0)));
+                    nodos.add(node3);
+                    
+                }
+                node.preorden(node);
+                nodos.add(node);
+            }
+            
+            while(nodos.size() > 1)
+            {
+                System.out.println("\n");
+                System.out.println("\n");
+                BinTree nodo1 = nodos.get(0);
+                BinTree nodo2 = nodos.get(1);
+                int info = Integer.parseInt(nodo1.getInfo()) + Integer.parseInt(nodo2.getInfo());
+                BinTree node = new BinTree(nodo1, nodo2, Integer.toString(info));
+                
+                nodos.remove(1);
+                nodos.remove(0);
+                nodos.add(node);
+                
                 node.preorden(node);
             }
-        //}
+            
+            
+            
+
         
         
         
