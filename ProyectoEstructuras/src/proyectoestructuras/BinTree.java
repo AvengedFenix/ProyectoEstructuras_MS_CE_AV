@@ -78,7 +78,7 @@ public class BinTree {
         int valor_l = evaluar(nodo.getLNode()); //evaluar left node
         int valor_r = evaluar(nodo.getRNode()); // evaluar right node
 
-        switch(nodo.getInfo()){
+        switch(nodo.getInfo()){//si nodo.getInfo() es un operador
             case "+":
                 return valor_l + valor_r;
             case "-":
