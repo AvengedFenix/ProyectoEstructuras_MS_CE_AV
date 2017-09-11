@@ -11,7 +11,7 @@ import java.util.Stack;
  *
  * @author andre
  */
-public class BinTree {
+public class BinTree implements Comparable<BinTree>{
     BinTree LNode = null, RNode = null;
     String info;
     
@@ -178,6 +178,14 @@ public class BinTree {
             postorden(nodo.getRNode());
             System.out.print(nodo.getInfo() + " ");
         }
+    }
+    
+    @Override
+    public int compareTo(BinTree nodo){
+        int compararCantidad = Integer.parseInt(nodo.getInfo());
+        
+        
+        return Integer.parseInt(this.getInfo()) - compararCantidad;
     }
 }
 
