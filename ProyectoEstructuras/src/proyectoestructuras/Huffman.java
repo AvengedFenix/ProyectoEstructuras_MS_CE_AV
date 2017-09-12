@@ -199,6 +199,7 @@ public class Huffman {
 
         //System.out.println("");
         String st = node.BinCode(node, "");
+        System.out.println(st);
         String delim = ",";
         StringTokenizer tok = new StringTokenizer(st, delim, true);
         ArrayList binary = new ArrayList();
@@ -224,6 +225,9 @@ public class Huffman {
             cont++;
         }
         System.out.println(binary);
+        
+        
+        
         
     }
     
