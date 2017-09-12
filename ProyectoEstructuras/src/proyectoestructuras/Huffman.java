@@ -5,6 +5,9 @@
  */
 package proyectoestructuras;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -20,6 +23,7 @@ public class Huffman {
 
     private static ArrayList<Character> letters = new ArrayList();
     private static ArrayList<Integer> freq = new ArrayList();
+    private static File archivo = null;
 
     public static Map<Character, Integer> getCharFreq(String s) {
         Map<Character, Integer> charFreq = new HashMap<>();
@@ -39,13 +43,12 @@ public class Huffman {
         Scanner sc = new Scanner(System.in);
         String str = sc.nextLine();
 
-        ArrayList<Integer> freq2 = new ArrayList();
         Map count = getCharFreq(str);
         for (Character ch : str.toCharArray()) {
             if (!letters.contains(ch)) {
                 letters.add(ch);
                 freq.add((int) count.get(ch));
-                freq2.add((int) count.get(ch));
+                //freq2.add((int) count.get(ch));
             }
         }
 
@@ -53,41 +56,16 @@ public class Huffman {
             System.out.println(letters.get(i) + " " + freq.get(i));
         }
 
-        Collections.sort(freq2);
+        Collections.sort(freq);
         ArrayList<BinTree> nodos = new ArrayList();
 
-        while (freq2.size() >= 2) {
-            /*
-            System.out.println("\nFREQ");
-            for (int i = 0; i < freq2.size(); i++) {
-               System.out.print(freq2.get(i) + " ");
-            }*/
-            System.out.println("\n");
-
-            if (!nodos.isEmpty() && Integer.parseInt(nodos.get(0).getInfo()) < freq2.get(0))
-            {
-                
-            }
-            BinTree node1 = new BinTree(Integer.toString(freq2.get(0)));
-            BinTree node2 = new BinTree(Integer.toString(freq2.get(1)));
-
-            int num = freq2.get(0) + freq2.get(1);
-            String info = Integer.toString(num);
-            BinTree node = new BinTree(node1, node2, info);
-
-            freq2.remove(1);
-            freq2.remove(0);
-            if (freq2.size() == 1) {
-                BinTree node3 = new BinTree(Integer.toString(freq2.get(0)));
-                nodos.add(node3);
-
-            }
-            node.preorden(node);
-            nodos.add(node);
+        for (int i = 0; i < freq.size(); i++) {
+            nodos.add(new BinTree(Integer.toString(freq.get(i))));
         }
 
         BinTree node = new BinTree();
         while (nodos.size() > 1) {
+            Collections.sort(nodos);
             System.out.println("\n");
             System.out.println("\n");
             BinTree nodo1 = nodos.get(0);
@@ -108,6 +86,8 @@ public class Huffman {
         StringTokenizer tok = new StringTokenizer(st, delim, true);
         ArrayList binary = new ArrayList();
         int cont = 0;
+        ArrayList<String> test = new ArrayList();
+        ArrayList bin = new ArrayList();
 
         while (tok.hasMoreTokens()) {
             String token = tok.nextToken();
@@ -119,72 +99,66 @@ public class Huffman {
                 for (int i = 0; i < freq.size(); i++) {
                     if (token.equals(Integer.toString(freq.get(i)))) {
                         binary.add(letters.get(i));
+                        test.add(letters.get(i)+"");
                         freq.remove(i);
                         letters.remove(i);
                         break;
                     }
                 }
+            } else {
+                test.add(token);
             }
             binary.add(token);
             cont++;
         }
         System.out.println(binary);
+        System.out.println("TEST" + test);
+        String texto = "";
+        String compressed = "";
+        for (int i = 0; i < str.length(); i++) {
+            for (int j = 0; j < test.size(); j++) {
+                if (str.substring(i,i+1).equals(test.get(i))) {
+                    compressed += test.get(i+1);
+                }
+            }
+        }
         
-    }
-    
-   public void Huff(String str) {
-        //System.out.println("Insert string: ");
-        //Scanner sc = new Scanner(System.in);
-        //String str = sc.nextLine();
+        System.out.println(compressed);
 
-        ArrayList<Integer> freq2 = new ArrayList();
+        for (int i = 0; i < test.size(); i++) {
+            texto += test.get(i) + ",";
+        }
+        save(texto);
+
+        bin = cargar();
+        System.out.println("TEST2" + bin);
+
+    }
+
+    public void Huff(String str) {
+
         Map count = getCharFreq(str);
         for (Character ch : str.toCharArray()) {
             if (!letters.contains(ch)) {
                 letters.add(ch);
                 freq.add((int) count.get(ch));
-                freq2.add((int) count.get(ch));
             }
         }
-        /*
+
         for (int i = 0; i < letters.size(); i++) {
             System.out.println(letters.get(i) + " " + freq.get(i));
         }
-        */
 
-        Collections.sort(freq2);
+        Collections.sort(freq);
         ArrayList<BinTree> nodos = new ArrayList();
 
-        while (freq2.size() >= 2) {
-            /*
-            System.out.println("\nFREQ");
-            for (int i = 0; i < freq2.size(); i++) {
-               System.out.print(freq2.get(i) + " ");
-            }*/
-            //System.out.println("\n");
-
-            BinTree node1 = new BinTree(Integer.toString(freq2.get(0)));
-            BinTree node2 = new BinTree(Integer.toString(freq2.get(1)));
-
-            int num = freq2.get(0) + freq2.get(1);
-            String info = Integer.toString(num);
-            BinTree node = new BinTree(node1, node2, info);
-
-            freq2.remove(1);
-            freq2.remove(0);
-            if (freq2.size() == 1) {
-                BinTree node3 = new BinTree(Integer.toString(freq2.get(0)));
-                nodos.add(node3);
-
-            }
-            //node.preorden(node);
-            nodos.add(node);
+        for (int i = 0; i < freq.size(); i++) {
+            nodos.add(new BinTree(Integer.toString(freq.get(i))));
         }
 
         BinTree node = new BinTree();
         while (nodos.size() > 1) {
-            //System.out.println("\n");
-            //System.out.println("\n");
+            Collections.sort(nodos);
             BinTree nodo1 = nodos.get(0);
             BinTree nodo2 = nodos.get(1);
             int info = Integer.parseInt(nodo1.getInfo()) + Integer.parseInt(nodo2.getInfo());
@@ -194,16 +168,15 @@ public class Huffman {
             nodos.remove(0);
             nodos.add(node);
 
-            //node.preorden(node);
+            node.preorden(node);
         }
 
-        //System.out.println("");
         String st = node.BinCode(node, "");
-        System.out.println(st);
         String delim = ",";
         StringTokenizer tok = new StringTokenizer(st, delim, true);
         ArrayList binary = new ArrayList();
         int cont = 0;
+        ArrayList test = new ArrayList();
 
         while (tok.hasMoreTokens()) {
             String token = tok.nextToken();
@@ -215,20 +188,64 @@ public class Huffman {
                 for (int i = 0; i < freq.size(); i++) {
                     if (token.equals(Integer.toString(freq.get(i)))) {
                         binary.add(letters.get(i));
+                        test.add(letters.get(i));
                         freq.remove(i);
                         letters.remove(i);
                         break;
                     }
                 }
+            } else {
+                test.add(token);
             }
             binary.add(token);
             cont++;
         }
         System.out.println(binary);
-        
-        
-        
-        
+        System.out.println("TEST" + test);
     }
-    
+
+    public static void save(String texto) {
+        //String texto = "";
+        archivo = null;
+        FileWriter fw = null;
+        BufferedWriter bw = null;
+
+        try {
+            archivo = new File("./comprimido.txt");
+            fw = new FileWriter(archivo, true);
+            //si el archivo no existe lo crea y si ya existe los sobreescribe (al menos que append
+            bw = new BufferedWriter(fw);
+            bw.write(texto);
+            bw.flush();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            //primero se borra el buffer
+            bw.close();
+            fw.close();
+        } catch (Exception e) {
+        }
+    }
+
+    public static ArrayList cargar() {
+        Scanner sc = null;
+        ArrayList binary = new ArrayList();
+
+        try {
+            sc = new Scanner(archivo);
+            sc.useDelimiter(",");
+            while (sc.hasNext()) {
+                binary.add(sc.next());
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            sc.close();
+        }
+        return binary;
+    }
 }
