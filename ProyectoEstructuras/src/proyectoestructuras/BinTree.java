@@ -12,12 +12,9 @@ import java.util.Stack;
  *
  * @author andre
  */
-<<<<<<< HEAD
-public class BinTree {
 
-=======
+
 public class BinTree implements Comparable<BinTree>{
->>>>>>> cf0a4dee05fe93f6644a5a050cdec4efdfad851e
     BinTree LNode = null, RNode = null;
     String info;
 
@@ -105,12 +102,12 @@ public class BinTree implements Comparable<BinTree>{
         int valor_l = evaluar(nodo.getLNode()); //evaluar left node
         int valor_r = evaluar(nodo.getRNode()); // evaluar right node
 
-<<<<<<< HEAD
+
         String operator = nodo.getInfo();
         switch (operator) {
-=======
-        switch(nodo.getInfo()){//si nodo.getInfo() es un operador
->>>>>>> cf0a4dee05fe93f6644a5a050cdec4efdfad851e
+            
+        }
+        switch(nodo.getInfo()){//si nodo.getInfo() es un operado
             case "+":
                 return valor_l + valor_r;
             case "-":
