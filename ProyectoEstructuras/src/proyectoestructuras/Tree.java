@@ -1,5 +1,9 @@
+package proyectoestructuras;
+
+
 import java.util.ArrayList;
-import javafx.scene.Node;
+
+
 
 
 public class Tree {

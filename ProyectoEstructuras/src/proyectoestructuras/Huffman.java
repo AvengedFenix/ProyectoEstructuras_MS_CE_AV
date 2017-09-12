@@ -125,6 +125,6 @@ public class Huffman {
             cont++;
         }
         System.out.println(binary);
-
+        
     }
 }
