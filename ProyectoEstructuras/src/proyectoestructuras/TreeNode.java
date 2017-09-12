@@ -14,8 +14,8 @@ import java.util.ArrayList;
 public class TreeNode {
 
     private int order;
-    private double evaluacion ;
-    private int hash;
+    private double evaluacion;
+    private int numNodo;
     
     
     Person persona;
@@ -27,13 +27,16 @@ public class TreeNode {
 
     public TreeNode(int order, int hash) {
         this.order = order;
-        this.hash = hash;
     }
 
-    public TreeNode(int order, int hash, TreeNode parent) {
+    public TreeNode(int order, int numNodo, TreeNode parent) {
         this.order = order;
-        this.hash = hash;
         this.parent = parent;
+        this.numNodo = numNodo;
+    }
+    
+    public TreeNode(int numNodo){
+        this.numNodo = numNodo;
     }
     
     public TreeNode(double evaluacion){
@@ -82,7 +85,7 @@ public class TreeNode {
     public String map() {
         return "";
     }
-
+/*
     public int getHash() {
         return hash;
     }
@@ -90,7 +93,7 @@ public class TreeNode {
     public void setHash(int hash) {
         this.hash = hash;
     }
-
+*/
     public ArrayList<TreeNode> getChildren() {
         return children;
     }
@@ -285,6 +288,14 @@ public class TreeNode {
     
     public void setPersona(Person persona){
         this.persona = persona;
+    }
+    
+    public void setNumNodo(int n){
+        this.numNodo = n;
+    }
+    
+    public int getNumNodo(){
+        return this.numNodo;
     }
     
 }
