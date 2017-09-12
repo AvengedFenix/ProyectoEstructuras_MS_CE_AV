@@ -533,6 +533,18 @@ public class GUIProject extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void bt_goActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_goActionPerformed
+        // TODO add your handling code here:
+        save();
+
+    }//GEN-LAST:event_bt_goActionPerformed
+
+    private void TF_compresionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TF_compresionKeyPressed
+        if (evt.getKeyCode() == 13) {
+            save();
+        }
+    }//GEN-LAST:event_TF_compresionKeyPressed
+
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         // TODO add your handling code here:
         adminPerson ap = new adminPerson("./personas.txt");
@@ -552,11 +564,9 @@ public class GUIProject extends javax.swing.JFrame {
 
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
         // TODO add your handling code here:
-        //TF_compresion.setVisible(true);
-        //bt_go.setVisible(true);
-        jd_compresion.pack();
-        jd_compresion.setLocationRelativeTo(null);
-        jd_compresion.setVisible(true);
+       // TF_compresion.setVisible(true);
+       // bt_go.setVisible(true);
+        panel_p.updateUI();
         this.pack();
     }//GEN-LAST:event_jLabel7MouseClicked
 
@@ -572,6 +582,7 @@ public class GUIProject extends javax.swing.JFrame {
             
         }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
         // TODO add your handling code here:
@@ -591,6 +602,7 @@ public class GUIProject extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
 
     /**
      * @param args the command line arguments
@@ -679,7 +691,7 @@ public class GUIProject extends javax.swing.JFrame {
     private String pathGrafo;
 
     public void save() {
-        //String texto = TF_compresion.getText();
+       // String texto = TF_compresion.getText();
         File archiv = null;
         FileWriter fw = null;
         BufferedWriter bw = null;
@@ -689,7 +701,7 @@ public class GUIProject extends javax.swing.JFrame {
             fw = new FileWriter(archiv, true);
             //si el archivo no existe lo crea y si ya existe los sobreescribe (al menos que append
             bw = new BufferedWriter(fw);
-            //bw.write(texto);
+       //     bw.write(texto);
             bw.flush();
 
         } catch (Exception e) {
@@ -737,14 +749,29 @@ public class GUIProject extends javax.swing.JFrame {
                 line = br.readLine();
             }
             
+
             //TreeNode rootTree = info.get
+
+            int nNodo = Integer.parseInt(info.get(0)[0]);
+            TreeNode rootTree = new TreeNode(nNodo);
+            rootTree.addTreeNode(new TreeNode(Integer.parseInt(info.get(0)[1])));
+
             
-            for (int i = 0; i < info.size(); i++) {
+            
+            for (int i = 1; i < info.size(); i++) {
                 int numeroNodo = Integer.parseInt(info.get(i)[0]);
                 int hijo = Integer.parseInt(info.get(i)[1]);
                 int evaluacion = Integer.parseInt(info.get(i)[2]);
                 
+
                 //if(treeExists)
+
+                if(treeExists(hijo, rootTree) == null){
+                    System.out.println("no existe nodo");
+                    
+                    //TreeNode nuevoNodo = new TreeNode(numeroNodo)
+                }
+
             }
 
         } catch (IOException e) {
@@ -774,3 +801,4 @@ public class GUIProject extends javax.swing.JFrame {
         return null;
     }
 }
+
