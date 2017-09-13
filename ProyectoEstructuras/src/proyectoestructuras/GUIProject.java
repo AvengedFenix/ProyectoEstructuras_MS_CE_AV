@@ -78,6 +78,9 @@ public class GUIProject extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
@@ -461,19 +464,34 @@ public class GUIProject extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("G R A F O   B I - C O L O R E A B L E");
 
+        jLabel20.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel20.setText("A L G O R I T M O  F L O Y D");
+
+        jLabel21.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel21.setText("A L G O R I T M O  D I J K S T R A");
+
+        jLabel22.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel22.setText("K R U S K A L  Y  P R I M");
+
         javax.swing.GroupLayout panel_pLayout = new javax.swing.GroupLayout(panel_p);
         panel_p.setLayout(panel_pLayout);
         panel_pLayout.setHorizontalGroup(
             panel_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panel_pLayout.createSequentialGroup()
-                .addContainerGap(126, Short.MAX_VALUE)
+                .addContainerGap(124, Short.MAX_VALUE)
                 .addGroup(panel_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel7)
                     .addComponent(jLabel6)
                     .addComponent(jLabel5)
                     .addComponent(jLabel8)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(128, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel20)
+                    .addComponent(jLabel21)
+                    .addComponent(jLabel22))
+                .addContainerGap(126, Short.MAX_VALUE))
         );
         panel_pLayout.setVerticalGroup(
             panel_pLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -488,7 +506,13 @@ public class GUIProject extends javax.swing.JFrame {
                 .addComponent(jLabel7)
                 .addGap(40, 40, 40)
                 .addComponent(jLabel8)
-                .addContainerGap(190, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
+                .addComponent(jLabel20)
+                .addGap(29, 29, 29)
+                .addComponent(jLabel21)
+                .addGap(31, 31, 31)
+                .addComponent(jLabel22)
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         jMenuBar1.setFont(jMenuBar1.getFont().deriveFont(jMenuBar1.getFont().getStyle() & ~java.awt.Font.BOLD));
@@ -654,6 +678,9 @@ public class GUIProject extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
