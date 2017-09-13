@@ -117,14 +117,14 @@ public class Huffman {
         String compressed = "";
         for (int i = 0; i < str.length(); i++) {
             for (int j = 0; j < test.size(); j++) {
-                if (str.substring(i,i+1).equals(test.get(i))) {
-                    compressed += test.get(i+1);
+                if (str.substring(i,i+1).equals(test.get(j))) {
+                    compressed += test.get(j+1);
                 }
             }
         }
         
         System.out.println(compressed);
-
+        texto += compressed + ",";
         for (int i = 0; i < test.size(); i++) {
             texto += test.get(i) + ",";
         }
