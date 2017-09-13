@@ -25,7 +25,7 @@ public class Huffman {
     private static ArrayList<Integer> freq = new ArrayList();
     private static File archivo = null;
 
-    public static Map<Character, Integer> getCharFreq(String s) {
+    public static Map<Character, Integer> getFreq(String s) {
         Map<Character, Integer> charFreq = new HashMap<>();
         int cont = 0;
         if (s != null) {
@@ -43,7 +43,7 @@ public class Huffman {
         Scanner sc = new Scanner(System.in);
         String str = sc.nextLine();
 
-        Map count = getCharFreq(str);
+        Map count = getFreq(str);
         for (Character ch : str.toCharArray()) {
             if (!letters.contains(ch)) {
                 letters.add(ch);
@@ -137,7 +137,7 @@ public class Huffman {
 
     public void Huff(String str) {
 
-        Map count = getCharFreq(str);
+        Map count = getFreq(str);
         for (Character ch : str.toCharArray()) {
             if (!letters.contains(ch)) {
                 letters.add(ch);
