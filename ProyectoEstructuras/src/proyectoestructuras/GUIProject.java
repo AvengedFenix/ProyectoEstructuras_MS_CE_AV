@@ -657,11 +657,13 @@ public class GUIProject extends javax.swing.JFrame {
         // TODO add your handling code here:
         pathTree = load();
         tf_pathtree.setText(pathTree);
+        TreeNode node;
         try {
-            createTree(pathTree);
+            node = createTree(pathTree);
         } catch (IOException ex) {
             Logger.getLogger(GUIProject.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         
         
     }//GEN-LAST:event_jLabel4MouseClicked
