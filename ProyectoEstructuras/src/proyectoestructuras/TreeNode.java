@@ -28,6 +28,10 @@ public class TreeNode {
     public TreeNode(int order, int hash) {
         this.order = order;
     }
+    
+    public TreeNode(Person persona) {
+        this.persona = persona;
+    }
 
     public TreeNode(int order, int numNodo, TreeNode parent) {
         this.order = order;
@@ -296,6 +300,36 @@ public class TreeNode {
     
     public int getNumNodo(){
         return this.numNodo;
+    }
+    
+    public ArrayList<TreeNode> getPostOrder(TreeNode nodo) {
+        ArrayList<TreeNode> pOrder = new ArrayList<>();
+        buildPostOrder(nodo, pOrder, 0);
+        return pOrder;
+    }
+    
+    private void buildPostOrder(TreeNode nodo, ArrayList<TreeNode> pOrder, double sum) {
+        
+        
+        for (TreeNode hijo : nodo.getChildren()) {
+            buildPostOrder(hijo, pOrder, sum);
+        }
+        
+        /*if(nodo.isParent()){
+            nodo.Evaluar();
+        }*/
+        pOrder.add(nodo);
+    }
+    
+    public void evaluarPOrden(TreeNode nodo){
+        if(nodo != null){
+            for (int i = 0; i < nodo.getChildren().size(); i++) {
+                evaluarPOrden(nodo.getChildren().get(i));
+            }
+            //System.out.println("( " + nodo.getPersona().getName() + ": " + nodo.getPersona().getEvaluacion() + " )" + " ");
+            //if(nodo.isParent()) nodo.Evaluar();
+            if(nodo.isParent()) nodo.Evaluar();
+        }
     }
     
 }
