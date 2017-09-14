@@ -13,6 +13,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -43,10 +45,13 @@ public class GUIProject extends javax.swing.JFrame {
         jd_desempeno = new javax.swing.JDialog();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        cb_empleados = new javax.swing.JComboBox<>();
         jPanel6 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        jPanel10 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        tf_pathtree = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        ta_evaluacion = new javax.swing.JTextArea();
         jd_resolucion = new javax.swing.JDialog();
         jPanel3 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
@@ -94,10 +99,6 @@ public class GUIProject extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("P O R   D E S E M P E Ñ O");
 
-        jLabel4.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("E l e g i r   e m p l e a d o s");
-
         jLabel2.setFont(new java.awt.Font("Montserrat", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(245, 124, 0));
         jLabel2.setText("C A L C U L O   D E   E V A L U A C I Ó N");
@@ -118,24 +119,47 @@ public class GUIProject extends javax.swing.JFrame {
                 .addComponent(jLabel2))
         );
 
+        jLabel4.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(245, 124, 0));
+        jLabel4.setText("E l e g i r   a r c h i v o");
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
+        );
+
+        tf_pathtree.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+
+        ta_evaluacion.setColumns(20);
+        ta_evaluacion.setRows(5);
+        jScrollPane3.setViewportView(ta_evaluacion);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(225, 225, 225)
-                        .addComponent(cb_empleados, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(119, 119, 119)
-                        .addComponent(jLabel4)))
-                .addGap(0, 368, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(163, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel3)
+                    .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_pathtree, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(134, 134, 134))
         );
         jPanel2Layout.setVerticalGroup(
@@ -145,11 +169,13 @@ public class GUIProject extends javax.swing.JFrame {
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
-                .addGap(104, 104, 104)
-                .addComponent(jLabel4)
-                .addGap(18, 18, 18)
-                .addComponent(cb_empleados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(198, Short.MAX_VALUE))
+                .addGap(59, 59, 59)
+                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(tf_pathtree, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jd_desempenoLayout = new javax.swing.GroupLayout(jd_desempeno.getContentPane());
@@ -466,15 +492,15 @@ public class GUIProject extends javax.swing.JFrame {
 
         jLabel20.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel20.setText("A L G O R I T M O  F L O Y D");
+        jLabel20.setText("A L G O R I T M O   F L O Y D");
 
         jLabel21.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel21.setText("A L G O R I T M O  D I J K S T R A");
+        jLabel21.setText("A L G O R I T M O   D I J K S T R A");
 
         jLabel22.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel22.setText("K R U S K A L  Y  P R I M");
+        jLabel22.setText("K R U S K A L   Y   P R I M");
 
         javax.swing.GroupLayout panel_pLayout = new javax.swing.GroupLayout(panel_p);
         panel_p.setLayout(panel_pLayout);
@@ -506,13 +532,13 @@ public class GUIProject extends javax.swing.JFrame {
                 .addComponent(jLabel7)
                 .addGap(40, 40, 40)
                 .addComponent(jLabel8)
-                .addGap(30, 30, 30)
+                .addGap(40, 40, 40)
                 .addComponent(jLabel20)
-                .addGap(29, 29, 29)
+                .addGap(40, 40, 40)
                 .addComponent(jLabel21)
-                .addGap(31, 31, 31)
+                .addGap(40, 40, 40)
                 .addComponent(jLabel22)
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         jMenuBar1.setFont(jMenuBar1.getFont().deriveFont(jMenuBar1.getFont().getStyle() & ~java.awt.Font.BOLD));
@@ -551,7 +577,7 @@ public class GUIProject extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel_p, javax.swing.GroupLayout.PREFERRED_SIZE, 607, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(panel_p, javax.swing.GroupLayout.DEFAULT_SIZE, 623, Short.MAX_VALUE)
         );
 
         pack();
@@ -582,14 +608,14 @@ public class GUIProject extends javax.swing.JFrame {
         jd_desempeno.setLocationRelativeTo(null);
         jd_desempeno.setVisible(true);
         for (int i = 0; i < ap.getListaPersonas().size(); i++) {
-            cb_empleados.addItem(ap.getListaPersonas().get(i).getName());
+            //cb_empleados.addItem(ap.getListaPersonas().get(i).getName());
         }
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
         // TODO add your handling code here:
-       // TF_compresion.setVisible(true);
-       // bt_go.setVisible(true);
+        // TF_compresion.setVisible(true);
+        // bt_go.setVisible(true);
         panel_p.updateUI();
         this.pack();
     }//GEN-LAST:event_jLabel7MouseClicked
@@ -597,13 +623,13 @@ public class GUIProject extends javax.swing.JFrame {
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         pathTree = load();
         System.out.println("Path tree: " + pathTree);
-        if(pathTree != null){
+        if (pathTree != null) {
             try {
                 createTree(pathTree);
             } catch (IOException e) {
                 System.out.println("exception");
             }
-            
+
         }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
@@ -619,7 +645,7 @@ public class GUIProject extends javax.swing.JFrame {
     private void jLabel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseClicked
         // TODO add your handling code here:
         Huffman huffman = new Huffman();
-        
+
         huffman.Huff(ta_og.getText());
     }//GEN-LAST:event_jLabel15MouseClicked
 
@@ -627,6 +653,18 @@ public class GUIProject extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        // TODO add your handling code here:
+        pathTree = load();
+        tf_pathtree.setText(pathTree);
+        try {
+            createTree(pathTree);
+        } catch (IOException ex) {
+            Logger.getLogger(GUIProject.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+    }//GEN-LAST:event_jLabel4MouseClicked
 
     /**
      * @param args the command line arguments
@@ -665,7 +703,6 @@ public class GUIProject extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> cb_empleados;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -695,6 +732,7 @@ public class GUIProject extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -705,20 +743,23 @@ public class GUIProject extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JDialog jd_compresion;
     private javax.swing.JDialog jd_desempeno;
     private javax.swing.JDialog jd_resolucion;
     private javax.swing.JPanel panel_p;
+    private javax.swing.JTextArea ta_evaluacion;
     private javax.swing.JTextArea ta_og;
+    private javax.swing.JTextField tf_pathtree;
     // End of variables declaration//GEN-END:variables
 
     private String pathTree;
     private String pathGrafo;
 
     public void save() {
-       // String texto = TF_compresion.getText();
+        // String texto = TF_compresion.getText();
         File archiv = null;
         FileWriter fw = null;
         BufferedWriter bw = null;
@@ -728,7 +769,7 @@ public class GUIProject extends javax.swing.JFrame {
             fw = new FileWriter(archiv, true);
             //si el archivo no existe lo crea y si ya existe los sobreescribe (al menos que append
             bw = new BufferedWriter(fw);
-       //     bw.write(texto);
+            //     bw.write(texto);
             bw.flush();
 
         } catch (Exception e) {
@@ -761,9 +802,9 @@ public class GUIProject extends javax.swing.JFrame {
         }
     }
 
-    public BinTree createTree(String path) throws IOException {
+    public TreeNode createTree(String path) throws IOException {
 
-        BinTree root = new BinTree();
+        TreeNode root = new TreeNode();
         BufferedReader br = new BufferedReader(new FileReader(path));
         try {
             String line = br.readLine();
@@ -775,27 +816,21 @@ public class GUIProject extends javax.swing.JFrame {
                 System.out.println(Arrays.toString(line.split(",")));
                 line = br.readLine();
             }
-            
 
             //TreeNode rootTree = info.get
-
             int nNodo = Integer.parseInt(info.get(0)[0]);
             TreeNode rootTree = new TreeNode(nNodo);
             rootTree.addTreeNode(new TreeNode(Integer.parseInt(info.get(0)[1])));
 
-            
-            
             for (int i = 1; i < info.size(); i++) {
                 int numeroNodo = Integer.parseInt(info.get(i)[0]);
                 int hijo = Integer.parseInt(info.get(i)[1]);
                 int evaluacion = Integer.parseInt(info.get(i)[2]);
-                
 
                 //if(treeExists)
-
-                if(treeExists(hijo, rootTree) == null){
+                if (treeExists(hijo, rootTree) == null) {
                     System.out.println("no existe nodo");
-                    
+
                     //TreeNode nuevoNodo = new TreeNode(numeroNodo)
                 }
 
@@ -824,8 +859,7 @@ public class GUIProject extends javax.swing.JFrame {
             }
 
         }
-        
+
         return null;
     }
 }
-
