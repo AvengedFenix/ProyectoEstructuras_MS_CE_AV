@@ -26,8 +26,7 @@ public class TDAGrafo{
         graph.addEdge("46", "4", "6",true);
         graph.addEdge("14", "1", "4",true);
         graph.addEdge("24", "2", "4",true);
-        
-        
+               
         graph.display();
     }
 }

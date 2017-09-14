@@ -795,7 +795,6 @@ public class GUIProject extends javax.swing.JFrame {
 
                 if(treeExists(hijo, rootTree) == null){
                     System.out.println("no existe nodo");
-                    
                     //TreeNode nuevoNodo = new TreeNode(numeroNodo)
                 }
 
