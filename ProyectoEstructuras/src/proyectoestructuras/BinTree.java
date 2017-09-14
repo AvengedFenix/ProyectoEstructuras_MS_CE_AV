@@ -173,9 +173,6 @@ public class BinTree implements Comparable<BinTree>{
         }
     }
 
-    public boolean isDigit(String s) {
-        return Character.isDigit(s.charAt(0));
-    }
 
     public void inorden(BinTree nodo) {
         if (nodo != null) {
@@ -208,6 +205,89 @@ public class BinTree implements Comparable<BinTree>{
         
         return Integer.parseInt(this.getInfo()) - compararCantidad;
     }
+    
+    public static BinTree postf_toTree(String[] s){//ESTO TIENE QUE ESTAR EN EL MAIN o en una clase Tree que contenga un nodo root pero no se si es necesario
+        BinTree b = new BinTree();
+        
+        Stack<BinTree> stackTree = new Stack();
+        
+        for (int i = 0; i < s.length; i++) {
+            b.postfixTree(s[i], stackTree);
+        }
+
+        return stackTree.pop();
+    }
+    
+    
+    public static String[] infixtoPostfix(String[] infix){
+        Stack<String> s = new Stack();
+        StringBuilder sb = new StringBuilder();
+        
+        for (String infix1 : infix) {
+            if (infix1.equals(" ")) {//si hay un espacio no hace nada
+            } else if (isDigit(infix1)) {//si infix[i] o infix1 es un digito, se agrega directamente al stringbuilder
+                sb.append(infix1).append(" ");
+            } else if (isOperator(infix1)) {//si es operador verifica que el stack no este vacio y la precedencia mas alta
+                while (!s.isEmpty() && !s.peek().equals("(") && precedenciaMasAlta(s.peek(), infix1)) {
+                    sb.append(s.pop()).append(" ");
+                }
+                s.push(infix1);
+            } else if (infix1.equals("(")) {//si encuentra un "(" se agrega al stack
+                s.push(infix1);
+            } else if (infix1.equals(")")) {
+                while(!s.empty() && !s.peek().equals("(")){
+                    sb.append(s.pop()).append(" ");
+                }
+                s.pop();
+            }
+        }
+        
+        while(!s.isEmpty()){
+            sb.append(s.pop()).append(" ");
+        }
+        
+        String[] sFinal = sb.toString().split(" ");
+        return sFinal;
+    }
+    
+    public static boolean isDigit(String s){
+        return Character.isDigit(s.charAt(0));
+    }
+    
+    public static boolean isOperator(String s){
+        return s.equals("+") || s.equals("-") || s.equals("*") || s.equals("/") || s.equals("^");
+    }
+    
+    public static int Precedencia(String s){
+        int pre = 0;
+        if(s.equals("+") || s.equals("-")){
+            pre = 1;
+        }
+        if(s.equals("*") || s.equals("/")){
+            pre = 2;
+        }
+        if(s.equals("^")){
+            pre = 3;
+        }
+        return pre;
+    }
+    
+    public static boolean precedenciaMasAlta(String s, String s2){
+        int prec = Precedencia(s);
+        int prec2 = Precedencia(s2);
+        
+        if(prec == prec2){
+            if(s.equals("^")){//if(Associative(s))
+                return false;
+            }else{
+                return true;
+            }
+        }else{
+            if(prec>prec2) return true;
+
+        }
+        return false;
+    }
 }
 
 
@@ -226,3 +306,5 @@ public static BinTree postf_toTree(String[] s){//ESTO TIENE QUE ESTAR EN EL MAIN
 
 
  */
+
+
