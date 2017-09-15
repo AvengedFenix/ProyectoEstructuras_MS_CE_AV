@@ -89,7 +89,7 @@ public class BinTree implements Comparable<BinTree>{
         return ret;
     }
 
-    public int evaluar(BinTree nodo) {
+    public double evaluar(BinTree nodo) {
         if (nodo == null) {
             return 0;
         }
@@ -99,8 +99,8 @@ public class BinTree implements Comparable<BinTree>{
             return Integer.parseInt(nodo.getInfo());
         }
 
-        int valor_l = evaluar(nodo.getLNode()); //evaluar left node
-        int valor_r = evaluar(nodo.getRNode()); // evaluar right node
+        double valor_l = evaluar(nodo.getLNode()); //evaluar left node
+        double valor_r = evaluar(nodo.getRNode()); // evaluar right node
 
 
         String operator = nodo.getInfo();
@@ -219,36 +219,7 @@ public class BinTree implements Comparable<BinTree>{
     }
     
     
-    public static String[] infixtoPostfix(String[] infix){
-        Stack<String> s = new Stack();
-        StringBuilder sb = new StringBuilder();
-        
-        for (String infix1 : infix) {
-            if (infix1.equals(" ")) {//si hay un espacio no hace nada
-            } else if (isDigit(infix1)) {//si infix[i] o infix1 es un digito, se agrega directamente al stringbuilder
-                sb.append(infix1).append(" ");
-            } else if (isOperator(infix1)) {//si es operador verifica que el stack no este vacio y la precedencia mas alta
-                while (!s.isEmpty() && !s.peek().equals("(") && precedenciaMasAlta(s.peek(), infix1)) {
-                    sb.append(s.pop()).append(" ");
-                }
-                s.push(infix1);
-            } else if (infix1.equals("(")) {//si encuentra un "(" se agrega al stack
-                s.push(infix1);
-            } else if (infix1.equals(")")) {
-                while(!s.empty() && !s.peek().equals("(")){
-                    sb.append(s.pop()).append(" ");
-                }
-                s.pop();
-            }
-        }
-        
-        while(!s.isEmpty()){
-            sb.append(s.pop()).append(" ");
-        }
-        
-        String[] sFinal = sb.toString().split(" ");
-        return sFinal;
-    }
+    
     
     public static boolean isDigit(String s){
         return Character.isDigit(s.charAt(0));
@@ -256,37 +227,6 @@ public class BinTree implements Comparable<BinTree>{
     
     public static boolean isOperator(String s){
         return s.equals("+") || s.equals("-") || s.equals("*") || s.equals("/") || s.equals("^");
-    }
-    
-    public static int Precedencia(String s){
-        int pre = 0;
-        if(s.equals("+") || s.equals("-")){
-            pre = 1;
-        }
-        if(s.equals("*") || s.equals("/")){
-            pre = 2;
-        }
-        if(s.equals("^")){
-            pre = 3;
-        }
-        return pre;
-    }
-    
-    public static boolean precedenciaMasAlta(String s, String s2){
-        int prec = Precedencia(s);
-        int prec2 = Precedencia(s2);
-        
-        if(prec == prec2){
-            if(s.equals("^")){//if(Associative(s))
-                return false;
-            }else{
-                return true;
-            }
-        }else{
-            if(prec>prec2) return true;
-
-        }
-        return false;
     }
 }
 

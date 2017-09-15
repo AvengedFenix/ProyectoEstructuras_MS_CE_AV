@@ -13,10 +13,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Stack;
+import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
 
 /**
  *
@@ -62,7 +65,7 @@ public class GUIProject extends javax.swing.JFrame {
         jPanel9 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
+        jl_answer = new javax.swing.JLabel();
         jd_compresion = new javax.swing.JDialog();
         jPanel4 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
@@ -251,9 +254,9 @@ public class GUIProject extends javax.swing.JFrame {
         jLabel18.setForeground(new java.awt.Color(255, 255, 255));
         jLabel18.setText("R E S P U E S T A :");
 
-        jLabel19.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel19.setText("[     ]");
+        jl_answer.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        jl_answer.setForeground(new java.awt.Color(255, 255, 255));
+        jl_answer.setText("[     ]");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -271,7 +274,7 @@ public class GUIProject extends javax.swing.JFrame {
                         .addGap(72, 72, 72)
                         .addComponent(jLabel18)
                         .addGap(13, 13, 13)
-                        .addComponent(jLabel19)))
+                        .addComponent(jl_answer)))
                 .addGap(185, 185, 185))
         );
         jPanel3Layout.setVerticalGroup(
@@ -290,7 +293,7 @@ public class GUIProject extends javax.swing.JFrame {
                 .addGap(64, 64, 64)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
-                    .addComponent(jLabel19))
+                    .addComponent(jl_answer))
                 .addContainerGap(112, Short.MAX_VALUE))
         );
 
@@ -609,9 +612,11 @@ public class GUIProject extends javax.swing.JFrame {
 
         ap.escribirArchivo();
 */
+        ta_evaluacion.setText("");
         jd_desempeno.pack();
         jd_desempeno.setLocationRelativeTo(null);
         jd_desempeno.setVisible(true);
+        
         /*for (int i = 0; i < ap.getListaPersonas().size(); i++) {
             //cb_empleados.addItem(ap.getListaPersonas().get(i).getName());
         }*/
@@ -711,6 +716,34 @@ public class GUIProject extends javax.swing.JFrame {
         // TODO add your handling code here:
         String str = tf_math.getText();
         
+        String s = "  (4/2*  3*4)  +(10/5)^2";
+        //String infix = "5-5";
+        String s2 = str.replaceAll(" ","");
+        String format = "";
+        
+        
+        StringTokenizer st = new StringTokenizer(s2, "+*/-()^", true);
+        while (st.hasMoreTokens()) {
+            format += st.nextToken() + " ";
+        }
+        
+        System.out.println("");
+        System.out.println("Format: " + format);
+ 
+        System.out.println("");
+        String[] finalinfix = infixtoPostfix(format.split(" "));
+        System.out.println("Infix to Postfix: " + Arrays.toString(finalinfix));
+        
+        
+        BinTree bt = postf_toTree(finalinfix);
+        
+        bt.inorden(bt);
+        System.out.print(" = " + bt.evaluar(bt));
+        System.out.println("");
+        
+        jl_answer.setText(Double.toString(bt.evaluar(bt)));
+        
+        
     }//GEN-LAST:event_jLabel17MouseClicked
 
     /**
@@ -760,7 +793,6 @@ public class GUIProject extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
@@ -795,6 +827,7 @@ public class GUIProject extends javax.swing.JFrame {
     private javax.swing.JDialog jd_compresion;
     private javax.swing.JDialog jd_desempeno;
     private javax.swing.JDialog jd_resolucion;
+    private javax.swing.JLabel jl_answer;
     private javax.swing.JPanel panel_p;
     private javax.swing.JTextArea ta_evaluacion;
     private javax.swing.JTextArea ta_og;
@@ -909,5 +942,87 @@ public class GUIProject extends javax.swing.JFrame {
         }
 
         return null;
+    }
+    
+    public static String[] infixtoPostfix(String[] infix){
+        Stack<String> s = new Stack();
+        StringBuilder sb = new StringBuilder();
+        
+        for (String infix1 : infix) {
+            if (infix1.equals(" ")) {//si hay un espacio no hace nada
+            } else if (isDigit(infix1)) {//si infix[i] o infix1 es un digito, se agrega directamente al stringbuilder
+                sb.append(infix1).append(" ");
+            } else if (isOperator(infix1)) {//si es operador verifica que el stack no este vacio y la precedencia mas alta
+                while (!s.isEmpty() && !s.peek().equals("(") && precedenciaMasAlta(s.peek(), infix1)) {
+                    sb.append(s.pop()).append(" ");
+                }
+                s.push(infix1);
+            } else if (infix1.equals("(")) {//si encuentra un "(" se agrega al stack
+                s.push(infix1);
+            } else if (infix1.equals(")")) {
+                while(!s.empty() && !s.peek().equals("(")){
+                    sb.append(s.pop()).append(" ");
+                }
+                s.pop();
+            }
+        }
+        
+        while(!s.isEmpty()){
+            sb.append(s.pop()).append(" ");
+        }
+        
+        String[] sFinal = sb.toString().split(" ");
+        return sFinal;
+    }
+    
+    public static BinTree postf_toTree(String[] s){//ESTO TIENE QUE ESTAR EN EL MAIN o en una clase Tree que contenga un nodo root pero no se si es necesario
+        BinTree b = new BinTree();
+        
+        Stack<BinTree> stackTree = new Stack();
+        
+        for (int i = 0; i < s.length; i++) {
+            b.postfixTree(s[i], stackTree);
+        }
+
+        return stackTree.pop();
+    }
+    
+    public static boolean isDigit(String s){
+        return Character.isDigit(s.charAt(0));
+    }
+    
+    public static boolean isOperator(String s){
+        return s.equals("+") || s.equals("-") || s.equals("*") || s.equals("/") || s.equals("^");
+    }
+    
+    public static int Precedencia(String s){
+        int pre = 0;
+        if(s.equals("+") || s.equals("-")){
+            pre = 1;
+        }
+        if(s.equals("*") || s.equals("/")){
+            pre = 2;
+        }
+        if(s.equals("^")){
+            pre = 3;
+        }
+        return pre;
+    }
+    
+    public static boolean precedenciaMasAlta(String s, String s2){
+        int prec = Precedencia(s);
+        int prec2 = Precedencia(s2);
+        
+        if(prec == prec2){
+            if(s.equals("^")){//if(Associative(s))
+                return false;
+            }else{
+                return true;
+            }
+        }else{
+            if(prec>prec2) return true;
+
+        }
+        return false;
     }
 }

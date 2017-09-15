@@ -204,7 +204,7 @@ public class TreeNode {
             for(int i = 0; i < nodo.getChildren().size(); i++){
                 evaluarPostorden(nodo.getChildren().get(i));
             }
-            System.out.print("( " + nodo.getEvaluacion() + " )" + " ");
+            System.out.print("( " + nodo.getPersona().getEvaluation() + " )" + " ");
             System.out.println(nodo.allChildrenVisited());
             nodo.setVisited(true);
             if(nodo.allChildrenVisited()) nodo.Evaluar();
@@ -237,16 +237,16 @@ public class TreeNode {
     }
     
     public void Evaluar(){
-        int x = 0;
-        int cont = 0;
+        double x = 0;
+        double cont = 0;
         if(!this.getChildren().isEmpty()){
             for (int i = 0; i < this.getChildren().size(); i++) {
-                x += this.getChildren().get(i).getEvaluacion();
+                x += this.getChildren().get(i).getPersona().getEvaluation();
                 cont++;
             }
             
             x /= cont;
-        this.setEvaluacion(x);
+        this.getPersona().setEvaluation(x);
         }else{
             System.out.println("El nodo no tiene hijos");
         }
