@@ -26,6 +26,7 @@ public class PrimTest {
         DorogovtsevMendesGenerator gen = new DorogovtsevMendesGenerator();
         //BaseGenerator gen =new BarabasiAlbertGenerator();
         Graph graph = new DefaultGraph("Prim Test");
+        Graph graph2 = new DefaultGraph("Actual Test");
 
         String css = "edge .notintree {size:1px;fill-color:gray;text-font:montserrat;} "
                 + "edge .intree {size:3px;fill-color:black;text-font:montserrat;}"
@@ -34,6 +35,9 @@ public class PrimTest {
 
         graph.addAttribute("ui.stylesheet", css);
         graph.display();
+        graph2.addAttribute("ui.stylesheet", css);
+        //graph2.display();
+
         gen.addEdgeLabels(true);
         gen.addEdgeAttribute("weight");
         gen.setEdgeAttributesRange(1, 100.0);
@@ -55,44 +59,46 @@ public class PrimTest {
         ArrayList<Node> nodes = new ArrayList();
         ArrayList<Edge> edges = new ArrayList();
         String i = "0";
-        int value = 0;
+
         while (graph.getNodeCount() != nodes.size()) {
             Node n = graph.getNode(i);
-            if (!nodes.contains(n)) {
-                nodes.add(n);
-
-                double low = 1000000;
-                //double weight = 0;
-
-                for (int j = 0; j < n.getEdgeSet().size(); j++) {
-                    if (!edges.contains(n.getEdge(j))) {
-                        double weight = n.getEdge(j).getAttribute("weight");
-                        if (weight < low) {
-                            low = weight;
-                            value = j;
-                        }
+            double low = 1000000;
+            //double weight = 0;
+            int value = 0;
+            for (int j = 0; j < n.getEdgeSet().size(); j++) {
+                if (!edges.contains(n.getEdge(j))) {
+                    double weight = n.getEdge(j).getAttribute("weight");
+                    if (weight < low) {
+                        low = weight;
+                        value = j;
                     }
                 }
-                System.out.println(i);
+            }
+            System.out.println(i);
 
-                if (n.getId().equals(n.getEdge(value).getSourceNode().getId()) && !nodes.contains(n.getEdge(value).getTargetNode())) {
-                    i = n.getEdge(value).getTargetNode().getId();
-                } else {
-                    i = n.getEdge(value).getSourceNode().getId();
-                }
-                if (!edges.contains(n.getEdge(value))) {
-                    n.getEdge(value).changeAttribute("ui.style", "size:3px;fill-color:black;");
-                    edges.add(n.getEdge(value));
-                }
+            if (n.getId().equals(n.getEdge(value).getSourceNode().getId())) {//&& !nodes.contains(n.getEdge(value).getTargetNode())) {
+                i = n.getEdge(value).getTargetNode().getId();
+            } else if (n.getId().equals(n.getEdge(value).getTargetNode().getId())) {//&& !nodes.contains(n.getEdge(value).getSourceNode())) {
+                i = n.getEdge(value).getSourceNode().getId();
+            }
+            if (!nodes.contains(graph.getNode(i))) {
+                n.getEdge(value).changeAttribute("ui.style", "size:3px;fill-color:black;");
+                nodes.add(n);
 
             }
+            edges.add(n.getEdge(value));
+
+            //}
         }
 
-            /*
+        System.out.println("hey");
+
+        /*
         Prim prim = new Prim("ui.class", "intree", "notintree");
 
         prim.init(graph);
-        prim.compute();*/
-        }
-
+        prim.compute();
+         */
     }
+
+}
