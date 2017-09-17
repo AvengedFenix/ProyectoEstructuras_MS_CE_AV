@@ -732,7 +732,7 @@ public class GUIProject extends javax.swing.JFrame {
  
         System.out.println("");
         String[] finalinfix = infixtoPostfix(format.split(" "));
-        System.out.println("Infix to Postfix: " + Arrays.toString(finalinfix));
+        System.out.println("Infix to Postfix: " + Arrays.toString(finalinfix) + "\n");
         
         
         BinTree bt = postf_toTree(finalinfix);
