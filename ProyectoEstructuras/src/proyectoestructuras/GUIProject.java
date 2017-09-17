@@ -13,8 +13,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Stack;
+import java.util.StringTokenizer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
 
 /**
  *
@@ -43,21 +48,24 @@ public class GUIProject extends javax.swing.JFrame {
         jd_desempeno = new javax.swing.JDialog();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        cb_empleados = new javax.swing.JComboBox<>();
         jPanel6 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        jPanel10 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        tf_pathtree = new javax.swing.JTextField();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        ta_evaluacion = new javax.swing.JTextArea();
         jd_resolucion = new javax.swing.JDialog();
         jPanel3 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        tf_math = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
+        jl_answer = new javax.swing.JLabel();
         jd_compresion = new javax.swing.JDialog();
         jPanel4 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
@@ -94,10 +102,6 @@ public class GUIProject extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("P O R   D E S E M P E Ñ O");
 
-        jLabel4.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("E l e g i r   e m p l e a d o s");
-
         jLabel2.setFont(new java.awt.Font("Montserrat", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(245, 124, 0));
         jLabel2.setText("C A L C U L O   D E   E V A L U A C I Ó N");
@@ -118,24 +122,47 @@ public class GUIProject extends javax.swing.JFrame {
                 .addComponent(jLabel2))
         );
 
+        jLabel4.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(245, 124, 0));
+        jLabel4.setText("E l e g i r   a r c h i v o");
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
+        );
+
+        tf_pathtree.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+
+        ta_evaluacion.setColumns(20);
+        ta_evaluacion.setRows(5);
+        jScrollPane3.setViewportView(ta_evaluacion);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(225, 225, 225)
-                        .addComponent(cb_empleados, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(119, 119, 119)
-                        .addComponent(jLabel4)))
-                .addGap(0, 368, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(163, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel3)
+                    .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_pathtree, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(134, 134, 134))
         );
         jPanel2Layout.setVerticalGroup(
@@ -145,11 +172,13 @@ public class GUIProject extends javax.swing.JFrame {
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
-                .addGap(104, 104, 104)
-                .addComponent(jLabel4)
-                .addGap(18, 18, 18)
-                .addComponent(cb_empleados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(198, Short.MAX_VALUE))
+                .addGap(59, 59, 59)
+                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(tf_pathtree, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jd_desempenoLayout = new javax.swing.GroupLayout(jd_desempeno.getContentPane());
@@ -187,10 +216,10 @@ public class GUIProject extends javax.swing.JFrame {
             .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
-        jTextField1.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        tf_math.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
+        tf_math.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                tf_mathActionPerformed(evt);
             }
         });
 
@@ -201,6 +230,11 @@ public class GUIProject extends javax.swing.JFrame {
         jLabel17.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(153, 0, 0));
         jLabel17.setText("R E S O L V E R");
+        jLabel17.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel17MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -220,9 +254,9 @@ public class GUIProject extends javax.swing.JFrame {
         jLabel18.setForeground(new java.awt.Color(255, 255, 255));
         jLabel18.setText("R E S P U E S T A :");
 
-        jLabel19.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel19.setText("[     ]");
+        jl_answer.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        jl_answer.setForeground(new java.awt.Color(255, 255, 255));
+        jl_answer.setText("[     ]");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -234,13 +268,13 @@ public class GUIProject extends javax.swing.JFrame {
                     .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10)
                     .addComponent(jLabel16)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tf_math, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
                         .addGap(72, 72, 72)
                         .addComponent(jLabel18)
                         .addGap(13, 13, 13)
-                        .addComponent(jLabel19)))
+                        .addComponent(jl_answer)))
                 .addGap(185, 185, 185))
         );
         jPanel3Layout.setVerticalGroup(
@@ -253,13 +287,13 @@ public class GUIProject extends javax.swing.JFrame {
                 .addGap(90, 90, 90)
                 .addComponent(jLabel16)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tf_math, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(64, 64, 64)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
-                    .addComponent(jLabel19))
+                    .addComponent(jl_answer))
                 .addContainerGap(112, Short.MAX_VALUE))
         );
 
@@ -466,15 +500,15 @@ public class GUIProject extends javax.swing.JFrame {
 
         jLabel20.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel20.setText("A L G O R I T M O  F L O Y D");
+        jLabel20.setText("A L G O R I T M O   F L O Y D");
 
         jLabel21.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel21.setText("A L G O R I T M O  D I J K S T R A");
+        jLabel21.setText("A L G O R I T M O   D I J K S T R A");
 
         jLabel22.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel22.setText("K R U S K A L  Y  P R I M");
+        jLabel22.setText("K R U S K A L   Y   P R I M");
 
         javax.swing.GroupLayout panel_pLayout = new javax.swing.GroupLayout(panel_p);
         panel_p.setLayout(panel_pLayout);
@@ -506,13 +540,13 @@ public class GUIProject extends javax.swing.JFrame {
                 .addComponent(jLabel7)
                 .addGap(40, 40, 40)
                 .addComponent(jLabel8)
-                .addGap(30, 30, 30)
+                .addGap(40, 40, 40)
                 .addComponent(jLabel20)
-                .addGap(29, 29, 29)
+                .addGap(40, 40, 40)
                 .addComponent(jLabel21)
-                .addGap(31, 31, 31)
+                .addGap(40, 40, 40)
                 .addComponent(jLabel22)
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         jMenuBar1.setFont(jMenuBar1.getFont().deriveFont(jMenuBar1.getFont().getStyle() & ~java.awt.Font.BOLD));
@@ -551,7 +585,7 @@ public class GUIProject extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel_p, javax.swing.GroupLayout.PREFERRED_SIZE, 607, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(panel_p, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
         );
 
         pack();
@@ -571,25 +605,27 @@ public class GUIProject extends javax.swing.JFrame {
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
         // TODO add your handling code here:
-        adminPerson ap = new adminPerson("./personas.txt");
+        /*adminPerson ap = new adminPerson("./personas.txt");
         ap.cargarArchivo();
         Person p = new Person("Juan", 20);
         ap.setPerson(p);
 
         ap.escribirArchivo();
-
+*/
+        ta_evaluacion.setText("");
         jd_desempeno.pack();
         jd_desempeno.setLocationRelativeTo(null);
         jd_desempeno.setVisible(true);
-        for (int i = 0; i < ap.getListaPersonas().size(); i++) {
-            cb_empleados.addItem(ap.getListaPersonas().get(i).getName());
-        }
+        
+        /*for (int i = 0; i < ap.getListaPersonas().size(); i++) {
+            //cb_empleados.addItem(ap.getListaPersonas().get(i).getName());
+        }*/
     }//GEN-LAST:event_jLabel5MouseClicked
 
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
         // TODO add your handling code here:
-       // TF_compresion.setVisible(true);
-       // bt_go.setVisible(true);
+        // TF_compresion.setVisible(true);
+        // bt_go.setVisible(true);
         panel_p.updateUI();
         this.pack();
     }//GEN-LAST:event_jLabel7MouseClicked
@@ -597,13 +633,13 @@ public class GUIProject extends javax.swing.JFrame {
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         pathTree = load();
         System.out.println("Path tree: " + pathTree);
-        if(pathTree != null){
+        if (pathTree != null) {
             try {
                 createTree(pathTree);
             } catch (IOException e) {
                 System.out.println("exception");
             }
-            
+
         }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
@@ -619,14 +655,96 @@ public class GUIProject extends javax.swing.JFrame {
     private void jLabel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseClicked
         // TODO add your handling code here:
         Huffman huffman = new Huffman();
-        
+
         huffman.Huff(ta_og.getText());
     }//GEN-LAST:event_jLabel15MouseClicked
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void tf_mathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_mathActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_tf_mathActionPerformed
 
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        // TODO add your handling code here:
+        
+        Person p = new Person("Andre");
+        TreeNode root = new TreeNode(p);
+        
+        TreeNode n = new TreeNode(new Person("Mario"));
+        TreeNode n2 = new TreeNode(new Person("Calvin",5));
+        
+        
+        
+
+        
+        root.addTreeNode(n);
+        root.addTreeNode(n2);
+        root.addTreeNode(new TreeNode(new Person("Jorge",8)));
+        
+        
+        TreeNode tn2 = new TreeNode(new Person("Carlos",5));
+        TreeNode tn3 = new TreeNode(new Person("Jose"));
+        n.addTreeNode(tn2);
+        n.addTreeNode(tn3);
+        
+        tn3.addTreeNode(new TreeNode(new Person("Karl",10)));
+        tn3.addTreeNode(new TreeNode(new Person("Bart",20)));
+        tn3.addTreeNode(new TreeNode(new Person("James",6)));
+        
+        //pathTree = load();
+        tf_pathtree.setText(pathTree);
+        TreeNode node = null;
+        /*
+        try {
+            node = createTree(pathTree);
+        } catch (IOException ex) {
+            Logger.getLogger(GUIProject.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        */
+        root.evaluarPOrden(root);
+         ArrayList<TreeNode> postorder = root.getPostOrder(root);
+        
+        for (int i = 0; i < postorder.size(); i++) {
+            ta_evaluacion.append(i + ". " + postorder.get(i).getPersona().getName() + ": " + postorder.get(i).getPersona().getEvaluation() + "\n");
+        }
+        
+        
+        
+        
+    }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void jLabel17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseClicked
+        // TODO add your handling code here:
+        String str = tf_math.getText();
+        
+        String s = "  (4/2*  3*4)  +(10/5)^2";
+        //String infix = "5-5";
+        String s2 = str.replaceAll(" ","");
+        String format = "";
+        
+        
+        StringTokenizer st = new StringTokenizer(s2, "+*/-()^", true);
+        while (st.hasMoreTokens()) {
+            format += st.nextToken() + " ";
+        }
+        
+        System.out.println("");
+        System.out.println("Format: " + format);
+ 
+        System.out.println("");
+        String[] finalinfix = infixtoPostfix(format.split(" "));
+        System.out.println("Infix to Postfix: " + Arrays.toString(finalinfix));
+        
+        
+        BinTree bt = postf_toTree(finalinfix);
+        
+        bt.inorden(bt);
+        System.out.print(" = " + bt.evaluar(bt));
+        System.out.println("");
+        
+        jl_answer.setText(Double.toString(bt.evaluar(bt)));
+        
+        
+    }//GEN-LAST:event_jLabel17MouseClicked
 
     /**
      * @param args the command line arguments
@@ -665,7 +783,6 @@ public class GUIProject extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> cb_empleados;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -676,7 +793,6 @@ public class GUIProject extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
@@ -695,6 +811,7 @@ public class GUIProject extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -705,20 +822,24 @@ public class GUIProject extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JDialog jd_compresion;
     private javax.swing.JDialog jd_desempeno;
     private javax.swing.JDialog jd_resolucion;
+    private javax.swing.JLabel jl_answer;
     private javax.swing.JPanel panel_p;
+    private javax.swing.JTextArea ta_evaluacion;
     private javax.swing.JTextArea ta_og;
+    private javax.swing.JTextField tf_math;
+    private javax.swing.JTextField tf_pathtree;
     // End of variables declaration//GEN-END:variables
 
     private String pathTree;
     private String pathGrafo;
 
     public void save() {
-       // String texto = TF_compresion.getText();
+        // String texto = TF_compresion.getText();
         File archiv = null;
         FileWriter fw = null;
         BufferedWriter bw = null;
@@ -728,7 +849,7 @@ public class GUIProject extends javax.swing.JFrame {
             fw = new FileWriter(archiv, true);
             //si el archivo no existe lo crea y si ya existe los sobreescribe (al menos que append
             bw = new BufferedWriter(fw);
-       //     bw.write(texto);
+            //     bw.write(texto);
             bw.flush();
 
         } catch (Exception e) {
@@ -761,9 +882,9 @@ public class GUIProject extends javax.swing.JFrame {
         }
     }
 
-    public BinTree createTree(String path) throws IOException {
+    public TreeNode createTree(String path) throws IOException {
 
-        BinTree root = new BinTree();
+        TreeNode root = new TreeNode();
         BufferedReader br = new BufferedReader(new FileReader(path));
         try {
             String line = br.readLine();
@@ -775,27 +896,22 @@ public class GUIProject extends javax.swing.JFrame {
                 System.out.println(Arrays.toString(line.split(",")));
                 line = br.readLine();
             }
-            
 
             //TreeNode rootTree = info.get
-
             int nNodo = Integer.parseInt(info.get(0)[0]);
             TreeNode rootTree = new TreeNode(nNodo);
             rootTree.addTreeNode(new TreeNode(Integer.parseInt(info.get(0)[1])));
 
-            
-            
             for (int i = 1; i < info.size(); i++) {
                 int numeroNodo = Integer.parseInt(info.get(i)[0]);
                 int hijo = Integer.parseInt(info.get(i)[1]);
                 int evaluacion = Integer.parseInt(info.get(i)[2]);
-                
 
                 //if(treeExists)
-
-                if(treeExists(hijo, rootTree) == null){
+                if (treeExists(hijo, rootTree) == null) {
                     System.out.println("no existe nodo");
-                    
+
+
                     //TreeNode nuevoNodo = new TreeNode(numeroNodo)
                 }
 
@@ -824,8 +940,89 @@ public class GUIProject extends javax.swing.JFrame {
             }
 
         }
-        
+
         return null;
     }
-}
+    
+    public static String[] infixtoPostfix(String[] infix){
+        Stack<String> s = new Stack();
+        StringBuilder sb = new StringBuilder();
+        
+        for (String infix1 : infix) {
+            if (infix1.equals(" ")) {//si hay un espacio no hace nada
+            } else if (isDigit(infix1)) {//si infix[i] o infix1 es un digito, se agrega directamente al stringbuilder
+                sb.append(infix1).append(" ");
+            } else if (isOperator(infix1)) {//si es operador verifica que el stack no este vacio y la precedencia mas alta
+                while (!s.isEmpty() && !s.peek().equals("(") && precedenciaMasAlta(s.peek(), infix1)) {
+                    sb.append(s.pop()).append(" ");
+                }
+                s.push(infix1);
+            } else if (infix1.equals("(")) {//si encuentra un "(" se agrega al stack
+                s.push(infix1);
+            } else if (infix1.equals(")")) {
+                while(!s.empty() && !s.peek().equals("(")){
+                    sb.append(s.pop()).append(" ");
+                }
+                s.pop();
+            }
+        }
+        
+        while(!s.isEmpty()){
+            sb.append(s.pop()).append(" ");
+        }
+        
+        String[] sFinal = sb.toString().split(" ");
+        return sFinal;
+    }
+    
+    public static BinTree postf_toTree(String[] s){//ESTO TIENE QUE ESTAR EN EL MAIN o en una clase Tree que contenga un nodo root pero no se si es necesario
+        BinTree b = new BinTree();
+        
+        Stack<BinTree> stackTree = new Stack();
+        
+        for (int i = 0; i < s.length; i++) {
+            b.postfixTree(s[i], stackTree);
+        }
 
+        return stackTree.pop();
+    }
+    
+    public static boolean isDigit(String s){
+        return Character.isDigit(s.charAt(0));
+    }
+    
+    public static boolean isOperator(String s){
+        return s.equals("+") || s.equals("-") || s.equals("*") || s.equals("/") || s.equals("^");
+    }
+    
+    public static int Precedencia(String s){
+        int pre = 0;
+        if(s.equals("+") || s.equals("-")){
+            pre = 1;
+        }
+        if(s.equals("*") || s.equals("/")){
+            pre = 2;
+        }
+        if(s.equals("^")){
+            pre = 3;
+        }
+        return pre;
+    }
+    
+    public static boolean precedenciaMasAlta(String s, String s2){
+        int prec = Precedencia(s);
+        int prec2 = Precedencia(s2);
+        
+        if(prec == prec2){
+            if(s.equals("^")){//if(Associative(s))
+                return false;
+            }else{
+                return true;
+            }
+        }else{
+            if(prec>prec2) return true;
+
+        }
+        return false;
+    }
+}

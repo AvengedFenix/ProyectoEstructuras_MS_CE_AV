@@ -89,7 +89,7 @@ public class BinTree implements Comparable<BinTree>{
         return ret;
     }
 
-    public int evaluar(BinTree nodo) {
+    public double evaluar(BinTree nodo) {
         if (nodo == null) {
             return 0;
         }
@@ -99,8 +99,8 @@ public class BinTree implements Comparable<BinTree>{
             return Integer.parseInt(nodo.getInfo());
         }
 
-        int valor_l = evaluar(nodo.getLNode()); //evaluar left node
-        int valor_r = evaluar(nodo.getRNode()); // evaluar right node
+        double valor_l = evaluar(nodo.getLNode()); //evaluar left node
+        double valor_r = evaluar(nodo.getRNode()); // evaluar right node
 
 
         String operator = nodo.getInfo();
@@ -173,9 +173,6 @@ public class BinTree implements Comparable<BinTree>{
         }
     }
 
-    public boolean isDigit(String s) {
-        return Character.isDigit(s.charAt(0));
-    }
 
     public void inorden(BinTree nodo) {
         if (nodo != null) {
@@ -208,6 +205,29 @@ public class BinTree implements Comparable<BinTree>{
         
         return Integer.parseInt(this.getInfo()) - compararCantidad;
     }
+    
+    public static BinTree postf_toTree(String[] s){//ESTO TIENE QUE ESTAR EN EL MAIN o en una clase Tree que contenga un nodo root pero no se si es necesario
+        BinTree b = new BinTree();
+        
+        Stack<BinTree> stackTree = new Stack();
+        
+        for (int i = 0; i < s.length; i++) {
+            b.postfixTree(s[i], stackTree);
+        }
+
+        return stackTree.pop();
+    }
+    
+    
+    
+    
+    public static boolean isDigit(String s){
+        return Character.isDigit(s.charAt(0));
+    }
+    
+    public static boolean isOperator(String s){
+        return s.equals("+") || s.equals("-") || s.equals("*") || s.equals("/") || s.equals("^");
+    }
 }
 
 
@@ -226,3 +246,5 @@ public static BinTree postf_toTree(String[] s){//ESTO TIENE QUE ESTAR EN EL MAIN
 
 
  */
+
+
