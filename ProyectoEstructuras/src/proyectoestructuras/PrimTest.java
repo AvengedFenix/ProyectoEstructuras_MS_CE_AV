@@ -59,34 +59,42 @@ public class PrimTest {
         ArrayList<Node> nodes = new ArrayList();
         ArrayList<Edge> edges = new ArrayList();
         String i = "0";
-
+        int u = 0;
+        int v = 0;
+        Node n = graph.getNode(0);
+        nodes.add(n);
         while (graph.getNodeCount() != nodes.size()) {
-            Node n = graph.getNode(i);
             double low = 1000000;
-            //double weight = 0;
-            int value = 0;
-            for (int j = 0; j < n.getEdgeSet().size(); j++) {
-                if (!edges.contains(n.getEdge(j))) {
-                    double weight = n.getEdge(j).getAttribute("weight");
-                    if (weight < low) {
-                        low = weight;
-                        value = j;
+            double weight = 0;
+            for (int k = 0; k < nodes.size(); k++) {
+                n = nodes.get(k);
+                for (int j = 0; j < n.getEdgeSet().size(); j++) {
+                    weight = n.getEdge(j).getAttribute("weight");
+                    if (!edges.contains(n.getEdge(j))&& (!nodes.contains(n.getEdge(j).getSourceNode()) || !nodes.contains(n.getEdge(j).getTargetNode()))) {
+                        System.out.println("NODE " + n.getId() + "  EDGE " + j + "  WEIGHT " + weight);
+                        if (weight < low) {
+                            low = weight;
+                            v = j;
+                            u = k;
+                        }
                     }
                 }
             }
-            System.out.println(i);
+            System.out.println(low);
+  
+            Node n1 = nodes.get(u).getEdge(v).getNode0();
+            Node n2 = nodes.get(u).getEdge(v).getNode1();
 
-            if (n.getId().equals(n.getEdge(value).getSourceNode().getId())) {//&& !nodes.contains(n.getEdge(value).getTargetNode())) {
-                i = n.getEdge(value).getTargetNode().getId();
-            } else if (n.getId().equals(n.getEdge(value).getTargetNode().getId())) {//&& !nodes.contains(n.getEdge(value).getSourceNode())) {
-                i = n.getEdge(value).getSourceNode().getId();
+            if (!nodes.contains(n2)) {
+                nodes.add(n2);
+            } else if (!nodes.contains(n1)) {
+                nodes.add(n1);
             }
-            if (!nodes.contains(graph.getNode(i))) {
-                n.getEdge(value).changeAttribute("ui.style", "size:3px;fill-color:black;");
-                nodes.add(n);
+            edges.add(nodes.get(u).getEdge(v));
+            nodes.get(u).getEdge(v).changeAttribute("ui.style", "size:3px;fill-color:black;");
 
-            }
-            edges.add(n.getEdge(value));
+            System.out.println("Nodes" + nodes);
+            System.out.println("Edges" + edges);
 
             //}
         }
@@ -98,6 +106,8 @@ public class PrimTest {
 
         prim.init(graph);
         prim.compute();
+       
+        System.out.println(prim.getTreeWeight());
          */
     }
 
