@@ -21,7 +21,6 @@ public class BinTree implements Comparable<BinTree>{
     BinTree(BinTree LNode, BinTree RNode, String info) {
         this.LNode = LNode;
         this.RNode = RNode;
-        this.info = info;
     }
 
     BinTree(String info) {

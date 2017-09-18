@@ -13,13 +13,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Stack;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
 
 /**
  *
@@ -79,6 +81,17 @@ public class GUIProject extends javax.swing.JFrame {
         jLabel14 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         jLabel15 = new javax.swing.JLabel();
+        jd_bicoloreable = new javax.swing.JDialog();
+        jPanel11 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jt_gruporojo = new javax.swing.JTextArea();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jt_grupoazul = new javax.swing.JTextArea();
+        jl_rojo = new javax.swing.JLabel();
+        jl_azul = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jl_bicolorResp = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         panel_p = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -371,7 +384,7 @@ public class GUIProject extends javax.swing.JFrame {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel15)
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -436,9 +449,97 @@ public class GUIProject extends javax.swing.JFrame {
             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        jt_gruporojo.setColumns(20);
+        jt_gruporojo.setRows(5);
+        jScrollPane4.setViewportView(jt_gruporojo);
+
+        jt_grupoazul.setColumns(20);
+        jt_grupoazul.setRows(5);
+        jScrollPane5.setViewportView(jt_grupoazul);
+
+        jl_rojo.setText("Color Rojo");
+        jl_rojo.setOpaque(true);
+
+        jl_azul.setText("Color Azul");
+        jl_azul.setOpaque(true);
+
+        jLabel24.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+        jLabel24.setText("BICOLOREABLE: ");
+
+        jl_bicolorResp.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
+
+        jButton1.setText("?");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addGap(193, 193, 193)
+                .addComponent(jl_rojo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jl_azul)
+                .addGap(185, 185, 185))
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addGap(133, 133, 133)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addComponent(jLabel24)
+                        .addGap(11, 11, 11)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jl_bicolorResp, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(158, Short.MAX_VALUE))
+                    .addGroup(jPanel11Layout.createSequentialGroup()
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(129, 129, 129))))
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
+                .addContainerGap(160, Short.MAX_VALUE)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel24, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jl_bicolorResp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(42, 42, 42)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jl_rojo, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jl_azul, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(93, 93, 93))
+        );
+
+        javax.swing.GroupLayout jd_bicoloreableLayout = new javax.swing.GroupLayout(jd_bicoloreable.getContentPane());
+        jd_bicoloreable.getContentPane().setLayout(jd_bicoloreableLayout);
+        jd_bicoloreableLayout.setHorizontalGroup(
+            jd_bicoloreableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_bicoloreableLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jd_bicoloreableLayout.setVerticalGroup(
+            jd_bicoloreableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_bicoloreableLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 153, 153));
-        setPreferredSize(new java.awt.Dimension(860, 620));
         setSize(new java.awt.Dimension(1000, 1000));
 
         panel_p.setBackground(new java.awt.Color(0, 102, 102));
@@ -497,6 +598,11 @@ public class GUIProject extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("G R A F O   B I - C O L O R E A B L E");
+        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel8MouseClicked(evt);
+            }
+        });
 
         jLabel20.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(255, 255, 255));
@@ -546,7 +652,7 @@ public class GUIProject extends javax.swing.JFrame {
                 .addComponent(jLabel21)
                 .addGap(40, 40, 40)
                 .addComponent(jLabel22)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         jMenuBar1.setFont(jMenuBar1.getFont().deriveFont(jMenuBar1.getFont().getStyle() & ~java.awt.Font.BOLD));
@@ -585,7 +691,7 @@ public class GUIProject extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel_p, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
+            .addComponent(panel_p, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)
         );
 
         pack();
@@ -611,12 +717,12 @@ public class GUIProject extends javax.swing.JFrame {
         ap.setPerson(p);
 
         ap.escribirArchivo();
-*/
+         */
         ta_evaluacion.setText("");
         jd_desempeno.pack();
         jd_desempeno.setLocationRelativeTo(null);
         jd_desempeno.setVisible(true);
-        
+
         /*for (int i = 0; i < ap.getListaPersonas().size(); i++) {
             //cb_empleados.addItem(ap.getListaPersonas().get(i).getName());
         }*/
@@ -665,86 +771,114 @@ public class GUIProject extends javax.swing.JFrame {
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         // TODO add your handling code here:
-        
+/*
         Person p = new Person("Andre");
         TreeNode root = new TreeNode(p);
-        
-        TreeNode n = new TreeNode(new Person("Mario"));
-        TreeNode n2 = new TreeNode(new Person("Calvin",5));
-        
-        
-        
 
-        
+        TreeNode n = new TreeNode(new Person("Mario"));
+        TreeNode n2 = new TreeNode(new Person("Calvin", 5));
+
         root.addTreeNode(n);
         root.addTreeNode(n2);
-        root.addTreeNode(new TreeNode(new Person("Jorge",8)));
-        
-        
-        TreeNode tn2 = new TreeNode(new Person("Carlos",5));
+        root.addTreeNode(new TreeNode(new Person("Jorge", 8)));
+
+        TreeNode tn2 = new TreeNode(new Person("Carlos", 5));
         TreeNode tn3 = new TreeNode(new Person("Jose"));
         n.addTreeNode(tn2);
         n.addTreeNode(tn3);
-        
-        tn3.addTreeNode(new TreeNode(new Person("Karl",10)));
-        tn3.addTreeNode(new TreeNode(new Person("Bart",20)));
-        tn3.addTreeNode(new TreeNode(new Person("James",6)));
-        
-        //pathTree = load();
+
+        tn3.addTreeNode(new TreeNode(new Person("Karl", 10)));
+        tn3.addTreeNode(new TreeNode(new Person("Bart", 20)));
+        tn3.addTreeNode(new TreeNode(new Person("James", 6)));
+*/
+        pathTree = load();
         tf_pathtree.setText(pathTree);
-        TreeNode node = null;
+        TreeNode root;
+        try {
+            root = createTree(pathTree);
+        } catch (IOException ex) {
+            Logger.getLogger(GUIProject.class.getName()).log(Level.SEVERE, null, ex);
+        }
         /*
         try {
             node = createTree(pathTree);
         } catch (IOException ex) {
             Logger.getLogger(GUIProject.class.getName()).log(Level.SEVERE, null, ex);
         }
-        */
-        root.evaluarPOrden(root);
-         ArrayList<TreeNode> postorder = root.getPostOrder(root);
-        
+         */
+        //root.evaluarPOrden(root);
+        /*ArrayList<TreeNode> postorder = root.getPostOrder(root);
+
         for (int i = 0; i < postorder.size(); i++) {
             ta_evaluacion.append(i + ". " + postorder.get(i).getPersona().getName() + ": " + postorder.get(i).getPersona().getEvaluation() + "\n");
-        }
-        
-        
-        
-        
+        }*/
+
+
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void jLabel17MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel17MouseClicked
         // TODO add your handling code here:
         String str = tf_math.getText();
-        
-        String s = "  (4/2*  3*4)  +(10/5)^2";
+
+        //String s = "  (4/2*  3*4)  +(10/5)^2";
         //String infix = "5-5";
-        String s2 = str.replaceAll(" ","");
+        String s2 = str.replaceAll(" ", "");
         String format = "";
-        
-        
+
         StringTokenizer st = new StringTokenizer(s2, "+*/-()^", true);
         while (st.hasMoreTokens()) {
             format += st.nextToken() + " ";
         }
-        
+
         System.out.println("");
         System.out.println("Format: " + format);
- 
+
         System.out.println("");
         String[] finalinfix = infixtoPostfix(format.split(" "));
-        System.out.println("Infix to Postfix: " + Arrays.toString(finalinfix));
-        
-        
+        System.out.println("Infix to Postfix: " + Arrays.toString(finalinfix) + "\n");
+
         BinTree bt = postf_toTree(finalinfix);
-        
+
         bt.inorden(bt);
         System.out.print(" = " + bt.evaluar(bt));
         System.out.println("");
-        
+
         jl_answer.setText(Double.toString(bt.evaluar(bt)));
-        
-        
+
+
     }//GEN-LAST:event_jLabel17MouseClicked
+
+    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+        jt_gruporojo.setVisible(false);
+        jt_grupoazul.setVisible(false);
+        jl_rojo.setVisible(false);
+        jl_azul.setVisible(false);
+        jd_bicoloreable.pack();
+        jd_bicoloreable.setLocationRelativeTo(null);
+        jd_bicoloreable.setVisible(true);
+    }//GEN-LAST:event_jLabel8MouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        GrafoMatriz gm = new GrafoMatriz(4, true);
+
+        gm.agregarArista(0, 1, 10);
+        gm.agregarArista(1, 2, 7);
+        gm.agregarArista(2, 3, 9);
+        gm.agregarArista(3, 0, 15);
+
+        System.out.println("Nodos adyacentes: \n");
+        for (int i = 0; i < gm.getMatrizAdy().length; i++) {
+            gm.imprimirNodosAdy(i);
+        }
+        System.out.println("");
+
+        System.out.println("Matriz de adyacencia: \n");
+        gm.imprimirMatrizAdy();
+        System.out.println("");
+        jl_bicolorResp.setText(gm.esBicoloreable(0) ? ("Bi-coloreable!") : ("No es bi-coloreable :("));
+
+
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -783,6 +917,7 @@ public class GUIProject extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -797,6 +932,7 @@ public class GUIProject extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -812,6 +948,7 @@ public class GUIProject extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -823,11 +960,19 @@ public class GUIProject extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JDialog jd_bicoloreable;
     private javax.swing.JDialog jd_compresion;
     private javax.swing.JDialog jd_desempeno;
     private javax.swing.JDialog jd_resolucion;
     private javax.swing.JLabel jl_answer;
+    private javax.swing.JLabel jl_azul;
+    private javax.swing.JLabel jl_bicolorResp;
+    private javax.swing.JLabel jl_rojo;
+    private javax.swing.JTextArea jt_grupoazul;
+    private javax.swing.JTextArea jt_gruporojo;
     private javax.swing.JPanel panel_p;
     private javax.swing.JTextArea ta_evaluacion;
     private javax.swing.JTextArea ta_og;
@@ -892,29 +1037,64 @@ public class GUIProject extends javax.swing.JFrame {
             ArrayList<String[]> info = new ArrayList();
 
             while (line != null) {
-                info.add(line.split(","));
+                String s = line.replaceAll(" ", "");
+                info.add(s.split(","));
+                //String[] x = info.get(info.size()-1);
+                /*for(String s : x){
+                    s = s.replaceAll(" ", "");
+                }*/
                 System.out.println(Arrays.toString(line.split(",")));
                 line = br.readLine();
             }
 
             //TreeNode rootTree = info.get
             int nNodo = Integer.parseInt(info.get(0)[0]);
+            ArrayList<Integer> existe = new ArrayList();
+            Map<TreeNode, ArrayList<TreeNode>> mapaarbol = new HashMap();
+
             TreeNode rootTree = new TreeNode(nNodo);
-            rootTree.addTreeNode(new TreeNode(Integer.parseInt(info.get(0)[1])));
+            //rootTree.addTreeNode(new TreeNode(Integer.parseInt(info.get(0)[1])));
 
             for (int i = 1; i < info.size(); i++) {
                 int numeroNodo = Integer.parseInt(info.get(i)[0]);
-                int hijo = Integer.parseInt(info.get(i)[1]);
-                int evaluacion = Integer.parseInt(info.get(i)[2]);
+                int padre = Integer.parseInt(info.get(i)[1]);
+                double evaluacion = Integer.parseInt(info.get(i)[2]);
+
+                if (padre == -1) {
+                    rootTree = new TreeNode(numeroNodo, evaluacion);
+                } else {
+
+                    if (!existe.contains(padre)) {
+                        TreeNode hijo = new TreeNode(numeroNodo, evaluacion);
+                        mapaarbol.put(hijo, new ArrayList());
+                    } else {
+                        for(Entry<TreeNode,ArrayList<TreeNode>> mapa : mapaarbol.entrySet()){
+                            if(mapa.getKey().getNumNodo() == padre){
+                                mapa.getValue().add(new TreeNode(numeroNodo, evaluacion));
+                            }
+                        }
+                    }
+
+                }
 
                 //if(treeExists)
-                if (treeExists(hijo, rootTree) == null) {
+                /*if (treeExists(hijo, rootTree) == null) {
                     System.out.println("no existe nodo");
 
 
                     //TreeNode nuevoNodo = new TreeNode(numeroNodo)
+                }*/
+            }
+            
+            for(Entry<TreeNode, ArrayList<TreeNode>> map : mapaarbol.entrySet()){
+                System.out.println(map.getKey().getNumNodo() + ": ");
+                StringBuilder sb = new StringBuilder();
+                System.out.println("size: " + map.getValue().size());
+                for(TreeNode nodo : map.getValue()){
+                    sb.append(nodo.getNumNodo()).append(", ");
                 }
-
+                
+                System.out.print(sb.toString());
             }
 
         } catch (IOException e) {
@@ -943,11 +1123,11 @@ public class GUIProject extends javax.swing.JFrame {
 
         return null;
     }
-    
-    public static String[] infixtoPostfix(String[] infix){
+
+    public static String[] infixtoPostfix(String[] infix) {
         Stack<String> s = new Stack();
         StringBuilder sb = new StringBuilder();
-        
+
         for (String infix1 : infix) {
             if (infix1.equals(" ")) {//si hay un espacio no hace nada
             } else if (isDigit(infix1)) {//si infix[i] o infix1 es un digito, se agrega directamente al stringbuilder
@@ -960,67 +1140,69 @@ public class GUIProject extends javax.swing.JFrame {
             } else if (infix1.equals("(")) {//si encuentra un "(" se agrega al stack
                 s.push(infix1);
             } else if (infix1.equals(")")) {
-                while(!s.empty() && !s.peek().equals("(")){
+                while (!s.empty() && !s.peek().equals("(")) {
                     sb.append(s.pop()).append(" ");
                 }
                 s.pop();
             }
         }
-        
-        while(!s.isEmpty()){
+
+        while (!s.isEmpty()) {
             sb.append(s.pop()).append(" ");
         }
-        
+
         String[] sFinal = sb.toString().split(" ");
         return sFinal;
     }
-    
-    public static BinTree postf_toTree(String[] s){//ESTO TIENE QUE ESTAR EN EL MAIN o en una clase Tree que contenga un nodo root pero no se si es necesario
+
+    public static BinTree postf_toTree(String[] s) {//ESTO TIENE QUE ESTAR EN EL MAIN o en una clase Tree que contenga un nodo root pero no se si es necesario
         BinTree b = new BinTree();
-        
+
         Stack<BinTree> stackTree = new Stack();
-        
+
         for (int i = 0; i < s.length; i++) {
             b.postfixTree(s[i], stackTree);
         }
 
         return stackTree.pop();
     }
-    
-    public static boolean isDigit(String s){
+
+    public static boolean isDigit(String s) {
         return Character.isDigit(s.charAt(0));
     }
-    
-    public static boolean isOperator(String s){
+
+    public static boolean isOperator(String s) {
         return s.equals("+") || s.equals("-") || s.equals("*") || s.equals("/") || s.equals("^");
     }
-    
-    public static int Precedencia(String s){
+
+    public static int Precedencia(String s) {
         int pre = 0;
-        if(s.equals("+") || s.equals("-")){
+        if (s.equals("+") || s.equals("-")) {
             pre = 1;
         }
-        if(s.equals("*") || s.equals("/")){
+        if (s.equals("*") || s.equals("/")) {
             pre = 2;
         }
-        if(s.equals("^")){
+        if (s.equals("^")) {
             pre = 3;
         }
         return pre;
     }
-    
-    public static boolean precedenciaMasAlta(String s, String s2){
+
+    public static boolean precedenciaMasAlta(String s, String s2) {
         int prec = Precedencia(s);
         int prec2 = Precedencia(s2);
-        
-        if(prec == prec2){
-            if(s.equals("^")){//if(Associative(s))
+
+        if (prec == prec2) {
+            if (s.equals("^")) {//if(Associative(s))
                 return false;
-            }else{
+            } else {
                 return true;
             }
-        }else{
-            if(prec>prec2) return true;
+        } else {
+            if (prec > prec2) {
+                return true;
+            }
 
         }
         return false;
