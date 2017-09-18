@@ -39,8 +39,9 @@ public class TreeNode {
         this.numNodo = numNodo;
     }
     
-    public TreeNode(int numNodo){
+    public TreeNode(int numNodo, double evaluacion){
         this.numNodo = numNodo;
+        this.evaluacion = evaluacion;
     }
     
     public TreeNode(double evaluacion){
