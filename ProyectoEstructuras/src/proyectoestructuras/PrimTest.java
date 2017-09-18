@@ -13,9 +13,6 @@ import java.util.ArrayList;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.implementations.DefaultGraph;
 
-import org.graphstream.algorithm.Prim;
-import org.graphstream.algorithm.generator.BarabasiAlbertGenerator;
-import org.graphstream.algorithm.generator.BaseGenerator;
 import org.graphstream.algorithm.generator.DorogovtsevMendesGenerator;
 import org.graphstream.graph.Edge;
 import org.graphstream.graph.Node;
@@ -24,9 +21,7 @@ public class PrimTest {
 
     public static void main(String... args) {
         DorogovtsevMendesGenerator gen = new DorogovtsevMendesGenerator();
-        //BaseGenerator gen =new BarabasiAlbertGenerator();
         Graph graph = new DefaultGraph("Prim Test");
-        Graph graph2 = new DefaultGraph("Actual Test");
 
         String css = "edge .notintree {size:1px;fill-color:gray;text-font:montserrat;} "
                 + "edge .intree {size:3px;fill-color:black;text-font:montserrat;}"
@@ -35,8 +30,6 @@ public class PrimTest {
 
         graph.addAttribute("ui.stylesheet", css);
         graph.display();
-        graph2.addAttribute("ui.stylesheet", css);
-        //graph2.display();
 
         gen.addEdgeLabels(true);
         gen.addEdgeAttribute("weight");
@@ -45,8 +38,7 @@ public class PrimTest {
         gen.addSink(graph);
         gen.begin();
 
-        for (int i = 0; i < 6 && gen.nextEvents(); i++)
-			;
+        for (int i = 0; i < 6 && gen.nextEvents(); i++);
         gen.end();
 
         for (int i = 0; i < graph.getEdgeCount(); i++) {
@@ -58,47 +50,44 @@ public class PrimTest {
         //graph.getNode(0).setAttribute("ui.color", 0.5);
         ArrayList<Node> nodes = new ArrayList();
         ArrayList<Edge> edges = new ArrayList();
-        String i = "0";
-
+        int u = 0;
+        int v = 0;
+        Node n = graph.getNode(0);
+        nodes.add(n);
         while (graph.getNodeCount() != nodes.size()) {
-            Node n = graph.getNode(i);
             double low = 1000000;
-            //double weight = 0;
-            int value = 0;
-            for (int j = 0; j < n.getEdgeSet().size(); j++) {
-                if (!edges.contains(n.getEdge(j))) {
-                    double weight = n.getEdge(j).getAttribute("weight");
-                    if (weight < low) {
-                        low = weight;
-                        value = j;
+            double weight = 0;
+            for (int k = 0; k < nodes.size(); k++) {
+                n = nodes.get(k);
+                for (int j = 0; j < n.getEdgeSet().size(); j++) {
+                    weight = n.getEdge(j).getAttribute("weight");
+                    if (!edges.contains(n.getEdge(j)) && (!nodes.contains(n.getEdge(j).getSourceNode()) || !nodes.contains(n.getEdge(j).getTargetNode()))) {
+                        System.out.println("NODE " + n.getId() + "  EDGE " + j + "  WEIGHT " + weight);
+                        if (weight < low) {
+                            low = weight;
+                            v = j;
+                            u = k;
+                        }
                     }
                 }
             }
-            System.out.println(i);
+            System.out.println(low);
 
-            if (n.getId().equals(n.getEdge(value).getSourceNode().getId())) {//&& !nodes.contains(n.getEdge(value).getTargetNode())) {
-                i = n.getEdge(value).getTargetNode().getId();
-            } else if (n.getId().equals(n.getEdge(value).getTargetNode().getId())) {//&& !nodes.contains(n.getEdge(value).getSourceNode())) {
-                i = n.getEdge(value).getSourceNode().getId();
+            Node n1 = nodes.get(u).getEdge(v).getNode0();
+            Node n2 = nodes.get(u).getEdge(v).getNode1();
+
+            if (!nodes.contains(n2)) {
+                nodes.add(n2);
+            } else if (!nodes.contains(n1)) {
+                nodes.add(n1);
             }
-            if (!nodes.contains(graph.getNode(i))) {
-                n.getEdge(value).changeAttribute("ui.style", "size:3px;fill-color:black;");
-                nodes.add(n);
+            edges.add(nodes.get(u).getEdge(v));
+            nodes.get(u).getEdge(v).changeAttribute("ui.style", "size:3px;fill-color:black;");
 
-            }
-            edges.add(n.getEdge(value));
+            System.out.println("Nodes" + nodes);
+            System.out.println("Edges" + edges);
 
-            //}
         }
-
-        System.out.println("hey");
-
-        /*
-        Prim prim = new Prim("ui.class", "intree", "notintree");
-
-        prim.init(graph);
-        prim.compute();
-         */
     }
 
 }
