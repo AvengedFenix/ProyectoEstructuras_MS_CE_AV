@@ -43,6 +43,7 @@ public class KruskalTest {
 
         for (int i = 0; i < graph.getEdgeCount(); i++) {
             Edge e = graph.getEdge(i);
+            e.addAttribute("ui.label", Double.toString(e.getAttribute("weight")));
             Double d = e.getAttribute("weight");
             System.out.println(e.getId() + " : " + d);
         }
@@ -62,7 +63,7 @@ public class KruskalTest {
 
         Edge lowEdge = null;
 
-        while (graph.getNodeCount() + 1 != nodes.size()) {
+        while (graph.getNodeCount() != nodes.size()) {
             double weight = 0;
             double low = 10000;
             for (int i = 0; i < edges.size(); i++) {
@@ -72,6 +73,8 @@ public class KruskalTest {
                     System.out.println(low);
                 }
             }
+            edges.remove(lowEdge);
+
             for (int j = 0; j < edges.size() - 1; j++) {
                 weight = lowEdge.getAttribute("weight");
                 Node n1 = lowEdge.getNode0();
@@ -80,18 +83,17 @@ public class KruskalTest {
                 if (!nodes.contains(n2)) {
                     System.out.println("EDGE " + lowEdge.getId() + " INDEX " + j + "  WEIGHT " + weight);
                     lowEdge.changeAttribute("ui.style", "size:3px;fill-color:black;");
-                    edges.remove(lowEdge);
                     nodes.add(n2);
                 }
                 if (!nodes.contains(n1)) {
                     System.out.println("EDGE " + lowEdge.getId() + " INDEX " + j + "  WEIGHT " + weight);
                     lowEdge.changeAttribute("ui.style", "size:3px;fill-color:black;");
-                    edges.remove(lowEdge);
                     nodes.add(n1);
                 }
                 /*
                 if (nodes.contains(n1) && nodes.contains(n2)) {
-                    edges.remove(lowEdge);
+                    System.out.println("EDGE " + lowEdge.getId() + " INDEX " + j + "  WEIGHT " + weight);
+
                     lowEdge.changeAttribute("ui.style", "size:3px;fill-color:black;");
                 }*/
             }
