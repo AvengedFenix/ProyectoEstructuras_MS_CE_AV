@@ -6,6 +6,7 @@
 package proyectoestructuras;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import org.graphstream.algorithm.generator.DorogovtsevMendesGenerator;
 import org.graphstream.graph.Edge;
 import org.graphstream.graph.Graph;
@@ -37,7 +38,7 @@ public class KruskalTest {
         gen.addSink(graph);
         gen.begin();
 
-        for (int i = 0; i < 6 && gen.nextEvents(); i++);
+        for (int i = 0; i < 3 && gen.nextEvents(); i++);
         gen.end();
 
         for (int i = 0; i < graph.getEdgeCount(); i++) {
@@ -52,42 +53,48 @@ public class KruskalTest {
         int u = 0;
         int v = 0;
         Node n = graph.getNode(0);
-        nodes.add(n);
+
         for (int i = 0; i < graph.getEdgeSet().size(); i++) {
             edges.add(graph.getEdge(i));
         }
-        
-        System.out.println(nodes);
 
-        while (graph.getNodeCount() != nodes.size()) {
-            double low = 1000000;
+        System.out.println(edges);
+
+        Edge lowEdge = null;
+
+        while (graph.getNodeCount() + 1 != nodes.size()) {
             double weight = 0;
-            for (int k = 0; k < nodes.size(); k++) {
-                n = nodes.get(k);
-                for (int j = 0; j < n.getEdgeSet().size(); j++) {
-                    weight = n.getEdge(j).getAttribute("weight");
-                    if (!edges.contains(n.getEdge(j)) && (!nodes.contains(n.getEdge(j).getSourceNode()) || !nodes.contains(n.getEdge(j).getTargetNode()))) {
-                        System.out.println("NODE " + n.getId() + "  EDGE " + j + "  WEIGHT " + weight);
-                        if (weight < low) {
-                            low = weight;
-                            v = j;
-                            u = k;
-                        }
-                    }
+            double low = 10000;
+            for (int i = 0; i < edges.size(); i++) {
+                if ((double) edges.get(i).getAttribute("weight") < low) {
+                    lowEdge = edges.get(i);
+                    low = edges.get(i).getAttribute("weight");
+                    System.out.println(low);
                 }
             }
-            System.out.println(low);
+            for (int j = 0; j < edges.size() - 1; j++) {
+                weight = lowEdge.getAttribute("weight");
+                Node n1 = lowEdge.getNode0();
+                Node n2 = lowEdge.getNode1();
 
-            Node n1 = nodes.get(u).getEdge(v).getNode0();
-            Node n2 = nodes.get(u).getEdge(v).getNode1();
-
-            if (!nodes.contains(n2)) {
-                nodes.add(n2);
-            } else if (!nodes.contains(n1)) {
-                nodes.add(n1);
+                if (!nodes.contains(n2)) {
+                    System.out.println("EDGE " + lowEdge.getId() + " INDEX " + j + "  WEIGHT " + weight);
+                    lowEdge.changeAttribute("ui.style", "size:3px;fill-color:black;");
+                    edges.remove(lowEdge);
+                    nodes.add(n2);
+                }
+                if (!nodes.contains(n1)) {
+                    System.out.println("EDGE " + lowEdge.getId() + " INDEX " + j + "  WEIGHT " + weight);
+                    lowEdge.changeAttribute("ui.style", "size:3px;fill-color:black;");
+                    edges.remove(lowEdge);
+                    nodes.add(n1);
+                }
+                /*
+                if (nodes.contains(n1) && nodes.contains(n2)) {
+                    edges.remove(lowEdge);
+                    lowEdge.changeAttribute("ui.style", "size:3px;fill-color:black;");
+                }*/
             }
-            edges.add(nodes.get(u).getEdge(v));
-            nodes.get(u).getEdge(v).changeAttribute("ui.style", "size:3px;fill-color:black;");
 
             System.out.println("Nodes" + nodes);
             System.out.println("Edges" + edges);
