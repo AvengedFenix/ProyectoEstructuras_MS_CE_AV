@@ -51,19 +51,15 @@ public class KruskalTest {
         //graph.getNode(0).setAttribute("ui.color", 0.5);
         ArrayList<Node> nodes = new ArrayList();
         ArrayList<Edge> edges = new ArrayList();
-        int u = 0;
-        int v = 0;
-        Node n = graph.getNode(0);
-
+        ArrayList<Edge> visited = new ArrayList();
         for (int i = 0; i < graph.getEdgeSet().size(); i++) {
             edges.add(graph.getEdge(i));
         }
 
         System.out.println(edges);
-
         Edge lowEdge = null;
 
-        while (graph.getNodeCount() != nodes.size()) {
+        while (visited.size() <= nodes.size() + 1) {
             double weight = 0;
             double low = 10000;
             for (int i = 0; i < edges.size(); i++) {
@@ -74,7 +70,7 @@ public class KruskalTest {
                 }
             }
             edges.remove(lowEdge);
-
+            visited.add(lowEdge);
             for (int j = 0; j < edges.size() - 1; j++) {
                 weight = lowEdge.getAttribute("weight");
                 Node n1 = lowEdge.getNode0();
@@ -90,18 +86,31 @@ public class KruskalTest {
                     lowEdge.changeAttribute("ui.style", "size:3px;fill-color:black;");
                     nodes.add(n1);
                 }
-                /*
-                if (nodes.contains(n1) && nodes.contains(n2)) {
+                
+                if (nodes.contains(n1) && nodes.contains(n2) && checkCycle(visited, lowEdge) == false) {
                     System.out.println("EDGE " + lowEdge.getId() + " INDEX " + j + "  WEIGHT " + weight);
 
                     lowEdge.changeAttribute("ui.style", "size:3px;fill-color:black;");
-                }*/
+                }
+                 
             }
-
             System.out.println("Nodes" + nodes);
             System.out.println("Edges" + edges);
 
         }
+
     }
 
+    public static boolean checkCycle(ArrayList<Edge> edges, Edge lowEdge) {
+        Node n1 = lowEdge.getNode0();
+        Node n2 = lowEdge.getNode1();
+        for (int i = 0; i < edges.size(); i++) {
+            Node n3 = edges.get(i).getNode0();
+            Node n4 = edges.get(i).getNode1();
+            if (n3.equals(n1) || n4.equals(n1) || n3.equals(n2) || n4.equals(n2)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
