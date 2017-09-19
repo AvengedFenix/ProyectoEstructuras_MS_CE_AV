@@ -136,8 +136,8 @@ public class Huffman {
 
         String text = (String) bin.get(0);
         bin.remove(0);
-        //BinTree root = node.BintoText(new BinTree(), new BinTree(), bin, 0, 0);
-        //root.preorden(root);
+        BinTree root = node.BintoText(new BinTree(), new BinTree(), bin, 1, 0);
+        root.preorden(root);
     }
 
     public void Huff(String str) {
@@ -217,7 +217,7 @@ public class Huffman {
 
         try {
             archivo = new File("./comprimido.txt");
-            fw = new FileWriter(archivo, true);
+            fw = new FileWriter(archivo, false);
             //si el archivo no existe lo crea y si ya existe los sobreescribe (al menos que append
             bw = new BufferedWriter(fw);
             bw.write(texto);

@@ -12,9 +12,8 @@ import java.util.Stack;
  *
  * @author andre
  */
+public class BinTree implements Comparable<BinTree> {
 
-
-public class BinTree implements Comparable<BinTree>{
     BinTree LNode = null, RNode = null;
     String info;
 
@@ -66,27 +65,67 @@ public class BinTree implements Comparable<BinTree>{
     public BinTree getRNode() {
         return this.RNode;
     }
-    
+
     public boolean isLeaf(BinTree nodo) {
-        
+
         if (nodo.getLNode() == null || nodo.getRNode() == null) {
 
             return true;
-        } 
+        }
         return false;
     }
-    
-    public String BinCode(BinTree node, String st)
-    {
-        if (node.isLeaf(node)){
+
+    public String BinCode(BinTree node, String st) {
+        if (node.isLeaf(node)) {
             return node.getInfo() + "," + st;
         }
-        
-        String l = BinCode(node.getLNode(),st + "0");
-        String r = BinCode(node.getRNode(),st + "1");
-        
+
+        String l = BinCode(node.getLNode(), st + "0");
+        String r = BinCode(node.getRNode(), st + "1");
+
         String ret = l + "," + r;
         return ret;
+    }
+
+    public BinTree BintoText(BinTree raiz, BinTree node, ArrayList<String> binary, int x, int y) {
+        if (y >= binary.get(x).length()) {
+            node.setInfo(binary.get(x - 1).toString());
+            BintoText(raiz, node, binary, x + 2, 0);
+            System.out.println("exceeded y");
+        }
+        BinTree newNode = new BinTree("null");
+
+        if (binary.get(x).charAt(y) == '0') {
+            if (raiz.getLNode() == null) {
+                raiz.insertLNode(newNode);
+                BintoText(raiz, newNode, binary, x, y++);
+            } else if (node.getLNode() == null) {
+                node.insertLNode(newNode);
+                BintoText(raiz, newNode, binary, x, y++);
+            } else {
+                BintoText(raiz, node.getLNode(), binary, x, y++);
+            }
+            System.out.println("0");
+        }
+
+        if (binary.get(x).charAt(y) == '1') {
+            if (raiz.getRNode() == null) {
+                raiz.insertRNode(newNode);
+                BintoText(raiz, newNode, binary, x, y++);
+            } else if (node.getRNode() == null) {
+                node.insertRNode(newNode);
+                BintoText(raiz, newNode, binary, x, y++);
+            } else {
+                BintoText(raiz, node.getRNode(), binary, x, y++);
+            }
+            System.out.println("1");
+        }
+
+        if (x >= binary.size()) {
+            System.out.println("exceeded x");
+            return raiz;
+        }
+        return raiz;
     }
 
     public int evaluar(BinTree nodo) {
@@ -102,12 +141,11 @@ public class BinTree implements Comparable<BinTree>{
         int valor_l = evaluar(nodo.getLNode()); //evaluar left node
         int valor_r = evaluar(nodo.getRNode()); // evaluar right node
 
-
         String operator = nodo.getInfo();
         switch (operator) {
-            
+
         }
-        switch(nodo.getInfo()){//si nodo.getInfo() es un operado
+        switch (nodo.getInfo()) {//si nodo.getInfo() es un operado
             case "+":
                 return valor_l + valor_r;
             case "-":
@@ -200,12 +238,11 @@ public class BinTree implements Comparable<BinTree>{
             System.out.print(nodo.getInfo() + " ");
         }
     }
-    
+
     @Override
-    public int compareTo(BinTree nodo){
+    public int compareTo(BinTree nodo) {
         int compararCantidad = Integer.parseInt(nodo.getInfo());
-        
-        
+
         return Integer.parseInt(this.getInfo()) - compararCantidad;
     }
 }
