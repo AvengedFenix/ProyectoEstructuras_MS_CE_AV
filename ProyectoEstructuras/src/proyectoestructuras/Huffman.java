@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -135,8 +136,8 @@ public class Huffman {
 
         String text = (String) bin.get(0);
         bin.remove(0);
-        BinTree root = node.BintoText(new BinTree(), new BinTree(), bin, 0, 0);
-        root.preorden(root);
+        //BinTree root = node.BintoText(new BinTree(), new BinTree(), bin, 0, 0);
+        //root.preorden(root);
     }
 
     public void Huff(String str) {

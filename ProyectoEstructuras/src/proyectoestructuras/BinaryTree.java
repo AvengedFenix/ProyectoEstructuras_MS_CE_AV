@@ -6,48 +6,47 @@
 package proyectoestructuras;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Stack;
 
 /**
  *
  * @author andre
  */
+public class BinaryTree implements Comparable<BinaryTree> {
 
-
-public class BinTree implements Comparable<BinTree>{
-    BinTree LNode = null, RNode = null;
+    BinaryTree LNode = null, RNode = null;
     String info;
 
-    BinTree(BinTree LNode, BinTree RNode, String info) {
+    BinaryTree(BinaryTree LNode, BinaryTree RNode, String info) {
         this.LNode = LNode;
         this.RNode = RNode;
+    }
+
+    BinaryTree(String info) {
         this.info = info;
     }
 
-    BinTree(String info) {
-        this.info = info;
-    }
-
-    BinTree() {
+    BinaryTree() {
         this.LNode = null;
         this.RNode = null;
     }
 
-    public void insertLNode(BinTree LNode, String info) {
+    public void insertLNode(BinaryTree LNode, String info) {
         this.LNode = LNode;
         this.LNode.setInfo(info);
     }
 
-    public void insertLNode(BinTree LNode) {
+    public void insertLNode(BinaryTree LNode) {
         this.LNode = LNode;
     }
 
-    public void insertRNode(BinTree RNode, String info) {
+    public void insertRNode(BinaryTree RNode, String info) {
         this.RNode = RNode;
         this.RNode.setInfo(info);
     }
 
-    public void insertRNode(BinTree RNode) {
+    public void insertRNode(BinaryTree RNode) {
         this.RNode = RNode;
     }
 
@@ -59,37 +58,69 @@ public class BinTree implements Comparable<BinTree>{
         return this.info;
     }
 
-    public BinTree getLNode() {
+    public int getInfoInt() {
+        return Integer.parseInt(this.getInfo());
+    }
+
+    public BinaryTree getLNode() {
         return this.LNode;
     }
 
-    public BinTree getRNode() {
+    public BinaryTree getRNode() {
         return this.RNode;
     }
-    
-    public boolean isLeaf(BinTree nodo) {
-        
+
+    public boolean isLeaf(BinaryTree nodo) {
+
         if (nodo.getLNode() == null || nodo.getRNode() == null) {
 
             return true;
-        } 
+        }
         return false;
     }
-    
-    public String BinCode(BinTree node, String st)
-    {
-        if (node.isLeaf(node)){
+
+    public String BinCode(BinaryTree node, String st) {
+        if (node.isLeaf(node)) {
             return node.getInfo() + "," + st;
         }
-        
-        String l = BinCode(node.getLNode(),st + "0");
-        String r = BinCode(node.getRNode(),st + "1");
-        
+
+        String l = BinCode(node.getLNode(), st + "0");
+        String r = BinCode(node.getRNode(), st + "1");
+
         String ret = l + "," + r;
         return ret;
     }
 
-    public int evaluar(BinTree nodo) {
+    public BinaryTree BintoText(BinaryTree raiz, BinaryTree node, ArrayList<String> binary, int x, int y) {
+        if (y > binary.get(x).length()) {
+            node.setInfo(binary.get(x - 1).toString());
+            BintoText(raiz, node, binary, x++, 0);
+        }
+        BinaryTree newNode = new BinaryTree();
+
+        if (binary.get(x).charAt(y) == '0') {
+            if (y == 0) {
+                raiz.insertLNode(newNode);
+            }
+            node.insertLNode(newNode);
+            BintoText(raiz, newNode, binary, x, y++);
+        }
+
+        if (binary.get(x).charAt(y) == '1') {
+            if (y == 0) {
+                raiz.insertRNode(newNode);
+            }
+            node.insertRNode(newNode);
+            BintoText(raiz, newNode, binary, x, y++);
+        }
+
+        if (x >= binary.size()) {
+            return raiz;
+        }
+        return raiz;
+    }
+
+    public double evaluar(BinaryTree nodo) {
         if (nodo == null) {
             return 0;
         }
@@ -99,15 +130,14 @@ public class BinTree implements Comparable<BinTree>{
             return Integer.parseInt(nodo.getInfo());
         }
 
-        int valor_l = evaluar(nodo.getLNode()); //evaluar left node
-        int valor_r = evaluar(nodo.getRNode()); // evaluar right node
-
+        double valor_l = evaluar(nodo.getLNode()); //evaluar left node
+        double valor_r = evaluar(nodo.getRNode()); // evaluar right node
 
         String operator = nodo.getInfo();
         switch (operator) {
-            
+
         }
-        switch(nodo.getInfo()){//si nodo.getInfo() es un operado
+        switch (nodo.getInfo()) {//si nodo.getInfo() es un operado
             case "+":
                 return valor_l + valor_r;
             case "-":
@@ -140,14 +170,14 @@ public class BinTree implements Comparable<BinTree>{
         return 0;
     }
 
-    public void postfixTree(String s, Stack<BinTree> stack) {
+    public void postfixTree(String s, Stack<BinaryTree> stack) {
         if (isDigit(s)) {
-            stack.push(new BinTree(s));
+            stack.push(new BinaryTree(s));
         } else {
-            BinTree operatorNode = new BinTree(s);
+            BinaryTree operatorNode = new BinaryTree(s);
 
-            BinTree rNodo = (stack.pop());//nodo derecho
-            BinTree lNodo = (stack.pop());
+            BinaryTree rNodo = (stack.pop());//nodo derecho
+            BinaryTree lNodo = (stack.pop());
             operatorNode.insertRNode(rNodo);//inserta nodo derecho
             operatorNode.insertLNode(lNodo);
 
@@ -173,11 +203,7 @@ public class BinTree implements Comparable<BinTree>{
         }
     }
 
-    public boolean isDigit(String s) {
-        return Character.isDigit(s.charAt(0));
-    }
-
-    public void inorden(BinTree nodo) {
+    public void inorden(BinaryTree nodo) {
         if (nodo != null) {
             inorden(nodo.getLNode());
             System.out.print(nodo.getInfo() + " ");
@@ -185,7 +211,7 @@ public class BinTree implements Comparable<BinTree>{
         }
     }
 
-    public void preorden(BinTree nodo) {
+    public void preorden(BinaryTree nodo) {
         if (nodo != null) {
             System.out.print(nodo.getInfo() + " ");
             preorden(nodo.getLNode());
@@ -193,7 +219,7 @@ public class BinTree implements Comparable<BinTree>{
         }
     }
 
-    public void postorden(BinTree nodo) {
+    public void postorden(BinaryTree nodo) {
         if (nodo != null) {
             postorden(nodo.getLNode());
             postorden(nodo.getRNode());
@@ -202,10 +228,45 @@ public class BinTree implements Comparable<BinTree>{
     }
     
     @Override
-    public int compareTo(BinTree nodo){
+    public int compareTo(BinaryTree nodo) {
         int compararCantidad = Integer.parseInt(nodo.getInfo());
-        
-        
+    
         return Integer.parseInt(this.getInfo()) - compararCantidad;
     }
+
+    public static BinaryTree postf_toTree(String[] s) {//ESTO TIENE QUE ESTAR EN EL MAIN o en una clase Tree que contenga un nodo root pero no se si es necesario
+        BinaryTree b = new BinaryTree();
+
+        Stack<BinaryTree> stackTree = new Stack();
+
+        for (int i = 0; i < s.length; i++) {
+            b.postfixTree(s[i], stackTree);
+        }
+
+        return stackTree.pop();
+    }
+
+    public static boolean isDigit(String s) {
+        return Character.isDigit(s.charAt(0));
+    }
+
+    public static boolean isOperator(String s) {
+        return s.equals("+") || s.equals("-") || s.equals("*") || s.equals("/") || s.equals("^");
+    }
 }
+
+/*
+public static BinaryTree postf_toTree(String[] s){//ESTO TIENE QUE ESTAR EN EL MAIN o en una clase Tree que contenga un nodo nodo pero no se si es necesario
+        BinaryTree b = new BinaryTree();
+        
+        Stack<BinaryTree> stackTree = new Stack();
+        
+        for (int i = 0; i < s.length; i++) {
+            b.postfixTree(s[i], stackTree);
+        }
+
+        return stackTree.pop();
+}
+
+ */
+
