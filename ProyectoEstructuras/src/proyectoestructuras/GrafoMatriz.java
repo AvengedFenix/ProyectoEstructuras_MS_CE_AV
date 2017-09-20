@@ -119,9 +119,17 @@ public class GrafoMatriz {
     public double[][] getMatrizAdy() {
         return matrizAdy;
     }
+    
+    public double getValorMatriz(int x, int y){
+        return matrizAdy[x][y];
+    }
 
     public void setMatrizAdy(double[][] matrizAdy) {
         this.matrizAdy = matrizAdy;
+    }
+    
+    public void setValor(int x, int y, double v){
+        matrizAdy[x][y] = v;
     }
 
     public boolean isDirigido() {
