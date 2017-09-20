@@ -88,43 +88,58 @@ public class BinTree implements Comparable<BinTree> {
     }
 
     public BinTree BintoText(BinTree raiz, BinTree node, ArrayList<String> binary, int x, int y) {
-        if (y >= binary.get(x).length()) {
-            node.setInfo(binary.get(x - 1).toString());
-            BintoText(raiz, raiz, binary, x + 2, 0);
-            System.out.println("exceeded y");
-        }
-        BinTree newNode = new BinTree("null");
+        System.out.println("x: " + x);
+        System.out.println("size: " + binary.size() + "\n");
 
-        if (binary.get(x).charAt(y) == '0') {
-            if (raiz.getLNode() == null && y == 0) {
-                raiz.insertLNode(newNode);
-                BintoText(raiz, newNode, binary, x, y++);
-            } else if (node.getLNode() == null) {
-                node.insertLNode(newNode);
-                BintoText(raiz, newNode, binary, x, y++);
+        System.out.println("y: " + y);
+        System.out.println("length: " + binary.get(x).length() + "\n");
+
+        if (y >= binary.get(x).length()) {
+            System.out.println("EXCEEDED Y");
+            node.setInfo(binary.get(x - 1).toString());
+            if (x + 2 < binary.size()) {
+                BintoText(raiz, raiz, binary, x + 2, 0);
             } else {
-                BintoText(raiz, node.getLNode(), binary, x, y++);
+                System.out.println("EXCEEDED X");
+                return raiz;
             }
-            System.out.println("0");
+
+        }
+        raiz.preorden(node);
+        System.out.println("");
+        BinTree newNode = new BinTree("null");
+        if (binary.get(x).charAt(y) == '0') {
+            System.out.println("LEFT 0");
+            if (raiz.getLNode() == null && y == 0) {
+                System.out.println("LRoot");
+                raiz.insertLNode(newNode);
+                BintoText(raiz, newNode, binary, x, y + 1);
+            } else if (node.getLNode() == null) {
+                System.out.println("New Node");
+                node.insertLNode(newNode);
+                BintoText(raiz, node.getLNode(), binary, x, y + 1);
+            } else {
+                System.out.println("Next Node");
+                BintoText(raiz, node.getLNode(), binary, x, y + 1);
+            }
         }
 
         if (binary.get(x).charAt(y) == '1') {
+            System.out.println("RIGHT 1");
             if (raiz.getRNode() == null && y == 0) {
+                System.out.println("RRoot");
                 raiz.insertRNode(newNode);
-                BintoText(raiz, newNode, binary, x, y++);
+                BintoText(raiz, newNode, binary, x, y + 1);
             } else if (node.getRNode() == null) {
+                System.out.println("New Node");
                 node.insertRNode(newNode);
-                BintoText(raiz, newNode, binary, x, y++);
+                BintoText(raiz, newNode, binary, x, y + 1);
             } else {
-                BintoText(raiz, node.getRNode(), binary, x, y++);
+                System.out.println("Next Node");
+                BintoText(raiz, node.getRNode(), binary, x, y + 1);
             }
-            System.out.println("1");
         }
 
-        if (x >= binary.size()) {
-            System.out.println("exceeded x");
-            return raiz;
-        }
         return raiz;
     }
 

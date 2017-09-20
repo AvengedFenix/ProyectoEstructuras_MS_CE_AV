@@ -137,6 +137,7 @@ public class Huffman {
         String text = (String) bin.get(0);
         bin.remove(0);
         BinTree root = node.BintoText(new BinTree(), new BinTree(), bin, 1, 0);
+        System.out.println("out");
         root.preorden(root);
     }
 
