@@ -90,13 +90,13 @@ public class BinTree implements Comparable<BinTree> {
     public BinTree BintoText(BinTree raiz, BinTree node, ArrayList<String> binary, int x, int y) {
         if (y >= binary.get(x).length()) {
             node.setInfo(binary.get(x - 1).toString());
-            BintoText(raiz, node, binary, x + 2, 0);
+            BintoText(raiz, raiz, binary, x + 2, 0);
             System.out.println("exceeded y");
         }
         BinTree newNode = new BinTree("null");
 
         if (binary.get(x).charAt(y) == '0') {
-            if (raiz.getLNode() == null) {
+            if (raiz.getLNode() == null && y == 0) {
                 raiz.insertLNode(newNode);
                 BintoText(raiz, newNode, binary, x, y++);
             } else if (node.getLNode() == null) {
@@ -109,7 +109,7 @@ public class BinTree implements Comparable<BinTree> {
         }
 
         if (binary.get(x).charAt(y) == '1') {
-            if (raiz.getRNode() == null) {
+            if (raiz.getRNode() == null && y == 0) {
                 raiz.insertRNode(newNode);
                 BintoText(raiz, newNode, binary, x, y++);
             } else if (node.getRNode() == null) {
