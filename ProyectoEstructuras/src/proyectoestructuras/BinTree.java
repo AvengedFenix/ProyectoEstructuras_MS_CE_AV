@@ -88,6 +88,7 @@ public class BinTree implements Comparable<BinTree> {
     }
 
     public BinTree BintoText(BinTree raiz, BinTree node, ArrayList<String> binary, int x, int y) {
+        System.out.println("\nLETTER: " + binary.get(x-1));
         System.out.println("x: " + x);
         System.out.println("size: " + binary.size() + "\n");
 
@@ -103,11 +104,11 @@ public class BinTree implements Comparable<BinTree> {
                 System.out.println("EXCEEDED X");
                 return raiz;
             }
-
         }
-        raiz.preorden(node);
+        raiz.preorden(raiz);
         System.out.println("");
-        BinTree newNode = new BinTree("null");
+        BinTree newNode = new BinTree("not leaf");
+        
         if (binary.get(x).charAt(y) == '0') {
             System.out.println("LEFT 0");
             if (raiz.getLNode() == null && y == 0) {
