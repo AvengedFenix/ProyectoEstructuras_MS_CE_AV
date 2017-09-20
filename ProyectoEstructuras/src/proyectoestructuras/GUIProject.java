@@ -88,12 +88,13 @@ public class GUIProject extends javax.swing.JFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         jt_grupoazul = new javax.swing.JTextArea();
         jl_bicolorResp = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jPanel12 = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jl_rojo = new javax.swing.JLabel();
         jl_azul = new javax.swing.JLabel();
+        jPanel13 = new javax.swing.JPanel();
+        jLabel24 = new javax.swing.JLabel();
         jDialog1 = new javax.swing.JDialog();
         panel_p = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
@@ -461,18 +462,6 @@ public class GUIProject extends javax.swing.JFrame {
 
         jl_bicolorResp.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
 
-        jButton1.setText("?");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
-            }
-        });
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         jLabel19.setFont(new java.awt.Font("Montserrat", 1, 24)); // NOI18N
         jLabel19.setForeground(new java.awt.Color(21, 101, 192));
         jLabel19.setText("G R A F O");
@@ -504,6 +493,29 @@ public class GUIProject extends javax.swing.JFrame {
         jl_azul.setForeground(new java.awt.Color(255, 255, 255));
         jl_azul.setText("C O L O R   A Z U L");
 
+        jLabel24.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(21, 101, 192));
+        jLabel24.setText("E l e g i r   a r c h i v o");
+        jLabel24.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel24MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel13Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel24)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel24, javax.swing.GroupLayout.Alignment.TRAILING)
+        );
+
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
@@ -512,7 +524,8 @@ public class GUIProject extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel23)
-                    .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(278, 278, 278))
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addGap(133, 133, 133)
@@ -528,9 +541,7 @@ public class GUIProject extends javax.swing.JFrame {
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel11Layout.createSequentialGroup()
-                        .addGap(399, 399, 399)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39)
+                        .addGap(493, 493, 493)
                         .addComponent(jl_bicolorResp, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel11Layout.createSequentialGroup()
                         .addGap(166, 166, 166)
@@ -550,7 +561,7 @@ public class GUIProject extends javax.swing.JFrame {
                         .addGap(69, 69, 69)
                         .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jl_bicolorResp, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(27, 27, 27)
                         .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jl_rojo, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -867,31 +878,9 @@ public class GUIProject extends javax.swing.JFrame {
         jd_bicoloreable.setVisible(true);
     }//GEN-LAST:event_jLabel8MouseClicked
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        GrafoMatriz gm = new GrafoMatriz(4, true);
-
-        gm.agregarArista(0, 1, 10);
-        gm.agregarArista(1, 2, 7);
-        gm.agregarArista(2, 3, 9);
-        gm.agregarArista(3, 0, 15);
-
-        System.out.println("Nodos adyacentes: \n");
-        for (int i = 0; i < gm.getMatrizAdy().length; i++) {
-            gm.imprimirNodosAdy(i);
-        }
-        System.out.println("");
-
-        System.out.println("Matriz de adyacencia: \n");
-        gm.imprimirMatrizAdy();
-        System.out.println("");
-        jl_bicolorResp.setText(gm.esBicoloreable(0) ? ("Bi-coloreable!") : ("No es bi-coloreable :("));
-
-
-    }//GEN-LAST:event_jButton1MouseClicked
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jLabel24MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel24MouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jLabel24MouseClicked
 
     /**
      * @param args the command line arguments
@@ -930,7 +919,6 @@ public class GUIProject extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -948,6 +936,7 @@ public class GUIProject extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -959,6 +948,7 @@ public class GUIProject extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
+    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
