@@ -86,12 +86,12 @@ public class KruskalTest {
                     lowEdge.changeAttribute("ui.style", "size:3px;fill-color:black;");
                     nodes.add(n1);
                 }
-                
+                /*
                 if (nodes.contains(n1) && nodes.contains(n2) && checkCycle(visited, lowEdge) == false) {
                     System.out.println("EDGE " + lowEdge.getId() + " INDEX " + j + "  WEIGHT " + weight);
 
                     lowEdge.changeAttribute("ui.style", "size:3px;fill-color:black;");
-                }
+                }*/
                  
             }
             System.out.println("Nodes" + nodes);

@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -133,6 +134,16 @@ public class Huffman {
         bin = cargar();
         System.out.println("TEST2" + bin);
 
+<<<<<<< HEAD
+=======
+        String text = (String) bin.get(0);
+        bin.remove(0);
+        BinTree raiz = new BinTree();
+        
+        BinTree root = node.BintoText(new BinTree(), new BinTree(), bin, 1, 0);
+        System.out.println("out");
+        root.preorden(root);
+>>>>>>> d835f5563579e532319834b5c49c2c3fcd183714
     }
 
     public void Huff(String str) {
@@ -212,7 +223,7 @@ public class Huffman {
 
         try {
             archivo = new File("./comprimido.txt");
-            fw = new FileWriter(archivo, true);
+            fw = new FileWriter(archivo, false);
             //si el archivo no existe lo crea y si ya existe los sobreescribe (al menos que append
             bw = new BufferedWriter(fw);
             bw.write(texto);
