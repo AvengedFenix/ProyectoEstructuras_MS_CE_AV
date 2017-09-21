@@ -134,16 +134,17 @@ public class Huffman {
         bin = cargar();
         System.out.println("TEST2" + bin);
 
-<<<<<<< HEAD
-=======
-        String text = (String) bin.get(0);
+        String text = bin.get(0).toString();
         bin.remove(0);
         BinTree raiz = new BinTree();
         
         BinTree root = node.BintoText(new BinTree(), new BinTree(), bin, 1, 0);
         System.out.println("out");
         root.preorden(root);
->>>>>>> d835f5563579e532319834b5c49c2c3fcd183714
+        
+        for (int i = 0; i < 10; i++) {
+            
+        }
     }
 
     public void Huff(String str) {
