@@ -159,7 +159,7 @@ public class BinTree implements Comparable<BinTree> {
 
         System.out.println("TEXT: " + text);
         if (x >= binary.length()) {
-            text = text.concat(node.getInfo());
+            //text = text.concat(node.getInfo());
             decompressed = true;
             return text;
         }
