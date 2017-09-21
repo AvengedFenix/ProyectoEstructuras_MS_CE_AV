@@ -57,7 +57,6 @@ public class GUIProject extends javax.swing.JFrame {
         tf_pathtree = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         ta_evaluacion = new javax.swing.JTextArea();
-        jl_azul = new javax.swing.JLabel();
         jd_resolucion = new javax.swing.JDialog();
         jPanel3 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
@@ -97,6 +96,7 @@ public class GUIProject extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jl_rojo = new javax.swing.JLabel();
+        jl_azul = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
         jd_krusprim = new javax.swing.JDialog();
@@ -109,6 +109,15 @@ public class GUIProject extends javax.swing.JFrame {
         jPanel17 = new javax.swing.JPanel();
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jPanel18 = new javax.swing.JPanel();
+        jLabel31 = new javax.swing.JLabel();
+        jd_dijkstra = new javax.swing.JDialog();
+        jPanel8 = new javax.swing.JPanel();
+        jPanel19 = new javax.swing.JPanel();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
         panel_p = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -175,10 +184,6 @@ public class GUIProject extends javax.swing.JFrame {
         ta_evaluacion.setRows(5);
         jScrollPane3.setViewportView(ta_evaluacion);
 
-        jl_azul.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
-        jl_azul.setForeground(new java.awt.Color(255, 255, 255));
-        jl_azul.setText("C O L O R   A Z U L");
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -192,11 +197,6 @@ public class GUIProject extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(169, 169, 169))
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jl_azul)
-                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,11 +212,6 @@ public class GUIProject extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(113, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jl_azul)
-                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout jd_desempenoLayout = new javax.swing.GroupLayout(jd_desempeno.getContentPane());
@@ -230,14 +225,14 @@ public class GUIProject extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jPanel3.setBackground(new java.awt.Color(184, 38, 1));
+        jPanel3.setBackground(new java.awt.Color(48, 65, 93));
 
         jLabel10.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("E X P R E S I O N E S   M A T E M Á T I C A S");
 
         jLabel9.setFont(new java.awt.Font("Montserrat", 1, 24)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(184, 38, 1));
+        jLabel9.setForeground(new java.awt.Color(48, 65, 93));
         jLabel9.setText("R E S O L U C I Ó N");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
@@ -266,7 +261,7 @@ public class GUIProject extends javax.swing.JFrame {
         jLabel16.setText("E s c r i b i r   e x p r e s i o n   m a t e m á t i c a");
 
         jLabel17.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(184, 38, 1));
+        jLabel17.setForeground(new java.awt.Color(48, 65, 93));
         jLabel17.setText("R E S O L V E R");
         jLabel17.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -345,7 +340,7 @@ public class GUIProject extends javax.swing.JFrame {
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jPanel4.setBackground(new java.awt.Color(6, 47, 79));
+        jPanel4.setBackground(new java.awt.Color(3, 20, 36));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel12.setFont(new java.awt.Font("Montserrat", 0, 18)); // NOI18N
@@ -356,7 +351,7 @@ public class GUIProject extends javax.swing.JFrame {
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel11.setFont(new java.awt.Font("Montserrat", 1, 24)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(6, 47, 79));
+        jLabel11.setForeground(new java.awt.Color(3, 20, 36));
         jLabel11.setText("C O M P R E S I Ó N");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -412,7 +407,7 @@ public class GUIProject extends javax.swing.JFrame {
 
         jLabel15.setBackground(new java.awt.Color(6, 47, 79));
         jLabel15.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(6, 47, 79));
+        jLabel15.setForeground(new java.awt.Color(3, 20, 36));
         jLabel15.setText("C O M P R I M I R");
         jLabel15.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -447,7 +442,7 @@ public class GUIProject extends javax.swing.JFrame {
 
         jLabel29.setBackground(new java.awt.Color(6, 47, 79));
         jLabel29.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
-        jLabel29.setForeground(new java.awt.Color(6, 47, 79));
+        jLabel29.setForeground(new java.awt.Color(3, 20, 36));
         jLabel29.setText("D E S C O M P R I M I R");
         jLabel29.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -482,7 +477,7 @@ public class GUIProject extends javax.swing.JFrame {
 
         jLabel30.setBackground(new java.awt.Color(6, 47, 79));
         jLabel30.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
-        jLabel30.setForeground(new java.awt.Color(6, 47, 79));
+        jLabel30.setForeground(new java.awt.Color(3, 20, 36));
         jLabel30.setText("E l e g i r   a r c h i v o");
         jLabel30.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -523,7 +518,7 @@ public class GUIProject extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel11.setBackground(new java.awt.Color(1, 82, 73));
+        jPanel11.setBackground(new java.awt.Color(142, 174, 189));
         jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jt_gruporojo.setColumns(20);
@@ -536,13 +531,15 @@ public class GUIProject extends javax.swing.JFrame {
         jt_grupoazul.setRows(5);
         jScrollPane5.setViewportView(jt_grupoazul);
 
-        jPanel11.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 272, 224, 158));
+        jPanel11.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 270, 224, 158));
 
         jl_bicolorResp.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         jPanel11.add(jl_bicolorResp, new org.netbeans.lib.awtextra.AbsoluteConstraints(356, 201, 228, 58));
 
+        jPanel12.setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel19.setFont(new java.awt.Font("Montserrat", 1, 24)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(1, 82, 73));
+        jLabel19.setForeground(new java.awt.Color(142, 174, 189));
         jLabel19.setText("G R A F O");
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
@@ -562,7 +559,7 @@ public class GUIProject extends javax.swing.JFrame {
         jPanel11.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(352, 58, -1, -1));
 
         jLabel23.setFont(new java.awt.Font("Montserrat", 1, 24)); // NOI18N
-        jLabel23.setForeground(new java.awt.Color(240, 240, 240));
+        jLabel23.setForeground(new java.awt.Color(255, 255, 255));
         jLabel23.setText("B I C O L O R E A B L E");
         jLabel23.setToolTipText("");
         jPanel11.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(295, 89, -1, -1));
@@ -572,8 +569,15 @@ public class GUIProject extends javax.swing.JFrame {
         jl_rojo.setText("C O L O R   R O J O");
         jPanel11.add(jl_rojo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 240, -1, 23));
 
+        jl_azul.setFont(new java.awt.Font("Montserrat", 0, 13)); // NOI18N
+        jl_azul.setForeground(new java.awt.Color(255, 255, 255));
+        jl_azul.setText("C O L O R   A Z U L");
+        jPanel11.add(jl_azul, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 240, -1, 23));
+
+        jPanel13.setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel24.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
-        jLabel24.setForeground(new java.awt.Color(48, 65, 93));
+        jLabel24.setForeground(new java.awt.Color(142, 174, 189));
         jLabel24.setText("E l e g i r   a r c h i v o");
         jLabel24.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -665,12 +669,12 @@ public class GUIProject extends javax.swing.JFrame {
             .addComponent(jPanel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jPanel16.setBackground(new java.awt.Color(142, 174, 189));
+        jPanel16.setBackground(new java.awt.Color(119, 201, 212));
 
         jPanel17.setBackground(new java.awt.Color(102, 102, 102));
 
         jLabel27.setFont(new java.awt.Font("Montserrat", 1, 24)); // NOI18N
-        jLabel27.setForeground(new java.awt.Color(142, 174, 189));
+        jLabel27.setForeground(new java.awt.Color(119, 201, 212));
         jLabel27.setText("G R A F O");
 
         javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
@@ -689,19 +693,50 @@ public class GUIProject extends javax.swing.JFrame {
 
         jLabel28.setFont(new java.awt.Font("Montserrat", 1, 24)); // NOI18N
         jLabel28.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel28.setText("A L  G O R I T M O   F L O Y D");
+        jLabel28.setText("A L G O R I T M O   F L O Y D");
         jLabel28.setToolTipText("");
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane6.setViewportView(jTextArea1);
+
+        jPanel18.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel31.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        jLabel31.setForeground(new java.awt.Color(142, 174, 189));
+        jLabel31.setText("E l e g i r   a r c h i v o");
+        jLabel31.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel31MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
+        jPanel18.setLayout(jPanel18Layout);
+        jPanel18Layout.setHorizontalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel18Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel31)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel18Layout.setVerticalGroup(
+            jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel31, javax.swing.GroupLayout.Alignment.TRAILING)
+        );
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
         jPanel16Layout.setHorizontalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel16Layout.createSequentialGroup()
-                .addGap(248, 248, 248)
+                .addGap(172, 172, 172)
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel28)
-                    .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(257, Short.MAX_VALUE))
+                    .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(182, Short.MAX_VALUE))
         );
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -710,7 +745,11 @@ public class GUIProject extends javax.swing.JFrame {
                 .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel28)
-                .addContainerGap(442, Short.MAX_VALUE))
+                .addGap(63, 63, 63)
+                .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(88, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jd_floydLayout = new javax.swing.GroupLayout(jd_floyd.getContentPane());
@@ -722,6 +761,63 @@ public class GUIProject extends javax.swing.JFrame {
         jd_floydLayout.setVerticalGroup(
             jd_floydLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        jPanel19.setBackground(new java.awt.Color(102, 102, 102));
+
+        jLabel32.setFont(new java.awt.Font("Montserrat", 1, 24)); // NOI18N
+        jLabel32.setForeground(new java.awt.Color(119, 201, 212));
+        jLabel32.setText("G R A F O");
+
+        javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
+        jPanel19.setLayout(jPanel19Layout);
+        jPanel19Layout.setHorizontalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel19Layout.createSequentialGroup()
+                .addContainerGap(20, Short.MAX_VALUE)
+                .addComponent(jLabel32)
+                .addGap(19, 19, 19))
+        );
+        jPanel19Layout.setVerticalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel32, javax.swing.GroupLayout.Alignment.TRAILING)
+        );
+
+        jLabel33.setFont(new java.awt.Font("Montserrat", 1, 24)); // NOI18N
+        jLabel33.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel33.setText("A L G O R I T M O   F L O Y D");
+        jLabel33.setToolTipText("");
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(253, 253, 253)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jLabel33)
+                    .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(259, Short.MAX_VALUE))
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel33)
+                .addContainerGap(461, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jd_dijkstraLayout = new javax.swing.GroupLayout(jd_dijkstra.getContentPane());
+        jd_dijkstra.getContentPane().setLayout(jd_dijkstraLayout);
+        jd_dijkstraLayout.setHorizontalGroup(
+            jd_dijkstraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jd_dijkstraLayout.setVerticalGroup(
+            jd_dijkstraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -1068,6 +1164,12 @@ public class GUIProject extends javax.swing.JFrame {
         ta_original.setText(huff.HuffDecompress(binary));
     }//GEN-LAST:event_jp_descomprimirMouseClicked
 
+    private void jLabel31MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel31MouseClicked
+        // TODO add your handling code here:
+        String path = load();
+        
+    }//GEN-LAST:event_jLabel31MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1129,6 +1231,9 @@ public class GUIProject extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1144,21 +1249,27 @@ public class GUIProject extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
+    private javax.swing.JPanel jPanel18;
+    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JDialog jd_bicoloreable;
     private javax.swing.JDialog jd_compresion;
     private javax.swing.JDialog jd_desempeno;
+    private javax.swing.JDialog jd_dijkstra;
     private javax.swing.JDialog jd_floyd;
     private javax.swing.JDialog jd_krusprim;
     private javax.swing.JDialog jd_resolucion;
