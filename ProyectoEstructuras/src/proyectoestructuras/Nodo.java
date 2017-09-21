@@ -14,8 +14,6 @@ import java.util.ArrayList;
  */
 public class Nodo {
     private String id;
-    private ArrayList<Nodo> caminoMasCorto = new ArrayList();
-    private double distancia;
     ArrayList<Double> pesoAdy = new ArrayList();
     ArrayList<Nodo> NodosAdy = new ArrayList();
     
@@ -25,7 +23,6 @@ public class Nodo {
     }
     
     public void agregarDestino(Nodo destino, double dist){
-        //nodosAdy.put(destino, dist);
         NodosAdy.add(destino);
         pesoAdy.add(dist);
     }
@@ -36,22 +33,6 @@ public class Nodo {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public ArrayList<Nodo> getCaminoMasCorto() {
-        return caminoMasCorto;
-    }
-
-    public void setCaminoMasCorto(ArrayList<Nodo> caminoMasCorto) {
-        this.caminoMasCorto = caminoMasCorto;
-    }
-
-    public double getDistancia() {
-        return distancia;
-    }
-
-    public void setDistancia(double distancia) {
-        this.distancia = distancia;
     }
 
     

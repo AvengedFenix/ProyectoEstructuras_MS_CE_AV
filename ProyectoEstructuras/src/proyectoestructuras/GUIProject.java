@@ -879,7 +879,44 @@ public class GUIProject extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel8MouseClicked
 
     private void jLabel24MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel24MouseClicked
-        // TODO add your handling code here:
+        pathGrafo = load();
+        //tf_pathtree.setText(pathTree);
+        GrafoMatriz g;
+        try {
+            g = createMatriz(pathGrafo, true);
+            System.out.println("Nodos adyacentes: \n");
+            for (int i = 0; i < g.getMatrizAdy().length; i++) {
+                g.imprimirNodosAdy(i);
+            }
+            System.out.println("");
+
+            System.out.println("Matriz de adyacencia: \n");
+            g.imprimirMatrizAdy();
+            System.out.println("");
+            ArrayList<String> colores = g.Bicoloreable(0);
+            //System.out.println("Size: " + colores.size());
+            jl_bicolorResp.setText(g.isBicoloreable() ? ("Bi-coloreable!") : ("No es bi-coloreable :("));
+
+            /*for(String color : colores){
+                System.out.println("Color: " + color);
+            }*/
+            if (g.isBicoloreable()) {
+                for (int i = 0; i< colores.size(); i++) {
+                    if (colores.get(i).equals("azul")) {
+                        jt_grupoazul.append(Integer.toString(i) + "\n");
+                    } else {
+                        jt_gruporojo.append(Integer.toString(i) + "\n");
+                    }
+                }
+            }
+
+            jt_gruporojo.setVisible(true);
+            jt_grupoazul.setVisible(true);
+            jl_rojo.setVisible(true);
+            jl_azul.setVisible(true);
+        } catch (IOException ex) {
+            Logger.getLogger(GUIProject.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jLabel24MouseClicked
 
     /**
@@ -1206,5 +1243,49 @@ public class GUIProject extends javax.swing.JFrame {
 
         }
         return false;
+    }
+    
+    public GrafoMatriz createMatriz(String path, boolean dirigido) throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader(path));
+        GrafoMatriz g;
+        ArrayList<String[]> info = new ArrayList();
+        try {
+            String line = br.readLine();
+
+            //int[][] matriz = new int[5][5];
+            while (line != null) {
+                String s = line.replaceAll(" ", "");
+                info.add(s.split(","));
+                //String[] x = info.get(info.size()-1);
+                /*for(String s : x){
+                    s = s.replaceAll(" ", "");
+                }*/
+                //System.out.println(Arrays.toString(s.split(",")));
+                line = br.readLine();
+            }
+
+            for (int i = 0; i < info.size(); i++) {
+                System.out.println(Arrays.toString(info.get(i)));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            br.close();
+        }
+        g = new GrafoMatriz(info.size(), dirigido);
+
+        double[][] matriz = new double[info.size()][info.size()];
+        for (int i = 0; i < info.size(); i++) {
+            for (int j = 0; j < info.size(); j++) {
+                matriz[i][j] = Double.parseDouble(info.get(i)[j]);
+                System.out.print(info.get(i)[j] + " ");
+            }
+            System.out.println("");
+        }
+
+        g.setMatrizAdy(matriz);
+        //System.out.println(g.isBicoloreable());
+
+        return g;
     }
 }
