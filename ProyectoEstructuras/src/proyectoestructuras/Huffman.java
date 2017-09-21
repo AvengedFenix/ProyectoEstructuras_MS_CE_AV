@@ -100,7 +100,7 @@ public class Huffman {
                 for (int i = 0; i < freq.size(); i++) {
                     if (token.equals(Integer.toString(freq.get(i)))) {
                         binary.add(letters.get(i));
-                        test.add(letters.get(i)+"");
+                        test.add(letters.get(i) + "");
                         freq.remove(i);
                         letters.remove(i);
                         break;
@@ -118,12 +118,12 @@ public class Huffman {
         String compressed = "";
         for (int i = 0; i < str.length(); i++) {
             for (int j = 0; j < test.size(); j++) {
-                if (str.substring(i,i+1).equals(test.get(j))) {
-                    compressed += test.get(j+1);
+                if (str.substring(i, i + 1).equals(test.get(j))) {
+                    compressed += test.get(j + 1);
                 }
             }
         }
-        
+
         System.out.println(compressed);
         texto += compressed + ",";
         for (int i = 0; i < test.size(); i++) {
@@ -134,17 +134,16 @@ public class Huffman {
         bin = cargar();
         System.out.println("TEST2" + bin);
 
-        String text = bin.get(0).toString();
+        String text = bin.get(0).toString() + "0";
         bin.remove(0);
         BinTree raiz = new BinTree();
-        
+
         BinTree root = node.BintoText(new BinTree(), new BinTree(), bin, 1, 0);
         System.out.println("out");
         root.preorden(root);
-        
-        for (int i = 0; i < 10; i++) {
-            
-        }
+        String newString = "";
+        String decompressed = root.DecomText(root, root, text, newString, 0);
+        System.out.println(decompressed);
     }
 
     public void Huff(String str) {

@@ -16,8 +16,7 @@ public class BinTree implements Comparable<BinTree> {
 
     BinTree LNode = null, RNode = null;
     String info;
-    boolean finished = false;
-    BinTree Tree;
+    boolean treeFormed = false, decompressed = false;
 
     BinTree(BinTree LNode, BinTree RNode, String info) {
         this.LNode = LNode;
@@ -32,14 +31,6 @@ public class BinTree implements Comparable<BinTree> {
     BinTree() {
         this.LNode = null;
         this.RNode = null;
-    }
-
-    public BinTree getTree() {
-        return this.Tree;
-    }
-
-    public void setTree(BinTree newTree) {
-        Tree = newTree;
     }
 
     public void insertLNode(BinTree LNode, String info) {
@@ -105,11 +96,11 @@ public class BinTree implements Comparable<BinTree> {
         System.out.println("y: " + y);
         System.out.println("length: " + binary.get(x).length() + "\n");
         if (x >= binary.size()) {
-            finished = true;
+            treeFormed = true;
             return raiz;
         }
 
-        if (finished == false && x < binary.size()) {
+        if (treeFormed == false && x < binary.size()) {
             if (y >= binary.get(x).length()) {
                 System.out.println("EXCEEDED Y");
                 node.setInfo(binary.get(x - 1).toString());
@@ -159,6 +150,38 @@ public class BinTree implements Comparable<BinTree> {
 
         }
         return raiz;
+    }
+
+    public String DecomText(BinTree raiz, BinTree node, String binary, String text, int x) {
+        System.out.println("");
+        System.out.println("x: " + x);
+        System.out.println("length: " + binary.length());
+
+        System.out.println("TEXT: " + text);
+        if (x >= binary.length()) {
+            text = text.concat(node.getInfo());
+            decompressed = true;
+            return text;
+        }
+
+        if (!decompressed && x < binary.length()) {
+            if (binary.charAt(x) == '0' && !node.isLeaf(node)) {
+                DecomText(raiz, node.getLNode(), binary, text, x + 1);
+            } else if (binary.charAt(x) == '0' && node.isLeaf(node)) {
+                text = text.concat(node.getInfo());
+                DecomText(raiz, raiz, binary, text, x);
+
+            }
+
+            if (binary.charAt(x) == '1' && !node.isLeaf(node)) {
+                DecomText(raiz, node.getRNode(), binary, text, x + 1);
+            } else if (binary.charAt(x) == '1' && node.isLeaf(node)) {
+                text = text.concat(node.getInfo());
+                DecomText(raiz, raiz, binary, text, x);
+            }
+        }
+
+        return text;
     }
 
     public int evaluar(BinTree nodo) {
