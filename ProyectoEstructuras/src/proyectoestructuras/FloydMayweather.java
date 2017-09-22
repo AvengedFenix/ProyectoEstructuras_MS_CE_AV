@@ -4,6 +4,7 @@ public class FloydMayweather {
 
     //static GrafoMatriz g = new GrafoMatriz(7);
     static GrafoMatriz g = new GrafoMatriz(4, true);
+    static String text = "";
 
     public static void main(String args[]) {
         /*g.agregarArista(0, 1, 1);
@@ -80,14 +81,20 @@ public class FloydMayweather {
             }
         }
         //  g.imprimirMatrizAdy();
+
         System.out.println();
         for (int i = 0; i < g.getMatrizAdy().length; i++) {
             for (int j = 0; j < g.getMatrizAdy().length; j++) {
                 System.out.print(matriz[i][j] + "; ");
+                text += matriz[i][j] + "; ";
             }
             System.out.println();
+            text += "\n";
         }
+        getText();
 
+        System.out.println("This is the variable text");
+        System.out.println(text);
     }
 
     public String Floyd(String path) {
@@ -153,16 +160,29 @@ public class FloydMayweather {
                 }
             }
         }
-        String texto = "";
+        System.out.println();
+        text += "               ";
         for (int i = 0; i < g.getMatrizAdy().length; i++) {
             for (int j = 0; j < g.getMatrizAdy().length; j++) {
-                texto += matriz[i][j] + "; ";
                 System.out.print(matriz[i][j] + "; ");
+                text += "   " + matriz[i][j] + ";   ";
             }
             System.out.println();
-            texto += "\n";
-        }
+            if (i != g.getMatrizAdy().length-1) {
+                text += "\n\n\n";
+                text += "               ";
 
-        return texto;
+            }
+        }
+        getText();
+
+        System.out.println("This is the variable text");
+        System.out.println(text);
+
+        return text;
+    }
+
+    public static String getText() {
+        return text;
     }
 }

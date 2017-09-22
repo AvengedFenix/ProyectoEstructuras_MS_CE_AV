@@ -114,7 +114,7 @@ public class GUIProject extends javax.swing.JFrame {
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        floyd_ta = new javax.swing.JTextArea();
         jPanel18 = new javax.swing.JPanel();
         jLabel31 = new javax.swing.JLabel();
         jd_dijkstra = new javax.swing.JDialog();
@@ -704,9 +704,11 @@ public class GUIProject extends javax.swing.JFrame {
         jLabel28.setText("A L G O R I T M O   F L O Y D");
         jLabel28.setToolTipText("");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane6.setViewportView(jTextArea1);
+        floyd_ta.setEditable(false);
+        floyd_ta.setColumns(20);
+        floyd_ta.setFont(new java.awt.Font("Montserrat", 1, 20)); // NOI18N
+        floyd_ta.setRows(5);
+        jScrollPane6.setViewportView(floyd_ta);
 
         jPanel18.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -1236,7 +1238,9 @@ public class GUIProject extends javax.swing.JFrame {
         String path = load();
         FloydMayweather fm = new FloydMayweather();
 
-        String text = fm.Floyd(path);
+        String texto = fm.Floyd(path);
+        floyd_ta.setText(fm.getText());
+        floyd_ta.updateUI();
     }//GEN-LAST:event_jLabel31MouseClicked
 
     private void jLabel20MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel20MouseClicked
@@ -1305,6 +1309,7 @@ public class GUIProject extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea floyd_ta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1365,7 +1370,6 @@ public class GUIProject extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JDialog jd_bicoloreable;
     private javax.swing.JDialog jd_compresion;
