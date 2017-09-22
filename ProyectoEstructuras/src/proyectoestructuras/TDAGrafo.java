@@ -34,6 +34,7 @@ public class TDAGrafo {
             + "ae CF C F weight:10 \n"
             + "ae DE D E weight:1 \n"
             + "ae EF E F weight:1 \n";
+    
 
     public static void main(String[] args) throws IOException {
         Graph graph = new SingleGraph("Prueba1");

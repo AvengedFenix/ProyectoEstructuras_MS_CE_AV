@@ -176,10 +176,7 @@ public class BinTree implements Comparable<BinTree>{
 
         int valor_l = evaluar(nodo.getLNode()); //evaluar left node
         int valor_r = evaluar(nodo.getRNode()); // evaluar right node
-<<<<<<< HEAD
 
-=======
->>>>>>> d835f5563579e532319834b5c49c2c3fcd183714
 
         String operator = nodo.getInfo();
         switch (operator) {

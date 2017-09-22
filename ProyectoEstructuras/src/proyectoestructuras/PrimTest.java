@@ -54,6 +54,7 @@ public class PrimTest {
         int v = 0;
         Node n = graph.getNode(0);
         nodes.add(n);
+
         while (graph.getNodeCount() != nodes.size()) {
             double low = 1000000;
             double weight = 0;
