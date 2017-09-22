@@ -20,7 +20,9 @@ import java.util.Stack;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -1053,11 +1055,26 @@ public class GUIProject extends javax.swing.JFrame {
 
     private void jLabel15MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel15MouseClicked
         // TODO add your handling code here:
-        Huffman huff = new Huffman();
-        String texto = ta_original.getText();
-        System.out.println(texto);
-        huff.HuffCompress(texto);
-        ta_original.setText("");
+        JDialog dialog = new JDialog();
+        if (ta_original.getText() == "") {
+            JLabel label1 = new JLabel("Por favor escribir en el text area");
+            dialog.add(label1);
+
+        } else {
+            Huffman huff = new Huffman();
+            String texto = ta_original.getText();
+            System.out.println(texto);
+            huff.HuffCompress(texto);
+            ta_original.setText("");
+            JLabel label2 = new JLabel("Archivo de texto comprimido exitosamente");
+            dialog.add(label2);
+
+        }
+
+        dialog.setLocationRelativeTo(null);
+        dialog.setTitle("Importante");
+        dialog.pack();
+
     }//GEN-LAST:event_jLabel15MouseClicked
 
     private void tf_mathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_mathActionPerformed
@@ -1196,13 +1213,21 @@ public class GUIProject extends javax.swing.JFrame {
 
     private void jLabel29MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel29MouseClicked
         // TODO add your handling code here:
-         ta_original.setText(huff.HuffDecompress(binary));
+        String bin = binary.get(0).toString() + "0";
+        System.out.println("");
+        System.out.println(bin);
+        BinTree raiz = huff.HuffDecompress(binary);
+        String tex = DecomText(raiz, raiz, bin, "", 0);
+        ta_original.setText(this.text);
     }//GEN-LAST:event_jLabel29MouseClicked
 
     private void jl_elegir2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jl_elegir2MouseClicked
         // TODO add your handling code here:
         String path = load();
         binary = huff.read(path);
+        this.text = "";
+        this.decompressed = false;
+
         ta_binary.setText(binary.get(0).toString());
     }//GEN-LAST:event_jl_elegir2MouseClicked
 
@@ -1373,6 +1398,8 @@ public class GUIProject extends javax.swing.JFrame {
     private String pathGrafo;
     private ArrayList binary;
     private Huffman huff = new Huffman();
+    private boolean decompressed;
+    private String text;
 
     public void save() {
         // String texto = TF_compresion.getText();
@@ -1641,5 +1668,38 @@ public class GUIProject extends javax.swing.JFrame {
         //System.out.println(g.isBicoloreable());
 
         return g;
+    }
+
+    public String DecomText(BinTree raiz, BinTree node, String binary, String text, int x) {
+        System.out.println("");
+        System.out.println("x: " + x);
+        System.out.println("length: " + binary.length());
+
+        System.out.println("TEXT: " + text);
+        this.text = text;
+        if (x >= binary.length()) {
+            //text = text.concat(node.getInfo());
+            decompressed = true;
+            return text;
+        }
+
+        if (!decompressed && x < binary.length()) {
+            if (binary.charAt(x) == '0' && !node.isLeaf(node)) {
+                DecomText(raiz, node.getLNode(), binary, text, x + 1);
+            } else if (binary.charAt(x) == '0' && node.isLeaf(node)) {
+                text = text.concat(node.getInfo());
+                DecomText(raiz, raiz, binary, text, x);
+
+            }
+
+            if (binary.charAt(x) == '1' && !node.isLeaf(node)) {
+                DecomText(raiz, node.getRNode(), binary, text, x + 1);
+            } else if (binary.charAt(x) == '1' && node.isLeaf(node)) {
+                text = text.concat(node.getInfo());
+                DecomText(raiz, raiz, binary, text, x);
+            }
+        }
+
+        return text;
     }
 }

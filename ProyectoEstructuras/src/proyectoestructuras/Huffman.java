@@ -133,7 +133,7 @@ public class Huffman {
         for (int i = 0; i < test.size(); i++) {
             texto += test.get(i) + ",";
         }
-        save(texto,str);
+        save(texto, str);
 
         bin = cargar();
         System.out.println("TEST2" + bin);
@@ -220,7 +220,7 @@ public class Huffman {
             cont++;
         }
         //System.out.println(binary);
-        //System.out.println("TEST" + test);
+        System.out.println("TEST" + test);
         String texto = "";
         String compressed = "";
         for (int i = 0; i < str.length(); i++) {
@@ -239,9 +239,8 @@ public class Huffman {
         save(texto, str);
     }
 
-    public String HuffDecompress(ArrayList bin) {
-
-        String text = bin.get(0).toString() + "0";
+    public BinTree HuffDecompress(ArrayList bin) {
+        //String text = bin.get(0).toString() + "0";
         bin.remove(0);
         BinTree raiz = new BinTree();
 
@@ -249,9 +248,9 @@ public class Huffman {
         System.out.println("out");
         root.preorden(root);
         String newString = "";
-        String decompressed = root.DecomText(root, root, text, newString, 0);
-        System.out.println(decompressed);
-        return decompressed;
+        //String decompressed = root.DecomText(root, root, text, newString, 0);
+        //System.out.println(decompressed);
+        return root;
     }
 
     public static void save(String texto, String str) {
