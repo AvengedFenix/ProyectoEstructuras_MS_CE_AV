@@ -26,6 +26,10 @@ public class Huffman {
     private static ArrayList<Integer> freq = new ArrayList();
     private static File archivo = null;
 
+    public Huffman() {
+
+    }
+
     public static Map<Character, Integer> getFreq(String s) {
         Map<Character, Integer> charFreq = new HashMap<>();
         int cont = 0;
@@ -100,7 +104,7 @@ public class Huffman {
                 for (int i = 0; i < freq.size(); i++) {
                     if (token.equals(Integer.toString(freq.get(i)))) {
                         binary.add(letters.get(i));
-                        test.add(letters.get(i)+"");
+                        test.add(letters.get(i) + "");
                         freq.remove(i);
                         letters.remove(i);
                         break;
@@ -118,36 +122,36 @@ public class Huffman {
         String compressed = "";
         for (int i = 0; i < str.length(); i++) {
             for (int j = 0; j < test.size(); j++) {
-                if (str.substring(i,i+1).equals(test.get(j))) {
-                    compressed += test.get(j+1);
+                if (str.substring(i, i + 1).equals(test.get(j))) {
+                    compressed += test.get(j + 1);
                 }
             }
         }
-        
+
         System.out.println(compressed);
         texto += compressed + ",";
         for (int i = 0; i < test.size(); i++) {
             texto += test.get(i) + ",";
         }
-        save(texto);
+        save(texto, str);
 
         bin = cargar();
         System.out.println("TEST2" + bin);
 
-<<<<<<< HEAD
-=======
-        String text = (String) bin.get(0);
+        String text = bin.get(0).toString() + "0";
         bin.remove(0);
         BinTree raiz = new BinTree();
-        
+
         BinTree root = node.BintoText(new BinTree(), new BinTree(), bin, 1, 0);
         System.out.println("out");
         root.preorden(root);
->>>>>>> d835f5563579e532319834b5c49c2c3fcd183714
+        String newString = "";
+        String decompressed = root.DecomText(root, root, text, newString, 0);
+        System.out.println("out");
+        System.out.println(decompressed);
     }
 
-    public void Huff(String str) {
-
+    public void HuffCompress(String str) {
         Map count = getFreq(str);
         for (Character ch : str.toCharArray()) {
             if (!letters.contains(ch)) {
@@ -155,10 +159,10 @@ public class Huffman {
                 freq.add((int) count.get(ch));
             }
         }
-
-        for (int i = 0; i < letters.size(); i++) {
-            System.out.println(letters.get(i) + " " + freq.get(i));
-        }
+//
+//        for (int i = 0; i < letters.size(); i++) {
+//            System.out.println(letters.get(i) + " " + freq.get(i));
+//        }
 
         Collections.sort(freq);
         ArrayList<BinTree> nodos = new ArrayList();
@@ -170,6 +174,8 @@ public class Huffman {
         BinTree node = new BinTree();
         while (nodos.size() > 1) {
             Collections.sort(nodos);
+//            System.out.println("\n");
+//            System.out.println("\n");
             BinTree nodo1 = nodos.get(0);
             BinTree nodo2 = nodos.get(1);
             int info = Integer.parseInt(nodo1.getInfo()) + Integer.parseInt(nodo2.getInfo());
@@ -182,12 +188,14 @@ public class Huffman {
             node.preorden(node);
         }
 
+        //System.out.println("");
         String st = node.BinCode(node, "");
         String delim = ",";
         StringTokenizer tok = new StringTokenizer(st, delim, true);
         ArrayList binary = new ArrayList();
         int cont = 0;
-        ArrayList test = new ArrayList();
+        ArrayList<String> test = new ArrayList();
+        ArrayList bin = new ArrayList();
 
         while (tok.hasMoreTokens()) {
             String token = tok.nextToken();
@@ -199,7 +207,7 @@ public class Huffman {
                 for (int i = 0; i < freq.size(); i++) {
                     if (token.equals(Integer.toString(freq.get(i)))) {
                         binary.add(letters.get(i));
-                        test.add(letters.get(i));
+                        test.add(letters.get(i) + "");
                         freq.remove(i);
                         letters.remove(i);
                         break;
@@ -211,18 +219,49 @@ public class Huffman {
             binary.add(token);
             cont++;
         }
-        System.out.println(binary);
+        //System.out.println(binary);
         System.out.println("TEST" + test);
+        String texto = "";
+        String compressed = "";
+        for (int i = 0; i < str.length(); i++) {
+            for (int j = 0; j < test.size(); j++) {
+                if (str.substring(i, i + 1).equals(test.get(j))) {
+                    compressed += test.get(j + 1);
+                }
+            }
+        }
+
+        System.out.println(compressed);
+        texto += compressed + ",";
+        for (int i = 0; i < test.size(); i++) {
+            texto += test.get(i) + ",";
+        }
+        save(texto, str);
     }
 
-    public static void save(String texto) {
+    public BinTree HuffDecompress(ArrayList bin) {
+        //String text = bin.get(0).toString() + "0";
+        bin.remove(0);
+        BinTree raiz = new BinTree();
+
+        BinTree root = raiz.BintoText(new BinTree(), new BinTree(), bin, 1, 0);
+        System.out.println("out");
+        root.preorden(root);
+        String newString = "";
+        //String decompressed = root.DecomText(root, root, text, newString, 0);
+        //System.out.println(decompressed);
+        return root;
+    }
+
+    public static void save(String texto, String str) {
         //String texto = "";
         archivo = null;
         FileWriter fw = null;
         BufferedWriter bw = null;
+        String name = str.substring(0, 6);
 
         try {
-            archivo = new File("./comprimido.txt");
+            archivo = new File("./Archivos/" + name + ".txt");
             fw = new FileWriter(archivo, false);
             //si el archivo no existe lo crea y si ya existe los sobreescribe (al menos que append
             bw = new BufferedWriter(fw);
@@ -247,6 +286,26 @@ public class Huffman {
 
         try {
             sc = new Scanner(archivo);
+            sc.useDelimiter(",");
+            while (sc.hasNext()) {
+                binary.add(sc.next());
+            }
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            sc.close();
+        }
+        return binary;
+    }
+
+    public static ArrayList read(String path) {
+        Scanner sc = null;
+        ArrayList binary = new ArrayList();
+        File file = new File(path);
+
+        try {
+            sc = new Scanner(file);
             sc.useDelimiter(",");
             while (sc.hasNext()) {
                 binary.add(sc.next());

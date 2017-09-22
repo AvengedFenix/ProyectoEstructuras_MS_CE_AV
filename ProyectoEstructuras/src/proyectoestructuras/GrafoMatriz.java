@@ -17,6 +17,7 @@ public class GrafoMatriz {
     double[][] matrizAdy;
 
     boolean dirigido;
+    boolean bicoloreable;
 
     public GrafoMatriz(int nodos) {
         dirigido = false;
@@ -187,4 +188,70 @@ public class GrafoMatriz {
         return bipartito;
 
     }
+    
+    public ArrayList<String> Bicoloreable(int nodoOrigen) {
+        boolean bipartito = true;
+
+        int cantNodos = matrizAdy.length;
+        //char colores[] = new char[cantNodos];
+        /*ArrayList<Boolean> sincolor = new ArrayList();
+        for(int i = 0; i < cantNodos; i++){
+            sincolor.add(false);
+        }*/
+
+        ArrayList<String> colores = new ArrayList();
+        for(int i = 0; i < cantNodos; i++){
+            colores.add("null");
+        }
+        /*for (int i = 0; i < cantNodos; i++) {
+            colores[i] = 'n';//n significa que no se le ha asignado un color
+        }*/
+
+        String[] a_o_r = new String[2];// array que contiene los colores que se asignaran a los nodos (azul o rojo)
+        a_o_r[0] = "azul";
+        a_o_r[1] = "rojo";
+
+        //colores[nodoOrigen] = 'a';
+        colores.set(nodoOrigen, "azul");
+        ArrayList<Integer> nodosMatriz = new ArrayList();
+        nodosMatriz.add(nodoOrigen);
+
+        while (!nodosMatriz.isEmpty()) {
+            //System.out.println("size: " + nodosMatriz.size());
+            int nodo = nodosMatriz.remove(0);
+
+            for (int ady = 0; ady < cantNodos; ady++) {
+                if (matrizAdy[nodo][ady] != 0 && colores.get(ady).equals("null")/*colores[ady] == 'n'*/) {
+
+                    //colores[ady] = (colores[nodo] == 'a') ? (colores[ady] = a_o_r[1]) : (colores[ady] = a_o_r[0]);// se le asigna el color opuesto al nodo adyacente, 
+                    String color = colores.get(nodo).equals("azul") ? (a_o_r[1]) : (a_o_r[0]);
+                    colores.set(ady, color);
+                    //si es rojo se le asigna azul, si es azul se le asigno rojo
+
+                    //sincolor.set(ady, true);
+                    nodosMatriz.add(ady);
+                } else if (matrizAdy[nodo][ady] != 0 && colores.get(nodo).equals(colores.get(ady))/*colores[ady] == colores[nodo]*/) {
+                    System.out.println("Nodos adyacentes: " + (nodo + 1) + "->" + (ady + 1) + " tienen el mismo color");
+                    bipartito = false;
+
+                }
+            }
+        }
+
+        if (bipartito) {
+            for (int i = 0; i < colores.size()/*length*/; i++) {
+                //System.out.println("nodo: " + i + ", color: " + colores[i]);
+                System.out.println("nodo: " + i + ", color: " + colores.get(i));
+            }
+            this.bicoloreable = true;
+        }
+
+        return colores;
+    }
+    
+    public boolean isBicoloreable(){
+        return this.bicoloreable;
+    }
+    
+    
 }

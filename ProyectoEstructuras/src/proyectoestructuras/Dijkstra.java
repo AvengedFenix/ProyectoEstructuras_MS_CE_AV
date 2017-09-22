@@ -14,93 +14,62 @@ import java.util.Map;
  * @author andre
  */
 public class Dijkstra {
+
     Grafo grafo;
     Nodo origen;
 
     public void Dijkstra() {
-        
+
     }
 
     public Dijkstra(Grafo grafo, Nodo origen) {
         this.grafo = grafo;
         this.origen = origen;
     }
-    
-    public Map<Nodo, ArrayList<Nodo>> implementarDijkstra3() {
 
+    public Map<Nodo, Double> DijkstraFinal() {
+        Map<Nodo, Double> distancias = new HashMap();
         for (Nodo nodo : grafo.getNodos()) {
-            nodo.setDistancia(900);
+            distancias.put(nodo, 900.0);
         }
 
-        ArrayList<Nodo> vistos = new ArrayList();
-        ArrayList<Nodo> no_vistos = new ArrayList();
+        ArrayList<Nodo> completos = new ArrayList();
+        ArrayList<Nodo> noCompletos = new ArrayList();
 
-        Map<Nodo, ArrayList<Nodo>> caminos = new HashMap();
+        distancias.replace(this.origen, 0.0);
 
-        this.origen.setDistancia(0);
+        noCompletos.add(this.origen);
+        while (!noCompletos.isEmpty()) {
+            //nodoActual = nodo de menor distancia
+            Nodo nodoActual = new Nodo("");
+            double menDistancia = 9000;
+            for (Nodo nodo : noCompletos) {
+                double distancia = distancias.get(nodo);
+                if (distancia < menDistancia) {
+                    menDistancia = distancia;
+                    nodoActual = nodo;
+                }
+            }
 
-        for (Nodo n : grafo.getNodos()) {
-            caminos.put(n, new ArrayList<>());
-        }
+            noCompletos.remove(nodoActual);
 
-        no_vistos.add(this.origen);
-        while (!no_vistos.isEmpty()) {
-            Nodo nodoActual = encontrarNodoMenorD(no_vistos);
-            no_vistos.remove(nodoActual);
-
-            for (int i = 0; i < nodoActual.getNodosAdyacentes().size(); i++) {
+            for (int i = 0; i < nodoActual.getNodosAdyacentes().size(); i++) {//encontrar la distancia menor de los nodos adyacentes
                 Nodo nAdy = nodoActual.getNodosAdyacentes().get(i);
                 Double peso = nodoActual.getPesoAdyacente().get(i);
 
-                Double menorDistancia = nodoActual.getDistancia();
-                if (!vistos.contains(nAdy) && (nAdy.getDistancia() > menorDistancia + peso)) {
-                    nAdy.setDistancia(menorDistancia + peso);
-                    ArrayList<Nodo> cMasCorto = new ArrayList(nodoActual.getCaminoMasCorto());
-                    cMasCorto.add(nodoActual);
+                Double menorDistancia = distancias.get(nodoActual);
+                if (!completos.contains(nAdy) && (distancias.get(nAdy) > menorDistancia + peso)) {
+                    distancias.replace(nAdy, menorDistancia + peso);
 
-                    nAdy.setCaminoMasCorto(cMasCorto);
-                    
-                    caminos.replace(nAdy, cMasCorto);
-
-                    /*ArrayList<Nodo> c = caminos.get(nAdy);
-                        c = new ArrayList(cMasCorto);
-                     */
                 }
 
-                no_vistos.add(nAdy);
-
-                ///visitados.add(nodoActual);
+                noCompletos.add(nAdy);
             }
 
-            vistos.add(nodoActual);
+            completos.add(nodoActual);
         }
 
-        /*for(Entry<Nodo, ArrayList<Nodo>> camino: caminos.entrySet()){
-                Nodo actual = camino.getKey();
-                System.out.println("camino mas corto de " + actual.getId() + ": ");
-                StringBuilder sb = new StringBuilder();
-                
-                for(Nodo n : actual.getCaminoMasCorto()){
-                    sb.append(n.getId()).append(", ");
-                }
-                System.out.print(sb.toString());
-        }*/
-        return caminos;
+        return distancias;
     }
-    
-    public Nodo encontrarNodoMenorD(ArrayList<Nodo> nodos) {
-        Nodo NodoMenorD = null;
-        double menDistancia = 9000;
 
-        for (Nodo nodo : nodos) {
-            double distancia = nodo.getDistancia();
-            if (distancia < menDistancia) {
-                menDistancia = distancia;
-                NodoMenorD = nodo;
-            }
-        }
-
-        return NodoMenorD;
-    }
-    
 }
