@@ -8,6 +8,7 @@ package proyectoestructuras;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -125,7 +126,7 @@ public class GUIProject extends javax.swing.JFrame {
         jPanel20 = new javax.swing.JPanel();
         jLabel34 = new javax.swing.JLabel();
         jScrollPane7 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
+        jt_dijkstra = new javax.swing.JTextArea();
         panel_p = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -821,9 +822,9 @@ public class GUIProject extends javax.swing.JFrame {
             .addComponent(jLabel34, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
         );
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane7.setViewportView(jTextArea2);
+        jt_dijkstra.setColumns(20);
+        jt_dijkstra.setRows(5);
+        jScrollPane7.setViewportView(jt_dijkstra);
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -1173,6 +1174,8 @@ public class GUIProject extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel8MouseClicked
 
     private void jl_elegir3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jl_elegir3MouseClicked
+        this.jt_gruporojo.setText("");
+        this.jt_grupoazul.setText("");
         pathGrafo = load();
         //tf_pathtree.setText(pathTree);
         GrafoMatriz g;
@@ -1265,7 +1268,34 @@ public class GUIProject extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel22MouseClicked
 
     private void jLabel34MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel34MouseClicked
-        // TODO add your handling code here:
+        jt_dijkstra.setText("");
+        pathGrafo = load();
+        //tf_pathtree.setText(pathTree); 
+        Grafo g;
+
+        try {
+            g = createGrafoAdj(pathGrafo);
+            System.out.println("cant nodos: " + g.getNodos().size());
+            for (int i = 0; i < g.getNodos().size(); i++) {
+                System.out.println(g.getNodos().get(i).printNodosAdy());
+            }
+
+            Grafo copia = g;
+
+            Dijkstra dijkstra = new Dijkstra(copia, g.getNodos().get(0));
+
+            Map<Nodo, Double> distanciass = dijkstra.DijkstraFinal();
+
+            System.out.println("dinstancia final\n");
+            for (Entry<Nodo, Double> distancia : distanciass.entrySet()) {
+                Nodo n = distancia.getKey();
+                double d = distancia.getValue();
+                this.jt_dijkstra.append(dijkstra.origen.getId() + " -> " + n.getId() + ": " + d + "\n");
+                //System.out.println(dijkstra.origen.getId() + " -> " + n.getId() + ": " + d);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(GUIProject.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jLabel34MouseClicked
 
     private void jLabel35MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel35MouseClicked
@@ -1370,7 +1400,6 @@ public class GUIProject extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JTextArea jTextArea2;
     private javax.swing.JDialog jd_bicoloreable;
     private javax.swing.JDialog jd_compresion;
     private javax.swing.JDialog jd_desempeno;
@@ -1388,6 +1417,7 @@ public class GUIProject extends javax.swing.JFrame {
     private javax.swing.JPanel jp_comprimir;
     private javax.swing.JPanel jp_descomprimir;
     private javax.swing.JPanel jp_elegir2;
+    private javax.swing.JTextArea jt_dijkstra;
     private javax.swing.JTextArea jt_grupoazul;
     private javax.swing.JTextArea jt_gruporojo;
     private javax.swing.JPanel panel_p;
@@ -1404,6 +1434,8 @@ public class GUIProject extends javax.swing.JFrame {
     private Huffman huff = new Huffman();
     private boolean decompressed;
     private String text;
+    private TreeNode foundTree = null;
+    private boolean found = false;
 
     public void save() {
         // String texto = TF_compresion.getText();
@@ -1449,85 +1481,6 @@ public class GUIProject extends javax.swing.JFrame {
         }
     }
 
-    public TreeNode createTree(String path) throws IOException {
-
-        TreeNode root = new TreeNode();
-        BufferedReader br = new BufferedReader(new FileReader(path));
-        try {
-            String line = br.readLine();
-
-            ArrayList<String[]> info = new ArrayList();
-
-            while (line != null) {
-                String s = line.replaceAll(" ", "");
-                info.add(s.split(","));
-                //String[] x = info.get(info.size()-1);
-                /*for(String s : x){
-                    s = s.replaceAll(" ", "");
-                }*/
-                System.out.println(Arrays.toString(line.split(",")));
-                line = br.readLine();
-            }
-
-            //TreeNode rootTree = info.get
-            int nNodo = Integer.parseInt(info.get(0)[0]);
-            ArrayList<Integer> existe = new ArrayList();
-            Map<TreeNode, ArrayList<TreeNode>> mapaarbol = new HashMap();
-
-            TreeNode rootTree = new TreeNode(nNodo);
-            //rootTree.addTreeNode(new TreeNode(Integer.parseInt(info.get(0)[1])));
-
-            for (int i = 1; i < info.size(); i++) {
-                int numeroNodo = Integer.parseInt(info.get(i)[0]);
-                int padre = Integer.parseInt(info.get(i)[1]);
-                double evaluacion = Integer.parseInt(info.get(i)[2]);
-
-                if (padre == -1) {
-                    rootTree = new TreeNode(numeroNodo, evaluacion);
-                } else {
-
-                    if (!existe.contains(padre)) {
-                        TreeNode hijo = new TreeNode(numeroNodo, evaluacion);
-                        mapaarbol.put(hijo, new ArrayList());
-                    } else {
-                        for (Entry<TreeNode, ArrayList<TreeNode>> mapa : mapaarbol.entrySet()) {
-                            if (mapa.getKey().getNumNodo() == padre) {
-                                mapa.getValue().add(new TreeNode(numeroNodo, evaluacion));
-                            }
-                        }
-                    }
-
-                }
-
-                //if(treeExists)
-                /*if (treeExists(hijo, rootTree) == null) {
-                    System.out.println("no existe nodo");
-
-
-                    //TreeNode nuevoNodo = new TreeNode(numeroNodo)
-                }*/
-            }
-
-            for (Entry<TreeNode, ArrayList<TreeNode>> map : mapaarbol.entrySet()) {
-                System.out.println(map.getKey().getNumNodo() + ": ");
-                StringBuilder sb = new StringBuilder();
-                System.out.println("size: " + map.getValue().size());
-                for (TreeNode nodo : map.getValue()) {
-                    sb.append(nodo.getNumNodo()).append(", ");
-                }
-
-                System.out.print(sb.toString());
-            }
-
-        } catch (IOException e) {
-
-        } finally {
-            br.close();
-        }
-
-        return root;
-    }
-
     public TreeNode treeExists(int n, TreeNode nodo) {
 
         if (nodo != null) {
@@ -1558,6 +1511,7 @@ public class GUIProject extends javax.swing.JFrame {
                 while (!s.isEmpty() && !s.peek().equals("(") && precedenciaMasAlta(s.peek(), infix1)) {
                     sb.append(s.pop()).append(" ");
                 }
+                
                 s.push(infix1);
             } else if (infix1.equals("(")) {//si encuentra un "(" se agrega al stack
                 s.push(infix1);
@@ -1594,7 +1548,7 @@ public class GUIProject extends javax.swing.JFrame {
     }
 
     public static boolean isOperator(String s) {
-        return s.equals("+") || s.equals("-") || s.equals("*") || s.equals("/") || s.equals("^");
+        return s.equals("+") || s.equals("-") || s.equals("*") || s.equals("/") || s.equals("^") || s.equals("!");
     }
 
     public static int Precedencia(String s) {
@@ -1706,4 +1660,202 @@ public class GUIProject extends javax.swing.JFrame {
 
         return text;
     }
+
+    public TreeNode createTree(String path) throws IOException {
+
+        TreeNode root = new TreeNode();
+        BufferedReader br = new BufferedReader(new FileReader(path));
+        try {
+            String line = br.readLine();
+
+            ArrayList<String[]> info = new ArrayList();
+
+            while (line != null) {
+                String s = line.replaceAll(" ", "");
+                info.add(s.split(","));
+                //String[] x = info.get(info.size()-1);
+                /*for(String s : x){
+                    s = s.replaceAll(" ", "");
+                }*/
+                System.out.println(Arrays.toString(line.split(",")));
+                line = br.readLine();
+            }
+
+            ArrayList<Integer> nodosUnicos = new ArrayList();
+
+            TreeNode rootTree = null;
+            ArrayList<TreeNode> padreNotFoundNodo = new ArrayList();
+            ArrayList<Integer> padreNotFoundPadre = new ArrayList();
+            ArrayList<Integer> padres = new ArrayList();
+
+            for (int i = 0; i < info.size(); i++) {
+                int numeroNodo = Integer.parseInt(info.get(i)[0]);
+                //System.out.println("Num Nodo: " + numeroNodo);
+                if (!nodosUnicos.contains(numeroNodo)) {
+                    nodosUnicos.add(numeroNodo);
+                    int padre = Integer.parseInt(info.get(i)[1]);
+                    //System.out.println("Padre: " + padre);
+                    double evaluacion = Integer.parseInt(info.get(i)[2]);
+
+                    if (padre == -1) {
+                        rootTree = new TreeNode(numeroNodo, evaluacion);
+                    } else {
+                        TreeNode p = findPadre(rootTree, padre);
+                        p = foundTree;
+                        if (foundTree != null/*!existe.contains(padre)*/) {
+                            TreeNode hijo = new TreeNode(numeroNodo, evaluacion);
+                            //System.out.println("n padre: " + foundTree.getNumNodo() + "\n");
+                            p.addTreeNode(hijo);
+                            //mapaarbol.put(hijo, new ArrayList());
+                        } else {
+                            //padreNotFound.put(new TreeNode(numeroNodo, evaluacion), padre);
+                            padreNotFoundNodo.add(new TreeNode(numeroNodo, evaluacion));
+                            padreNotFoundPadre.add(padre);
+                            /*for (Entry<TreeNode, ArrayList<TreeNode>> mapa : mapaarbol.entrySet()) {
+                            if (mapa.getKey().getNumNodo() == padre) {
+                                mapa.getValue().add(new TreeNode(numeroNodo, evaluacion));
+                            }
+                        }*/
+                        }
+                    }
+                    if (!padres.contains(padre)) {
+                        padres.add(padre);
+                    }
+                }
+
+                foundTree = null;
+
+                //if(treeExists)
+                /*if (treeExists(hijo, rootTree) == null) {
+                    System.out.println("no existe nodo");
+
+
+                    //TreeNode nuevoNodo = new TreeNode(numeroNodo)
+                }*/
+            }
+
+            /*/for (Entry<TreeNode, ArrayList<TreeNode>> map : mapaarbol.entrySet()) {
+                System.out.println(map.getKey().getNumNodo() + ": ");
+                StringBuilder sb = new StringBuilder();
+                System.out.println("size: " + map.getValue().size());
+                for (TreeNode nodo : map.getValue()) {
+                    sb.append(nodo.getNumNodo()).append(", ");
+                }
+
+                System.out.print(sb.toString());
+            }*/
+            for (int i = 0; i < padreNotFoundNodo.size(); i++) {
+                if (!nodosUnicos.contains(padreNotFoundPadre.get(i))) {
+                    padreNotFoundNodo.remove(i);
+                    padreNotFoundPadre.remove(i);
+                }
+            }
+
+            while (!padreNotFoundNodo.isEmpty()) {
+                for (int i = 0; i < padreNotFoundNodo.size(); i++) {
+                    TreeNode nodo = padreNotFoundNodo.get(i);
+                    TreeNode padre = findPadre(rootTree, padreNotFoundPadre.get(i));
+                    padre = foundTree;
+
+                    if (!padres.contains(padreNotFoundPadre.get(i))) {
+                        System.out.println("No se encontro padre de nodo" + nodo.getNumNodo());
+                        //padreNotFound.remove(nodo, notFound.getValue());
+                        padreNotFoundNodo.remove(i);
+                        padreNotFoundPadre.remove(i);
+
+                    } else if (padre != null) {
+                        //System.out.println("padre de " + nodo.getNumNodo() + ": " + padreNotFoundPadre.get(i));
+                        padre.addTreeNode(nodo);
+                        padreNotFoundNodo.remove(i);
+                        padreNotFoundPadre.remove(i);
+                        //padreNotFound.remove(nodo, notFound.getValue());
+                    }
+                    foundTree = null;
+                }
+
+            }
+
+            //cont++;
+            //rootTree.Evaluar();
+            System.out.println("Evaluacion: " + rootTree.evaluarTree(rootTree));
+
+        } catch (IOException e) {
+
+        } finally {
+            br.close();
+        }
+
+        return root;
+    }
+
+    public TreeNode findPadre(TreeNode raiz, int n) {
+        TreeNode find = null;
+
+        for (int i = 0; i < raiz.getChildren().size(); i++) {
+            find = findPadre(raiz.getChildren().get(i), n);
+        }
+
+        if (n == raiz.getNumNodo()) {
+            found = true;
+            find = raiz;
+            System.out.println("returned " + raiz.getNumNodo());
+            foundTree = raiz;
+            return find;
+        }
+
+        if (foundTree == null) {
+            return null;
+        } else {
+            return find;
+        }
+    }
+
+    public Grafo createGrafoAdj(String path) throws FileNotFoundException, IOException {
+        Grafo g = new Grafo();
+        BufferedReader br = new BufferedReader(new FileReader(path));
+        ArrayList<String[]> info = new ArrayList();
+
+        try {
+            String line = br.readLine();
+
+            //int[][] matriz = new int[5][5];
+            while (line != null) {
+                String s = line.replaceAll(" ", "");
+                info.add(s.split(","));
+                //String[] x = info.get(info.size()-1);
+                /*for(String s : x){
+                    s = s.replaceAll(" ", "");
+                }*/
+                // System.out.println(Arrays.toString(s.split(",")));
+                line = br.readLine();
+            }
+
+            for (int i = 0; i < info.size(); i++) {
+                System.out.println(Arrays.toString(info.get(i)));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            br.close();
+        }
+        System.out.println("");
+        ArrayList<Nodo> nodos = new ArrayList();
+        for (int i = 0; i < info.size(); i++) {
+            nodos.add(new Nodo(Integer.toString(i)));
+        }
+
+        for (int i = 0; i < info.size(); i++) {
+            for (int j = 0; j < info.size(); j++) {
+                if (Integer.parseInt(info.get(i)[j]) != 0) {
+                    nodos.get(i).agregarDestino(nodos.get(j), Double.parseDouble(info.get(i)[j]));
+                    //n.getNodosAdyacentes().add(new Nodo(Integer.toString(j)));
+                    //n.getPesoAdyacente().add(Double.parseDouble(info.get(i)[j]));
+                }
+            }
+            g.agregarNodo(nodos.get(i));
+        }
+
+        return g;
+    }
+
 }

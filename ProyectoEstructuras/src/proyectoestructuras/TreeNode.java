@@ -269,11 +269,11 @@ public class TreeNode {
         double x = 0;
         if(this.isParent()){
             for (int i = 0; i < this.getChildren().size(); i++) {
-                x += this.getChildren().get(i).getPersona().getEvaluation();
+                x += this.getChildren().get(i).getEvaluacion();
             }
             
             x /= this.getChildrenCount();
-        this.getPersona().setEvaluation(x);
+        this.setEvaluacion(x);
         }
         return x;
     }

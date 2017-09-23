@@ -7,22 +7,21 @@ package proyectoestructuras;
 
 import java.util.ArrayList;
 
-
 /**
  *
  * @author andre
  */
 public class Nodo {
+
     private String id;
     ArrayList<Double> pesoAdy = new ArrayList();
     ArrayList<Nodo> NodosAdy = new ArrayList();
-    
-    
-    public Nodo(String id){
+
+    public Nodo(String id) {
         this.id = id;
     }
-    
-    public void agregarDestino(Nodo destino, double dist){
+
+    public void agregarDestino(Nodo destino, double dist) {
         NodosAdy.add(destino);
         pesoAdy.add(dist);
     }
@@ -35,15 +34,24 @@ public class Nodo {
         this.id = id;
     }
 
-    
-    public ArrayList<Nodo> getNodosAdyacentes(){
+    public ArrayList<Nodo> getNodosAdyacentes() {
         return this.NodosAdy;
     }
-    
-    public ArrayList<Double> getPesoAdyacente(){
+
+    public ArrayList<Double> getPesoAdyacente() {
         return this.pesoAdy;
     }
-    
-    
-    
+
+    public String printNodosAdy() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < NodosAdy.size(); i++) {
+            String s = "";
+            s += this.id + " -> " + NodosAdy.get(i).getId() + ": " + pesoAdy.get(i) + "\n";
+            sb.append(s);
+        }
+
+        return sb.toString();
+
+    }
+
 }

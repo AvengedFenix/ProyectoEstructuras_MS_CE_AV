@@ -197,10 +197,7 @@ public class BinTree implements Comparable<BinTree> {
         int valor_l = evaluar(nodo.getLNode()); //evaluar left node
         int valor_r = evaluar(nodo.getRNode()); // evaluar right node
 
-        String operator = nodo.getInfo();
-        switch (operator) {
 
-        }
         switch (nodo.getInfo()) {//si nodo.getInfo() es un operado
             case "+":
                 return valor_l + valor_r;
@@ -212,6 +209,9 @@ public class BinTree implements Comparable<BinTree> {
                 return valor_l / valor_r;
             case "^":
                 return (int) Math.pow(valor_l, valor_r);
+            case "!":
+                return factorial(valor_l);
+
         }
 
         /*
@@ -240,12 +240,16 @@ public class BinTree implements Comparable<BinTree> {
         } else {
             BinTree operatorNode = new BinTree(s);
 
-            BinTree rNodo = (stack.pop());//nodo derecho
-            BinTree lNodo = (stack.pop());
-            operatorNode.insertRNode(rNodo);//inserta nodo derecho
-            operatorNode.insertLNode(lNodo);
+            if (s.equals("!")) {
+                BinTree lNode = (stack.pop());
+                operatorNode.insertLNode(lNode);
+            } else {
+                BinTree rNodo = (stack.pop());//nodo derecho
+                BinTree lNodo = (stack.pop());
+                operatorNode.insertRNode(rNodo);//inserta nodo derecho
+                operatorNode.insertLNode(lNodo);
 
-            /*
+                /*
             if(isDigit(popt1.getInfo()) && !isDigit(popt2.getInfo())){//lo hice asi para que los nodos de los operadores siempre esten en el lado izquierdo
                 //si nodo 1 es digito y nodo 2 es operador, entonces el nodo 2 va a ser hijo izquierdo del operatorNode
                 operatorNode.insertLNode(popt2);
@@ -257,11 +261,13 @@ public class BinTree implements Comparable<BinTree> {
                 operatorNode.insertLNode(popt1);
                 operatorNode.insertRNode(popt2);
             }
-             */
-            System.out.println("Padre: " + operatorNode.getInfo());
-            System.out.println("Left node: " + operatorNode.getLNode().getInfo());
-            System.out.println("Right node: " + operatorNode.getRNode().getInfo());
-            System.out.println("");
+                 */
+                System.out.println("Padre: " + operatorNode.getInfo());
+                System.out.println("Left node: " + operatorNode.getLNode().getInfo());
+                System.out.println("Right node: " + operatorNode.getRNode().getInfo());
+                System.out.println("");
+
+            }
 
             stack.push(operatorNode);
         }
@@ -300,5 +306,9 @@ public class BinTree implements Comparable<BinTree> {
         int compararCantidad = Integer.parseInt(nodo.getInfo());
 
         return Integer.parseInt(this.getInfo()) - compararCantidad;
+    }
+
+    public int factorial(int n) {
+        return (n == 0 ? 1 : n * factorial(n - 1));
     }
 }
