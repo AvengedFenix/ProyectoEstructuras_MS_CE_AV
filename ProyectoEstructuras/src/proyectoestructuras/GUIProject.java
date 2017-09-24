@@ -24,6 +24,7 @@ import java.util.logging.Logger;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
@@ -127,6 +128,8 @@ public class GUIProject extends javax.swing.JFrame {
         jLabel34 = new javax.swing.JLabel();
         jScrollPane7 = new javax.swing.JScrollPane();
         jt_dijkstra = new javax.swing.JTextArea();
+        jc_origen = new javax.swing.JComboBox<>();
+        jb_dijkstra = new javax.swing.JButton();
         panel_p = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -826,6 +829,13 @@ public class GUIProject extends javax.swing.JFrame {
         jt_dijkstra.setRows(5);
         jScrollPane7.setViewportView(jt_dijkstra);
 
+        jb_dijkstra.setText("OK");
+        jb_dijkstra.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_dijkstraMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
@@ -834,10 +844,17 @@ public class GUIProject extends javax.swing.JFrame {
                 .addContainerGap(181, Short.MAX_VALUE)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel33)
                     .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(173, 173, 173))
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(180, 180, 180)
+                .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(154, 154, 154)
+                .addComponent(jc_origen, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jb_dijkstra, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -845,12 +862,17 @@ public class GUIProject extends javax.swing.JFrame {
                 .addGap(45, 45, 45)
                 .addComponent(jPanel19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel33)
-                .addGap(58, 58, 58)
-                .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addComponent(jLabel33)
+                        .addGap(62, 62, 62)
+                        .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jc_origen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jb_dijkstra)))
+                .addGap(27, 27, 27)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(87, Short.MAX_VALUE))
+                .addContainerGap(88, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jd_dijkstraLayout = new javax.swing.GroupLayout(jd_dijkstra.getContentPane());
@@ -1292,29 +1314,55 @@ public class GUIProject extends javax.swing.JFrame {
     private void jLabel34MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel34MouseClicked
         jt_dijkstra.setText("");
         pathGrafo = load();
+        
+        try {
+            Grafo g = createGrafoAdj(pathGrafo);
+            actual = g;
+            Object[] origen = new Object[g.getNodos().size()];
+            for (int i = 0; i < origen.length; i++) {
+                jc_origen.addItem(Integer.toString(i));
+                //posibilities[i-1] = i;
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(GUIProject.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
         //tf_pathtree.setText(pathTree); 
+        
+    }//GEN-LAST:event_jLabel34MouseClicked
+
+    private void jLabel35MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel35MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel35MouseClicked
+
+    private void jb_dijkstraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_dijkstraMouseClicked
         Grafo g;
+        this.jt_dijkstra.setText("");
 
         try {
-            g = createGrafoAdj(pathGrafo);
-            System.out.println("cant nodos: " + g.getNodos().size());
+            g = actual;
+            //System.out.println("cant nodos: " + g.getNodos().size());
             for (int i = 0; i < g.getNodos().size(); i++) {
                 System.out.println(g.getNodos().get(i).printNodosAdy());
             }
 
             Grafo copia = g;
 
-            Dijkstra dijkstra = new Dijkstra(copia, g.getNodos().get(0));
+            Dijkstra dijkstra = new Dijkstra(copia, g.getNodos().get(jc_origen.getSelectedIndex()));
 
             //Map<Nodo, Double> distanciass = dijkstra.DijkstraFinal();
             Map<Nodo, Double>  dist = dijkstra.dijkstra();
-            System.out.println("dinstancia final\n");
+            //System.out.println("dinstancia final\n");
             for (Entry<Nodo, Double> distancia : dist.entrySet()) {
                 Nodo n = distancia.getKey();
                 double d = distancia.getValue();
-                this.jt_dijkstra.append((Integer.parseInt(dijkstra.origen.getId()) + 1) + " -> " + (Integer.parseInt(n.getId()) + 1) + ": " + d + "\n");
+               
+                this.jt_dijkstra.append(dijkstra.origen.getId() + " -> " + n.getId() + ": " + d + "\n");
+
                 //System.out.println(dijkstra.origen.getId() + " -> " + n.getId() + ": " + d);
             }
+            
             
             /*System.out.println("SIZE: " +dist.size());
             for (int i = 0; i < dist.size(); i++) {
@@ -1323,11 +1371,7 @@ public class GUIProject extends javax.swing.JFrame {
         } catch (Exception ex) {
             Logger.getLogger(GUIProject.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jLabel34MouseClicked
-
-    private void jLabel35MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel35MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel35MouseClicked
+    }//GEN-LAST:event_jb_dijkstraMouseClicked
 
     /**
      * @param args the command line arguments
@@ -1427,6 +1471,8 @@ public class GUIProject extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JButton jb_dijkstra;
+    private javax.swing.JComboBox<String> jc_origen;
     private javax.swing.JDialog jd_bicoloreable;
     private javax.swing.JDialog jd_compresion;
     private javax.swing.JDialog jd_desempeno;
@@ -1462,7 +1508,7 @@ public class GUIProject extends javax.swing.JFrame {
     private boolean decompressed;
     private String text;
     private TreeNode foundTree = null;
-    private boolean found = false;
+    Grafo actual = null;
 
     public void save() {
         // String texto = TF_compresion.getText();
@@ -1717,6 +1763,15 @@ public class GUIProject extends javax.swing.JFrame {
 
             for (int i = 0; i < info.size(); i++) {
                 int numeroNodo = Integer.parseInt(info.get(i)[0]);
+                int padre = Integer.parseInt(info.get(i)[1]);
+                double evaluacion = Integer.parseInt(info.get(i)[2]);
+                
+                if(padre == -1){
+                    rootTree = new TreeNode(numeroNodo, evaluacion);
+                }
+            }
+            for (int i = 0; i < info.size(); i++) {
+                int numeroNodo = Integer.parseInt(info.get(i)[0]);
                 //System.out.println("Num Nodo: " + numeroNodo);
                 if (!nodosUnicos.contains(numeroNodo)) {
                     nodosUnicos.add(numeroNodo);
@@ -1724,9 +1779,7 @@ public class GUIProject extends javax.swing.JFrame {
                     //System.out.println("Padre: " + padre);
                     double evaluacion = Integer.parseInt(info.get(i)[2]);
 
-                    if (padre == -1) {
-                        rootTree = new TreeNode(numeroNodo, evaluacion);
-                    } else {
+                    if(padre != -1) {
                         TreeNode p = findPadre(rootTree, padre);
                         p = foundTree;
                         if (foundTree != null/*!existe.contains(padre)*/) {
@@ -1823,7 +1876,6 @@ public class GUIProject extends javax.swing.JFrame {
         }
 
         if (n == raiz.getNumNodo()) {
-            found = true;
             find = raiz;
             System.out.println("returned " + raiz.getNumNodo());
             foundTree = raiz;
