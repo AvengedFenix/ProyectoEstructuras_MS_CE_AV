@@ -26,12 +26,111 @@ public class PrimTest2 {
 
     public static void main(String... args) throws IOException {
         String path = "";
-        GrafoMatriz graph = new GrafoMatriz(4, true);//createMatriz(path, true);
-        graph.agregarArista(0, 2, -2);
+        GrafoMatriz graph = createMatriz(path, true); //new GrafoMatriz(4, true);//createMatriz(path, true);
+        /*graph.agregarArista(0, 2, -2);
         graph.agregarArista(2, 3, 2);
         graph.agregarArista(3, 1, -1);
         graph.agregarArista(1, 0, 4);
-        graph.agregarArista(1, 2, 3);
+        graph.agregarArista(1, 2, 3);*/
+        
+        Graph graphstream = new DefaultGraph("Prim Test");
+        for (int i = 0; i < graph.getMatrizAdy().length; i++) {
+            graphstream.addNode(Integer.toString(i));
+            // for (int j = 0; j < graph.getMatrizAdy().length; j++) {
+            //   graphstream.add
+            //}
+        }
+
+        for (int i = 0; i < graph.getMatrizAdy().length; i++) {
+            for (int j = 0; j < graph.getMatrizAdy().length; j++) {
+               // String s = Integer.toString(i) + Integer.toString(j);
+                if (i == j) {
+                    System.out.println("Nothing");
+                }else if(graph.getMatrizAdy()[i][j] != 0){
+                    graphstream.addEdge("i: " + Integer.toString(i) + " j: " + Integer.toString(j), Integer.toString(i), Integer.toString(j));
+                    graphstream.getEdge("i: " + Integer.toString(i) + " j: " + Integer.toString(j)).setAttribute("weight", graph.getValorMatriz(i, j));
+                    graphstream.getEdge("i: " + Integer.toString(i) + " j: " + Integer.toString(j)).setAttribute("ui.label", graph.getValorMatriz(i, j));
+                    
+                }
+            }
+        }
+        /*  DorogovtsevMendesGenerator gen = new DorogovtsevMendesGenerator();*/
+
+        String css = "edge .notintree {size:1px;fill-color:gray;text-font:montserrat;} "
+                + "edge .intree {size:3px;fill-color:black;text-font:montserrat;}"
+                + "node {fill-mode: dyn-plain;fill-color: red, blue;text-size:16;text-font:montserrat;"
+                + "size: 20px;}";
+
+        graphstream.addAttribute("ui.stylesheet", css);
+        graphstream.display();
+
+        /*gen.addEdgeLabels(true);
+        gen.addEdgeAttribute("weight");
+        gen.setEdgeAttributesRange(1, 100.0);
+        gen.addNodeLabels(true);
+        gen.addSink(graph);
+        gen.begin();*/
+
+ /*for (int i = 0; i < 6 && gen.nextEvents(); i++);
+        gen.end();*/
+        for (int i = 0; i < graphstream.getEdgeCount(); i++) {
+            Edge e = graphstream.getEdge(i);
+            Double d = e.getAttribute("weight");
+            System.out.println(e.getId() + " : " + d);
+        }
+
+        //graph.getNode(0).setAttribute("ui.color", 0.5);
+        ArrayList< Node> nodes = new ArrayList();
+        ArrayList<Edge> edges = new ArrayList();
+        int u = 0;
+        int v = 0;
+        Node n = graphstream.getNode(0);
+        nodes.add(n);
+
+        while (graph.getMatrizAdy().length != nodes.size()) {
+            double low = 1000000;
+            double weight = 0;
+            for (int k = 0; k < nodes.size(); k++) {
+                n = nodes.get(k);
+                for (int j = 0; j < n.getEdgeSet().size(); j++) {
+                    weight = n.getEdge(j).getAttribute("weight");
+                    if (!edges.contains(n.getEdge(j)) && (!nodes.contains(n.getEdge(j).getSourceNode()) || !nodes.contains(n.getEdge(j).getTargetNode()))) {
+                        System.out.println("NODE " + n.getId() + "  EDGE " + j + "  WEIGHT " + weight);
+                        if (weight < low) {
+                            low = weight;
+                            v = j;
+                            u = k;
+                        }
+                    }
+                }
+            }
+            System.out.println(low);
+
+            Node n1 = nodes.get(u).getEdge(v).getNode0();
+            Node n2 = nodes.get(u).getEdge(v).getNode1();
+
+            if (!nodes.contains(n2)) {
+                nodes.add(n2);
+            } else if (!nodes.contains(n1)) {
+                nodes.add(n1);
+            }
+            edges.add(nodes.get(u).getEdge(v));
+            nodes.get(u).getEdge(v).changeAttribute("ui.style", "size:3px;fill-color:black;");
+
+            System.out.println("Nodes" + nodes);
+            System.out.println("Edges" + edges);
+
+        }
+    }
+    
+    public static void Prim(String path) throws IOException{
+        
+        GrafoMatriz graph = createMatriz(path, false); //new GrafoMatriz(4, true);
+        /*graph.agregarArista(0, 2, -2);
+        graph.agregarArista(2, 3, 2);
+        graph.agregarArista(3, 1, -1);
+        graph.agregarArista(1, 0, 4);
+        graph.agregarArista(1, 2, 3);*/
         
         Graph graphstream = new DefaultGraph("Prim Test");
         for (int i = 0; i < graph.getMatrizAdy().length; i++) {

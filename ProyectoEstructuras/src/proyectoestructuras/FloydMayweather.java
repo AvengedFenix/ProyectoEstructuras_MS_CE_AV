@@ -1,5 +1,11 @@
 package proyectoestructuras;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 public class FloydMayweather {
 
     //static GrafoMatriz g = new GrafoMatriz(7);
@@ -19,7 +25,7 @@ public class FloydMayweather {
         g.agregarArista(4, 5, 10);
         g.agregarArista(5, 3, 11);
         g.agregarArista(5, 6, 12);*/
-/*
+ /*
         g.agregarArista(0, 2, -2);
         g.agregarArista(2, 3, 2);
         g.agregarArista(3, 1, -1);
@@ -28,7 +34,7 @@ public class FloydMayweather {
         g.agregarArista(1, 2, 3);
 
         g.imprimirMatrizAdy();
-*/
+         */
         double[][] matriz = new double[g.getMatrizAdy().length][g.getMatrizAdy().length];
 
         for (int i = 0; i < g.getMatrizAdy().length; i++) {
@@ -97,16 +103,18 @@ public class FloydMayweather {
         System.out.println(text);
     }
 
-    public String Floyd(String path) {
-        GrafoMatriz g = new GrafoMatriz(4, true);
-/*
+    public String Floyd(String path) throws IOException {
+
+    //    GrafoMatriz temp = createMatriz(path, true);
+        GrafoMatriz g = createMatriz(path,true);
+        /*
         g.agregarArista(0, 2, -2);
         g.agregarArista(2, 3, 2);
         g.agregarArista(3, 1, -1);
         //g.agregarArista(1, 0, -4);
         g.agregarArista(1, 0, 4);
         g.agregarArista(1, 2, 3);
-*/
+         */
         g.imprimirMatrizAdy();
 
         double[][] matriz = new double[g.getMatrizAdy().length][g.getMatrizAdy().length];
@@ -168,7 +176,7 @@ public class FloydMayweather {
                 text += "   " + matriz[i][j] + ";   ";
             }
             System.out.println();
-            if (i != g.getMatrizAdy().length-1) {
+            if (i != g.getMatrizAdy().length - 1) {
                 text += "\n\n\n";
                 text += "               ";
 
@@ -180,6 +188,50 @@ public class FloydMayweather {
         System.out.println(text);
 
         return text;
+    }
+
+    public GrafoMatriz createMatriz(String path, boolean dirigido) throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader(path));
+        GrafoMatriz g;
+        ArrayList<String[]> info = new ArrayList();
+        try {
+            String line = br.readLine();
+
+            //int[][] matriz = new int[5][5];
+            while (line != null) {
+                String s = line.replaceAll(" ", "");
+                info.add(s.split(","));
+                //String[] x = info.get(info.size()-1);
+                /*for(String s : x){
+                    s = s.replaceAll(" ", "");
+                }*/
+                //System.out.println(Arrays.toString(s.split(",")));
+                line = br.readLine();
+            }
+
+            for (int i = 0; i < info.size(); i++) {
+                System.out.println(Arrays.toString(info.get(i)));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            br.close();
+        }
+        g = new GrafoMatriz(info.size(), dirigido);
+
+        double[][] matriz = new double[info.size()][info.size()];
+        for (int i = 0; i < info.size(); i++) {
+            for (int j = 0; j < info.size(); j++) {
+                matriz[i][j] = Double.parseDouble(info.get(i)[j]);
+                System.out.print(info.get(i)[j] + " ");
+            }
+            System.out.println("");
+        }
+
+        g.setMatrizAdy(matriz);
+        //System.out.println(g.isBicoloreable());
+
+        return g;
     }
 
     public static String getText() {

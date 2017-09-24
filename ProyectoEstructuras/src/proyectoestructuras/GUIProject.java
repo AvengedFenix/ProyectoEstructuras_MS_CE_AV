@@ -1296,15 +1296,19 @@ public class GUIProject extends javax.swing.JFrame {
 
     private void jLabel31MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel31MouseClicked
         // TODO add your handling code here:
-        /*String path = load();
+        String path = load();
         FloydMayweather fm = new FloydMayweather();
 
-        String texto = fm.Floyd(path);
+        try {
+            String texto = fm.Floyd(path);
+        } catch (IOException ex) {
+            Logger.getLogger(GUIProject.class.getName()).log(Level.SEVERE, null, ex);
+        }
         floyd_ta.setText(fm.getText());
-        floyd_ta.updateUI();*/
-        floyd_ta.setText("");
-        String path = load();
-        GrafoMatriz grafo;
+      //  floyd_ta.setText("");
+        floyd_ta.updateUI();
+       // String path = load();
+       /* GrafoMatriz grafo;
         try {
             grafo = createMatriz(path, false);
             Floyd floyd = new Floyd(grafo);
@@ -1325,7 +1329,7 @@ public class GUIProject extends javax.swing.JFrame {
             //floyd_ta.updateUI();
         } catch (IOException ex) {
             Logger.getLogger(GUIProject.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
     }//GEN-LAST:event_jLabel31MouseClicked
 
     private void jLabel20MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel20MouseClicked
@@ -1347,6 +1351,7 @@ public class GUIProject extends javax.swing.JFrame {
         jd_krusprim.pack();
         jd_krusprim.setLocationRelativeTo(null);
         jd_krusprim.setVisible(true);
+        PrimTest2 prim = new PrimTest2();
     }//GEN-LAST:event_jLabel22MouseClicked
 
     private void jLabel34MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel34MouseClicked
@@ -1373,6 +1378,10 @@ public class GUIProject extends javax.swing.JFrame {
 
     private void jLabel35MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel35MouseClicked
         // TODO add your handling code here:
+        String path = load();
+        PrimTest2 prim = new PrimTest2();
+        KruskalTest kruskal = new KruskalTest();
+        kruskal.Krusky(path);
     }//GEN-LAST:event_jLabel35MouseClicked
 
     private void jb_dijkstraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_dijkstraMouseClicked
