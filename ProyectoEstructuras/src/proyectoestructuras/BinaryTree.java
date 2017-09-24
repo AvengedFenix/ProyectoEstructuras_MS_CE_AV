@@ -170,39 +170,6 @@ public class BinaryTree implements Comparable<BinaryTree> {
         return 0;
     }
 
-    public void postfixTree(String s, Stack<BinaryTree> stack) {
-        if (isDigit(s)) {
-            stack.push(new BinaryTree(s));
-        } else {
-            BinaryTree operatorNode = new BinaryTree(s);
-
-            BinaryTree rNodo = (stack.pop());//nodo derecho
-            BinaryTree lNodo = (stack.pop());
-            operatorNode.insertRNode(rNodo);//inserta nodo derecho
-            operatorNode.insertLNode(lNodo);
-
-            /*
-            if(isDigit(popt1.getInfo()) && !isDigit(popt2.getInfo())){//lo hice asi para que los nodos de los operadores siempre esten en el lado izquierdo
-                //si nodo 1 es digito y nodo 2 es operador, entonces el nodo 2 va a ser hijo izquierdo del operatorNode
-                operatorNode.insertLNode(popt2);
-                operatorNode.insertRNode(popt1);
-            }else if(isDigit(popt2.getInfo()) && !isDigit(popt1.getInfo())){
-                operatorNode.insertLNode(popt1);
-                operatorNode.insertRNode(popt2);
-            }else{//si los dos nodos son numeros son leaves
-                operatorNode.insertLNode(popt1);
-                operatorNode.insertRNode(popt2);
-            }
-             */
-            System.out.println("Padre: " + operatorNode.getInfo());
-            System.out.println("Left node: " + operatorNode.getLNode().getInfo());
-            System.out.println("Right node: " + operatorNode.getRNode().getInfo());
-            System.out.println("");
-
-            stack.push(operatorNode);
-        }
-    }
-
     public void inorden(BinaryTree nodo) {
         if (nodo != null) {
             inorden(nodo.getLNode());
@@ -234,17 +201,7 @@ public class BinaryTree implements Comparable<BinaryTree> {
         return Integer.parseInt(this.getInfo()) - compararCantidad;
     }
 
-    public static BinaryTree postf_toTree(String[] s) {//ESTO TIENE QUE ESTAR EN EL MAIN o en una clase Tree que contenga un nodo root pero no se si es necesario
-        BinaryTree b = new BinaryTree();
-
-        Stack<BinaryTree> stackTree = new Stack();
-
-        for (int i = 0; i < s.length; i++) {
-            b.postfixTree(s[i], stackTree);
-        }
-
-        return stackTree.pop();
-    }
+    
 
     public static boolean isDigit(String s) {
         return Character.isDigit(s.charAt(0));

@@ -184,18 +184,18 @@ public class BinTree implements Comparable<BinTree> {
         return text;
     }
 
-    public int evaluar(BinTree nodo) {
+    public double evaluar(BinTree nodo) {
         if (nodo == null) {
-            return 0;
+            return 0.0;
         }
 
         if (nodo.getLNode() == null && nodo.getRNode() == null) {//esto significa que el nodo es leaf, por lo tanto es un numero
             //System.out.println("info " + nodo.getInfo());
-            return Integer.parseInt(nodo.getInfo());
+            return Double.parseDouble(nodo.getInfo());
         }
 
-        int valor_l = evaluar(nodo.getLNode()); //evaluar left node
-        int valor_r = evaluar(nodo.getRNode()); // evaluar right node
+        double valor_l = evaluar(nodo.getLNode()); //evaluar left node
+        double valor_r = evaluar(nodo.getRNode()); // evaluar right node
 
 
         switch (nodo.getInfo()) {//si nodo.getInfo() es un operado
@@ -208,9 +208,9 @@ public class BinTree implements Comparable<BinTree> {
             case "/":
                 return valor_l / valor_r;
             case "^":
-                return (int) Math.pow(valor_l, valor_r);
+                return (int) Math.pow((int)valor_l, (int)valor_r);
             case "!":
-                return factorial(valor_l);
+                return factorial((int)valor_l);
 
         }
 
@@ -231,47 +231,9 @@ public class BinTree implements Comparable<BinTree> {
         else if (nodo.getInfo().equals("^")){
             return (int) Math.pow(valor_l, valor_r);
         }*/
-        return 0;
+        return 0.0;
     }
 
-    public void postfixTree(String s, Stack<BinTree> stack) {
-        if (isDigit(s)) {
-            stack.push(new BinTree(s));
-        } else {
-            BinTree operatorNode = new BinTree(s);
-
-            if (s.equals("!")) {
-                BinTree lNode = (stack.pop());
-                operatorNode.insertLNode(lNode);
-            } else {
-                BinTree rNodo = (stack.pop());//nodo derecho
-                BinTree lNodo = (stack.pop());
-                operatorNode.insertRNode(rNodo);//inserta nodo derecho
-                operatorNode.insertLNode(lNodo);
-
-                /*
-            if(isDigit(popt1.getInfo()) && !isDigit(popt2.getInfo())){//lo hice asi para que los nodos de los operadores siempre esten en el lado izquierdo
-                //si nodo 1 es digito y nodo 2 es operador, entonces el nodo 2 va a ser hijo izquierdo del operatorNode
-                operatorNode.insertLNode(popt2);
-                operatorNode.insertRNode(popt1);
-            }else if(isDigit(popt2.getInfo()) && !isDigit(popt1.getInfo())){
-                operatorNode.insertLNode(popt1);
-                operatorNode.insertRNode(popt2);
-            }else{//si los dos nodos son numeros son leaves
-                operatorNode.insertLNode(popt1);
-                operatorNode.insertRNode(popt2);
-            }
-                 */
-                System.out.println("Padre: " + operatorNode.getInfo());
-                System.out.println("Left node: " + operatorNode.getLNode().getInfo());
-                System.out.println("Right node: " + operatorNode.getRNode().getInfo());
-                System.out.println("");
-
-            }
-
-            stack.push(operatorNode);
-        }
-    }
 
     public boolean isDigit(String s) {
         return Character.isDigit(s.charAt(0));

@@ -829,6 +829,8 @@ public class GUIProject extends javax.swing.JFrame {
         jt_dijkstra.setRows(5);
         jScrollPane7.setViewportView(jt_dijkstra);
 
+        jc_origen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Origen" }));
+
         jb_dijkstra.setText("OK");
         jb_dijkstra.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1176,11 +1178,12 @@ public class GUIProject extends javax.swing.JFrame {
 
         BinTree bt = postf_toTree(finalinfix);
 
+        Double respuesta = bt.evaluar(bt);
         bt.inorden(bt);
-        System.out.print(" = " + bt.evaluar(bt));
+        System.out.print(" = " + respuesta);
         System.out.println("");
 
-        jl_answer.setText(Double.toString(bt.evaluar(bt)));
+        jl_answer.setText(Double.toString(respuesta));
 
 
     }//GEN-LAST:event_jLabel17MouseClicked
@@ -1212,23 +1215,56 @@ public class GUIProject extends javax.swing.JFrame {
             System.out.println("Matriz de adyacencia: \n");
             g.imprimirMatrizAdy();
             System.out.println("");
-            ArrayList<String> colores = g.Bicoloreable(0);
-            //System.out.println("Size: " + colores.size());
-            jl_bicolorResp.setText(g.isBicoloreable() ? ("Bi-coloreable!") : ("No es bi-coloreable :("));
+            boolean bipartito = false;
 
-            /*for(String color : colores){
-                System.out.println("Color: " + color);
+            /*para ver si es bipartito desde cualquier origen
+            for (int i = 0; i < g.getMatrizAdy().length; i++) {
+                this.jt_grupoazul.setText("");
+                this.jt_gruporojo.setText("");
+                ArrayList<String> colores = g.DFSbipartito(i);
+                if(g.isBicoloreable()){
+                    System.out.println("es bicoloreable en " + i);
+                    for (int j = 0; j < colores.size(); j++) {
+                        if (colores.get(j).equals("azul")) {
+                            jt_grupoazul.append(Integer.toString(j) + "\n");
+                        } else {
+                            jt_gruporojo.append(Integer.toString(j) + "\n");
+                        }
+                    }
+                    bipartito = true;
+                    break;
+                }    
+                
+                System.out.println("");
             }*/
+            ArrayList<String> colores = g.DFSbipartito(0);
+
             if (g.isBicoloreable()) {
-                for (int i = 0; i < colores.size(); i++) {
-                    if (colores.get(i).equals("azul")) {
+                bipartito = true;
+                for (int j = 0; j < colores.size(); j++) {
+                    if (colores.get(j).equals("azul")) {
+                        jt_grupoazul.append(Integer.toString(j) + "\n");
+                    } else {
+                        jt_gruporojo.append(Integer.toString(j) + "\n");
+                    }
+                }
+            }
+
+            //ArrayList<String> coloress = g.DFSbipartito(0);//es bicoloreable desde origen 0?
+            /*if (g.isBicoloreable()) {
+                for (int i = 0; i < coloress.size(); i++) {
+                    if (coloress.get(i).equals("azul")) {
                         jt_grupoazul.append(Integer.toString(i) + "\n");
                     } else {
                         jt_gruporojo.append(Integer.toString(i) + "\n");
                     }
                 }
-            }
+            }*/
+            //ArrayList<String> colores = g.Bicoloreable(0);
+            //System.out.println("Size: " + colores.size());
+            jl_bicolorResp.setText(bipartito == true ? ("Bi-coloreable!") : ("No es bi-coloreable desde el origen"));
 
+            
             jt_gruporojo.setVisible(true);
             jt_grupoazul.setVisible(true);
             jl_rojo.setVisible(true);
@@ -1272,18 +1308,20 @@ public class GUIProject extends javax.swing.JFrame {
         try {
             grafo = createMatriz(path, false);
             Floyd floyd = new Floyd(grafo);
-            
+
             double[][] distancias = floyd.distanciaTodosLosDestinos();
-            
+
             for (int i = 0; i < distancias.length; i++) {
                 for (int j = 0; j < distancias.length; j++) {
-                    if(j < distancias.length-1)
+                    if (j < distancias.length - 1) {
                         floyd_ta.append(distancias[i][j] + "\t");
-                    else
+                    } else {
                         floyd_ta.append(distancias[i][j] + "");
-                }floyd_ta.append("\n");
+                    }
+                }
+                floyd_ta.append("\n");
             }
-            
+
             //floyd_ta.updateUI();
         } catch (IOException ex) {
             Logger.getLogger(GUIProject.class.getName()).log(Level.SEVERE, null, ex);
@@ -1315,6 +1353,8 @@ public class GUIProject extends javax.swing.JFrame {
         jt_dijkstra.setText("");
         pathGrafo = load();
         
+        jc_origen.removeAllItems();
+
         try {
             Grafo g = createGrafoAdj(pathGrafo);
             actual = g;
@@ -1326,10 +1366,9 @@ public class GUIProject extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(GUIProject.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
+
         //tf_pathtree.setText(pathTree); 
-        
+
     }//GEN-LAST:event_jLabel34MouseClicked
 
     private void jLabel35MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel35MouseClicked
@@ -1352,18 +1391,17 @@ public class GUIProject extends javax.swing.JFrame {
             Dijkstra dijkstra = new Dijkstra(copia, g.getNodos().get(jc_origen.getSelectedIndex()));
 
             //Map<Nodo, Double> distanciass = dijkstra.DijkstraFinal();
-            Map<Nodo, Double>  dist = dijkstra.dijkstra();
+            Map<Nodo, Double> dist = dijkstra.dijkstra();
             //System.out.println("dinstancia final\n");
             for (Entry<Nodo, Double> distancia : dist.entrySet()) {
                 Nodo n = distancia.getKey();
                 double d = distancia.getValue();
-               
+
                 this.jt_dijkstra.append(dijkstra.origen.getId() + " -> " + n.getId() + ": " + d + "\n");
 
                 //System.out.println(dijkstra.origen.getId() + " -> " + n.getId() + ": " + d);
             }
-            
-            
+
             /*System.out.println("SIZE: " +dist.size());
             for (int i = 0; i < dist.size(); i++) {
                 System.out.println("distancia: " + dist.get(i));
@@ -1579,41 +1617,66 @@ public class GUIProject extends javax.swing.JFrame {
         for (String infix1 : infix) {
             if (infix1.equals(" ")) {//si hay un espacio no hace nada
             } else if (isDigit(infix1)) {//si infix[i] o infix1 es un digito, se agrega directamente al stringbuilder
+                //System.out.println("agregando " + infix1 + " al strigbuilder");
                 sb.append(infix1).append(" ");
             } else if (isOperator(infix1)) {//si es operador verifica que el stack no este vacio y la precedencia mas alta
                 while (!s.isEmpty() && !s.peek().equals("(") && precedenciaMasAlta(s.peek(), infix1)) {
-                    sb.append(s.pop()).append(" ");
+                    //String operador = s.pop();
+                    sb.append(s.pop()/*operador*/).append(" ");
+                    //System.out.println("agregando operador: " + operador + "al string builder");
                 }
-                
+
                 s.push(infix1);
             } else if (infix1.equals("(")) {//si encuentra un "(" se agrega al stack
+                //System.out.println("agregando ( al stack");
                 s.push(infix1);
-            } else if (infix1.equals(")")) {
+            } else if (infix1.equals(")")) {//no se agrega al stack pero elimina el primer parentesis "(" encontrado y agrega los operadores al string final
+                System.out.println("encontro )");
                 while (!s.empty() && !s.peek().equals("(")) {
-                    sb.append(s.pop()).append(" ");
+                    //String operador = s.pop();
+                    //System.out.println("agregando operador: " + operador + "al stringbuilder");
+                    sb.append(s.pop()/*operador*/).append(" ");
                 }
-                s.pop();
+                s.pop();//se saca el parentesis "("
+                //System.out.println("sacando ( del stack");
             }
         }
 
         while (!s.isEmpty()) {
-            sb.append(s.pop()).append(" ");
+            //String remaining = s.pop();
+            //System.out.println("agregando del while " + remaining);
+            sb.append(s.pop()/*remaining*/).append(" ");
         }
 
         String[] sFinal = sb.toString().split(" ");
         return sFinal;
     }
 
-    public static BinTree postf_toTree(String[] s) {//ESTO TIENE QUE ESTAR EN EL MAIN o en una clase Tree que contenga un nodo root pero no se si es necesario
-        BinTree b = new BinTree();
-
-        Stack<BinTree> stackTree = new Stack();
+    public static BinTree postf_toTree(String[] s/*recibe un arreglo de la expresion en postfix*/) {
+        Stack<BinTree> stackTree = new Stack();//aqui se van armando los arboles, el ultimo nodo que quede (stackTree.pop()) va a ser el arbol final
 
         for (int i = 0; i < s.length; i++) {
-            b.postfixTree(s[i], stackTree);
+            if (isDigit(s[i])) {
+                stackTree.push(new BinTree(s[i]));
+            } else {//si no es un digito se crea un nuevo arbol, la raiz es el operados y los hijos (hojas) son los numeros o un arbol operador ya armado
+                BinTree nodoOperador = new BinTree(s[i]);
+
+                BinTree nodoR = stackTree.pop();
+                BinTree nodoL = stackTree.pop();
+                nodoOperador.insertRNode(nodoR);
+                nodoOperador.insertLNode(nodoL);
+
+                stackTree.push(nodoOperador);
+
+                System.out.println("Padre: " + nodoOperador.getInfo());
+                System.out.println("Left node: " + nodoOperador.getLNode().getInfo());
+                System.out.println("Right node: " + nodoOperador.getRNode().getInfo());
+                System.out.println("");
+            }
+            //b.postfixTree(s[i], stackTree);
         }
 
-        return stackTree.pop();
+        return stackTree.pop();//el ultimo nodo que quede en el stack es el arbol completo
     }
 
     public static boolean isDigit(String s) {
@@ -1765,8 +1828,8 @@ public class GUIProject extends javax.swing.JFrame {
                 int numeroNodo = Integer.parseInt(info.get(i)[0]);
                 int padre = Integer.parseInt(info.get(i)[1]);
                 double evaluacion = Integer.parseInt(info.get(i)[2]);
-                
-                if(padre == -1){
+
+                if (padre == -1) {
                     rootTree = new TreeNode(numeroNodo, evaluacion);
                 }
             }
@@ -1779,7 +1842,7 @@ public class GUIProject extends javax.swing.JFrame {
                     //System.out.println("Padre: " + padre);
                     double evaluacion = Integer.parseInt(info.get(i)[2]);
 
-                    if(padre != -1) {
+                    if (padre != -1) {
                         TreeNode p = findPadre(rootTree, padre);
                         p = foundTree;
                         if (foundTree != null/*!existe.contains(padre)*/) {

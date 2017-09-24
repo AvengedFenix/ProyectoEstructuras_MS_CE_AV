@@ -44,6 +44,7 @@ public class Dijkstra {
         distancias.replace(origen, 0.0);//la distancia del nodo origen = 0
         while(!nodosAProcesar.isEmpty()){
             Nodo nodoActual = new Nodo("");
+            //nodo actual va a ser el nodo con la menor distancia en la lista de nodos
             double menDistancia = 100000;
             for(Nodo n : nodosAProcesar){
                 double distancia = distancias.get(n);
