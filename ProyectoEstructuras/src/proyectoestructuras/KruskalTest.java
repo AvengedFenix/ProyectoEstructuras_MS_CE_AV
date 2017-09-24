@@ -7,6 +7,7 @@ package proyectoestructuras;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import org.graphstream.algorithm.Kruskal;
 import org.graphstream.algorithm.generator.DorogovtsevMendesGenerator;
 import org.graphstream.graph.Edge;
 import org.graphstream.graph.Graph;
@@ -20,18 +21,46 @@ import org.graphstream.graph.implementations.DefaultGraph;
 public class KruskalTest {
 
     public static void main(String... args) {
-        DorogovtsevMendesGenerator gen = new DorogovtsevMendesGenerator();
-        Graph graph = new DefaultGraph("Prim Test");
+        //DorogovtsevMendesGenerator gen = new DorogovtsevMendesGenerator();
+        //Graph graph = new DefaultGraph("Prim Test");
+        GrafoMatriz graph = new GrafoMatriz(4, true);
+        graph.agregarArista(0, 2, -2);
+        graph.agregarArista(2, 3, 2);
+        graph.agregarArista(3, 1, -1);
+        graph.agregarArista(1, 0, 4);
+        graph.agregarArista(1, 2, 3);
+        
+        Graph graphstream = new DefaultGraph("Prim Test");
+        for (int i = 0; i < graph.getMatrizAdy().length; i++) {
+            graphstream.addNode(Integer.toString(i));
+            // for (int j = 0; j < graph.getMatrizAdy().length; j++) {
+            //   graphstream.add
+            //}
+        }
+
+        for (int i = 0; i < graph.getMatrizAdy().length; i++) {
+            for (int j = 0; j < graph.getMatrizAdy().length; j++) {
+               // String s = Integer.toString(i) + Integer.toString(j);
+                if (i == j) {
+                    System.out.println("Nothing");
+                }else if(graph.getMatrizAdy()[i][j] != 0){
+                    graphstream.addEdge("i: " + Integer.toString(i) + " j: " + Integer.toString(j), Integer.toString(i), Integer.toString(j));
+                    graphstream.getEdge("i: " + Integer.toString(i) + " j: " + Integer.toString(j)).setAttribute("weight", graph.getValorMatriz(i, j));
+                    graphstream.getEdge("i: " + Integer.toString(i) + " j: " + Integer.toString(j)).setAttribute("ui.label", graph.getValorMatriz(i, j));
+                    
+                }
+            }
+        }
 
         String css = "edge .notintree {size:1px;fill-color:gray;text-font:montserrat;} "
                 + "edge .intree {size:3px;fill-color:black;text-font:montserrat;}"
                 + "node {fill-mode: dyn-plain;fill-color: red, blue;text-size:16;text-font:montserrat;"
                 + "size: 20px;}";
 
-        graph.addAttribute("ui.stylesheet", css);
-        graph.display();
+        graphstream.addAttribute("ui.stylesheet", css);
+        graphstream.display();
 
-        gen.addEdgeLabels(true);
+        /*gen.addEdgeLabels(true);
         gen.addEdgeAttribute("weight");
         gen.setEdgeAttributesRange(1, 100.0);
         gen.addNodeLabels(true);
@@ -39,8 +68,68 @@ public class KruskalTest {
         gen.begin();
 
         for (int i = 0; i < 3 && gen.nextEvents(); i++);
-        gen.end();
+        gen.end();*/
 
+        Kruskal kruskal = new Kruskal("ui.class", "intree", "notintree");
+        kruskal.init(graphstream);
+        kruskal.compute();
+
+    }
+    
+    public static void Krusky(String path){
+          GrafoMatriz graph = new GrafoMatriz(4, true);
+        graph.agregarArista(0, 2, -2);
+        graph.agregarArista(2, 3, 2);
+        graph.agregarArista(3, 1, -1);
+        graph.agregarArista(1, 0, 4);
+        graph.agregarArista(1, 2, 3);
+        
+        Graph graphstream = new DefaultGraph("Prim Test");
+        for (int i = 0; i < graph.getMatrizAdy().length; i++) {
+            graphstream.addNode(Integer.toString(i));
+            // for (int j = 0; j < graph.getMatrizAdy().length; j++) {
+            //   graphstream.add
+            //}
+        }
+
+        for (int i = 0; i < graph.getMatrizAdy().length; i++) {
+            for (int j = 0; j < graph.getMatrizAdy().length; j++) {
+               // String s = Integer.toString(i) + Integer.toString(j);
+                if (i == j) {
+                    System.out.println("Nothing");
+                }else if(graph.getMatrizAdy()[i][j] != 0){
+                    graphstream.addEdge("i: " + Integer.toString(i) + " j: " + Integer.toString(j), Integer.toString(i), Integer.toString(j));
+                    graphstream.getEdge("i: " + Integer.toString(i) + " j: " + Integer.toString(j)).setAttribute("weight", graph.getValorMatriz(i, j));
+                    graphstream.getEdge("i: " + Integer.toString(i) + " j: " + Integer.toString(j)).setAttribute("ui.label", graph.getValorMatriz(i, j));
+                    
+                }
+            }
+        }
+
+        String css = "edge .notintree {size:1px;fill-color:gray;text-font:montserrat;} "
+                + "edge .intree {size:3px;fill-color:black;text-font:montserrat;}"
+                + "node {fill-mode: dyn-plain;fill-color: red, blue;text-size:16;text-font:montserrat;"
+                + "size: 20px;}";
+
+        graphstream.addAttribute("ui.stylesheet", css);
+        graphstream.display();
+
+        /*gen.addEdgeLabels(true);
+        gen.addEdgeAttribute("weight");
+        gen.setEdgeAttributesRange(1, 100.0);
+        gen.addNodeLabels(true);
+        gen.addSink(graph);
+        gen.begin();
+
+        for (int i = 0; i < 3 && gen.nextEvents(); i++);
+        gen.end();*/
+
+        Kruskal kruskal = new Kruskal("ui.class", "intree", "notintree");
+        kruskal.init(graphstream);
+        kruskal.compute();
+    }
+
+    public static void myKruskal(Graph graph) {
         for (int i = 0; i < graph.getEdgeCount(); i++) {
             Edge e = graph.getEdge(i);
             e.addAttribute("ui.label", Double.toString(e.getAttribute("weight")));
@@ -86,19 +175,18 @@ public class KruskalTest {
                     lowEdge.changeAttribute("ui.style", "size:3px;fill-color:black;");
                     nodes.add(n1);
                 }
-                /*
+
                 if (nodes.contains(n1) && nodes.contains(n2) && checkCycle(visited, lowEdge) == false) {
                     System.out.println("EDGE " + lowEdge.getId() + " INDEX " + j + "  WEIGHT " + weight);
 
                     lowEdge.changeAttribute("ui.style", "size:3px;fill-color:black;");
-                }*/
-                 
+                }
+
             }
             System.out.println("Nodes" + nodes);
             System.out.println("Edges" + edges);
 
         }
-
     }
 
     public static boolean checkCycle(ArrayList<Edge> edges, Edge lowEdge) {
