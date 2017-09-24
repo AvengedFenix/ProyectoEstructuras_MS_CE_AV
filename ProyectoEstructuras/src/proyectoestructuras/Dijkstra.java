@@ -27,49 +27,46 @@ public class Dijkstra {
         this.origen = origen;
     }
 
-    public Map<Nodo, Double> DijkstraFinal() {
+    
+    public Map<Nodo, Double> dijkstra(){
         Map<Nodo, Double> distancias = new HashMap();
-        for (Nodo nodo : grafo.getNodos()) {
-            distancias.put(nodo, 900.0);
+        ArrayList<Nodo> nodosAProcesar = new ArrayList();
+
+
+        for (int i = 0; i < grafo.getNodos().size(); i++) {
+            distancias.put(grafo.getNodos().get(i), 9999.0);//la distancia de origen hasta el destino es infinita (no se sabe)
+            if(Integer.parseInt(grafo.getNodos().get(i).getId()) == Integer.parseInt(origen.getId())){
+            }
+            nodosAProcesar.add(grafo.getNodos().get(i));
         }
-
-        ArrayList<Nodo> completos = new ArrayList();
-        ArrayList<Nodo> noCompletos = new ArrayList();
-
-        distancias.replace(this.origen, 0.0);
-
-        noCompletos.add(this.origen);
-        while (!noCompletos.isEmpty()) {
-            //nodoActual = nodo de menor distancia
+        
+        
+        distancias.replace(origen, 0.0);//la distancia del nodo origen = 0
+        while(!nodosAProcesar.isEmpty()){
             Nodo nodoActual = new Nodo("");
-            double menDistancia = 9000;
-            for (Nodo nodo : noCompletos) {
-                double distancia = distancias.get(nodo);
+            double menDistancia = 100000;
+            for(Nodo n : nodosAProcesar){
+                double distancia = distancias.get(n);
                 if (distancia < menDistancia) {
                     menDistancia = distancia;
-                    nodoActual = nodo;
+                    nodoActual = n;
                 }
             }
-
-            noCompletos.remove(nodoActual);
-
-            for (int i = 0; i < nodoActual.getNodosAdyacentes().size(); i++) {//encontrar la distancia menor de los nodos adyacentes
-                Nodo nAdy = nodoActual.getNodosAdyacentes().get(i);
-                Double peso = nodoActual.getPesoAdyacente().get(i);
-
-                Double menorDistancia = distancias.get(nodoActual);
-                if (!completos.contains(nAdy) && (distancias.get(nAdy) > menorDistancia + peso)) {
-                    distancias.replace(nAdy, menorDistancia + peso);
-
+            
+            nodosAProcesar.remove(nodoActual);
+            
+            for (int j = 0; j < nodoActual.getNodosAdyacentes().size(); j++) {
+                double dist = distancias.get(nodoActual) + nodoActual.getPesoAdyacente().get(j);
+                Nodo ady = nodoActual.getNodosAdyacentes().get(j);
+                if(dist < distancias.get(ady)){
+                    distancias.replace(ady, dist);
                 }
-
-                noCompletos.add(nAdy);
             }
-
-            completos.add(nodoActual);
         }
-
+        
         return distancias;
+        
+        
     }
 
 }

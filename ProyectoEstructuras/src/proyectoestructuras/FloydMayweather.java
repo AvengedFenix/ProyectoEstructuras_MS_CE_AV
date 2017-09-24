@@ -19,7 +19,7 @@ public class FloydMayweather {
         g.agregarArista(4, 5, 10);
         g.agregarArista(5, 3, 11);
         g.agregarArista(5, 6, 12);*/
-
+/*
         g.agregarArista(0, 2, -2);
         g.agregarArista(2, 3, 2);
         g.agregarArista(3, 1, -1);
@@ -28,7 +28,7 @@ public class FloydMayweather {
         g.agregarArista(1, 2, 3);
 
         g.imprimirMatrizAdy();
-
+*/
         double[][] matriz = new double[g.getMatrizAdy().length][g.getMatrizAdy().length];
 
         for (int i = 0; i < g.getMatrizAdy().length; i++) {
@@ -99,14 +99,14 @@ public class FloydMayweather {
 
     public String Floyd(String path) {
         GrafoMatriz g = new GrafoMatriz(4, true);
-
+/*
         g.agregarArista(0, 2, -2);
         g.agregarArista(2, 3, 2);
         g.agregarArista(3, 1, -1);
         //g.agregarArista(1, 0, -4);
         g.agregarArista(1, 0, 4);
         g.agregarArista(1, 2, 3);
-
+*/
         g.imprimirMatrizAdy();
 
         double[][] matriz = new double[g.getMatrizAdy().length][g.getMatrizAdy().length];

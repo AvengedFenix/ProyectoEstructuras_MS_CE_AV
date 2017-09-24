@@ -707,7 +707,7 @@ public class GUIProject extends javax.swing.JFrame {
 
         floyd_ta.setEditable(false);
         floyd_ta.setColumns(20);
-        floyd_ta.setFont(new java.awt.Font("Montserrat", 1, 20)); // NOI18N
+        floyd_ta.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
         floyd_ta.setRows(5);
         jScrollPane6.setViewportView(floyd_ta);
 
@@ -1238,12 +1238,34 @@ public class GUIProject extends javax.swing.JFrame {
 
     private void jLabel31MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel31MouseClicked
         // TODO add your handling code here:
-        String path = load();
+        /*String path = load();
         FloydMayweather fm = new FloydMayweather();
 
         String texto = fm.Floyd(path);
         floyd_ta.setText(fm.getText());
-        floyd_ta.updateUI();
+        floyd_ta.updateUI();*/
+        floyd_ta.setText("");
+        String path = load();
+        GrafoMatriz grafo;
+        try {
+            grafo = createMatriz(path, false);
+            Floyd floyd = new Floyd(grafo);
+            
+            double[][] distancias = floyd.distanciaTodosLosDestinos();
+            
+            for (int i = 0; i < distancias.length; i++) {
+                for (int j = 0; j < distancias.length; j++) {
+                    if(j < distancias.length-1)
+                        floyd_ta.append(distancias[i][j] + "\t");
+                    else
+                        floyd_ta.append(distancias[i][j] + "");
+                }floyd_ta.append("\n");
+            }
+            
+            //floyd_ta.updateUI();
+        } catch (IOException ex) {
+            Logger.getLogger(GUIProject.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jLabel31MouseClicked
 
     private void jLabel20MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel20MouseClicked
@@ -1284,15 +1306,20 @@ public class GUIProject extends javax.swing.JFrame {
 
             Dijkstra dijkstra = new Dijkstra(copia, g.getNodos().get(0));
 
-            Map<Nodo, Double> distanciass = dijkstra.DijkstraFinal();
-
+            //Map<Nodo, Double> distanciass = dijkstra.DijkstraFinal();
+            Map<Nodo, Double>  dist = dijkstra.dijkstra();
             System.out.println("dinstancia final\n");
-            for (Entry<Nodo, Double> distancia : distanciass.entrySet()) {
+            for (Entry<Nodo, Double> distancia : dist.entrySet()) {
                 Nodo n = distancia.getKey();
                 double d = distancia.getValue();
-                this.jt_dijkstra.append(dijkstra.origen.getId() + " -> " + n.getId() + ": " + d + "\n");
+                this.jt_dijkstra.append((Integer.parseInt(dijkstra.origen.getId()) + 1) + " -> " + (Integer.parseInt(n.getId()) + 1) + ": " + d + "\n");
                 //System.out.println(dijkstra.origen.getId() + " -> " + n.getId() + ": " + d);
             }
+            
+            /*System.out.println("SIZE: " +dist.size());
+            for (int i = 0; i < dist.size(); i++) {
+                System.out.println("distancia: " + dist.get(i));
+            }*/
         } catch (Exception ex) {
             Logger.getLogger(GUIProject.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1847,7 +1874,7 @@ public class GUIProject extends javax.swing.JFrame {
         for (int i = 0; i < info.size(); i++) {
             for (int j = 0; j < info.size(); j++) {
                 if (Integer.parseInt(info.get(i)[j]) != 0) {
-                    nodos.get(i).agregarDestino(nodos.get(j), Double.parseDouble(info.get(i)[j]));
+                    nodos.get(i).agregarArista(nodos.get(j), Double.parseDouble(info.get(i)[j]));
                     //n.getNodosAdyacentes().add(new Nodo(Integer.toString(j)));
                     //n.getPesoAdyacente().add(Double.parseDouble(info.get(i)[j]));
                 }

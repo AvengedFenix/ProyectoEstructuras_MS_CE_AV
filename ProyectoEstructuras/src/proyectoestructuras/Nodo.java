@@ -21,7 +21,7 @@ public class Nodo {
         this.id = id;
     }
 
-    public void agregarDestino(Nodo destino, double dist) {
+    public void agregarArista(Nodo destino, double dist) {
         NodosAdy.add(destino);
         pesoAdy.add(dist);
     }
