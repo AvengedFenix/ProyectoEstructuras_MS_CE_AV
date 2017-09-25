@@ -1401,7 +1401,6 @@ public class GUIProject extends javax.swing.JFrame {
         // TODO add your handling code here:
         String path = load();
         
-        
         //PrimTest2 prim = new PrimTest2();
         try {
             ta_prim.setText("");
@@ -1410,18 +1409,34 @@ public class GUIProject extends javax.swing.JFrame {
             
             ArrayList<int[]> aristas = prim.prim(0);
            
-            
+            Double cost = 0.0;
             for (int i = 0; i < aristas.size(); i++) {
                 ta_prim.append(aristas.get(i)[0] + " -> " + aristas.get(i)[1] + " : " + aristas.get(i)[2] + "\n");
+                cost += aristas.get(i)[2];
             }
             
+            ta_prim.append("\ncosto: " + cost);
             
             //PrimTest2.Prim(path);
         } catch (IOException ex) {
             Logger.getLogger(GUIProject.class.getName()).log(Level.SEVERE, null, ex);
         }
-        /*KruskalTest kruskal = new KruskalTest();
-        kruskal.Krusky(path);*/
+        
+        //KruskalTest kruskal = new KruskalTest();
+        
+        KruskalTest.Krusky(path);
+        /*
+        path = load();
+        Grafo g;
+        
+        try {
+            g = createGrafoAdj(path);
+            Prim krusk = new Prim(g);
+            krusk.kruskal();
+            
+        } catch (IOException ex) {
+            Logger.getLogger(GUIProject.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
     }//GEN-LAST:event_jLabel35MouseClicked
 
     private void jb_dijkstraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_dijkstraMouseClicked
@@ -1441,15 +1456,20 @@ public class GUIProject extends javax.swing.JFrame {
 
             //Map<Nodo, Double> distanciass = dijkstra.DijkstraFinal();
             Map<Nodo, Double> dist = dijkstra.dijkstra();
+            
             //System.out.println("dinstancia final\n");
             for (Entry<Nodo, Double> distancia : dist.entrySet()) {
                 Nodo n = distancia.getKey();
                 double d = distancia.getValue();
 
                 this.jt_dijkstra.append(dijkstra.origen.getId() + " -> " + n.getId() + ": " + d + "\n");
+                
+                
 
                 //System.out.println(dijkstra.origen.getId() + " -> " + n.getId() + ": " + d);
             }
+            
+            
 
             /*System.out.println("SIZE: " +dist.size());
             for (int i = 0; i < dist.size(); i++) {

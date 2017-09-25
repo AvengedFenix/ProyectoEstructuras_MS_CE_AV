@@ -12,7 +12,7 @@ import java.util.Map;
  *
  * @author andre
  */
-public class Grafo {
+public class Grafo{
 
     //int[] nodos;
     private ArrayList<Nodo> nodos;
@@ -124,6 +124,7 @@ public class Grafo {
         }
         return true;
     }
+    
     
     
 }

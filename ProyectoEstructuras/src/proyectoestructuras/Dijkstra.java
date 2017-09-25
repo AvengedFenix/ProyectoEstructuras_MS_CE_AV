@@ -8,6 +8,7 @@ package proyectoestructuras;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  *
@@ -32,6 +33,7 @@ public class Dijkstra {
         Map<Nodo, Double> distancias = new HashMap();
         ArrayList<Nodo> nodosAProcesar = new ArrayList();
 
+        
 
         for (int i = 0; i < grafo.getNodos().size(); i++) {
             distancias.put(grafo.getNodos().get(i), 9999.0);//la distancia de origen hasta el destino es infinita (no se sabe)
@@ -64,6 +66,8 @@ public class Dijkstra {
                 }
             }
         }
+        
+        
         
         return distancias;
         

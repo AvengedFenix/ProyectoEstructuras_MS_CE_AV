@@ -96,7 +96,7 @@ public class KruskalTest {
             for (int j = 0; j < graph.getMatrizAdy().length; j++) {
                // String s = Integer.toString(i) + Integer.toString(j);
                 if (i == j) {
-                    System.out.println("Nothing");
+                   // System.out.println("Nothing");
                 }else if(graph.getMatrizAdy()[i][j] != 0){
                     graphstream.addEdge("i: " + Integer.toString(i) + " j: " + Integer.toString(j), Integer.toString(i), Integer.toString(j));
                     graphstream.getEdge("i: " + Integer.toString(i) + " j: " + Integer.toString(j)).setAttribute("weight", graph.getValorMatriz(i, j));

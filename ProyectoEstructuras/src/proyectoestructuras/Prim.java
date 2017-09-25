@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  *
@@ -18,9 +19,14 @@ public class Prim {
 
     double[][] matrizAdy;
     TreeNode tree;
+    Grafo grafo;
 
     public Prim(double[][] matriz) {
         matrizAdy = matriz;
+    }
+    
+    public Prim(Grafo g){
+        grafo = g;
     }
     
     public ArrayList<int[]> prim(int origen){
@@ -55,7 +61,7 @@ public class Prim {
                 if(nodos.containsKey(ady) && distancia[ady] > matrizAdy[nodoActual][ady] && padre[ady] == -1 && matrizAdy[nodoActual][ady] != 0){
                     padre[ady] = nodoActual;
                     distancia[ady] = matrizAdy[nodoActual][ady];
-                    System.out.println("true");
+                    //System.out.println("entro if");
                 }
             }
             
@@ -80,6 +86,36 @@ public class Prim {
         
         
         return aristas;
+    }
+    
+    public void kruskal(){
+        Map<Nodo, Nodo> aristas = new HashMap();
+        for (int i = 0; i < grafo.getNodos().size(); i++) {
+            ArrayList<Nodo> adyacentes = grafo.getNodos().get(i).getNodosAdyacentes();
+            for (int j = 0; j < grafo.getNodos().get(i).getNodosAdyacentes().size(); j++) {
+                if((aristas.containsKey(/*adyacentes.get(j)*/grafo.getNodos().get(i)) && aristas.get(/*adyacentes.get(j)*/grafo.getNodos().get(i)) != adyacentes.get(j))){
+                    aristas.put(grafo.getNodos().get(i), adyacentes.get(j));
+                }else if(aristas.containsKey(adyacentes.get(j)) && aristas.get(/*adyacentes.get(j)*/adyacentes.get(j)) != grafo.getNodos().get(i)){
+                    aristas.put(adyacentes.get(j), grafo.getNodos().get(i));
+                }else if(!aristas.containsKey(grafo.getNodos().get(i))){
+                    aristas.put(grafo.getNodos().get(i), adyacentes.get(j));
+                }else if(!aristas.containsKey(adyacentes.get(j))){
+                    aristas.put(adyacentes.get(j), grafo.getNodos().get(i));
+                    
+                
+                }
+            }
+        }
+        
+        for(Entry<Nodo, Nodo> arista : aristas.entrySet()){
+            Nodo n = arista.getKey();
+            Nodo n2 = arista.getValue();
+            
+            System.out.println("n: " + n.getId() + ", n2: " + n2.getId());
+        }
+        
+        
+        
     }
 
 }
