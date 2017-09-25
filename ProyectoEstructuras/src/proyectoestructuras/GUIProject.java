@@ -110,6 +110,8 @@ public class GUIProject extends javax.swing.JFrame {
         jLabel25 = new javax.swing.JLabel();
         jPanel21 = new javax.swing.JPanel();
         jLabel35 = new javax.swing.JLabel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        ta_prim = new javax.swing.JTextArea();
         jd_floyd = new javax.swing.JDialog();
         jPanel16 = new javax.swing.JPanel();
         jPanel17 = new javax.swing.JPanel();
@@ -484,6 +486,7 @@ public class GUIProject extends javax.swing.JFrame {
 
         jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 220, 270, 202));
 
+        ta_binary.setEditable(false);
         ta_binary.setColumns(20);
         ta_binary.setFont(new java.awt.Font("Montserrat", 0, 15)); // NOI18N
         ta_binary.setLineWrap(true);
@@ -646,17 +649,25 @@ public class GUIProject extends javax.swing.JFrame {
             .addComponent(jLabel35, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 22, Short.MAX_VALUE)
         );
 
+        ta_prim.setColumns(20);
+        ta_prim.setRows(5);
+        jScrollPane8.setViewportView(ta_prim);
+
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
         jPanel14Layout.setHorizontalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel14Layout.createSequentialGroup()
-                .addGap(268, 268, 268)
+                .addGap(304, 304, 304)
                 .addGroup(jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jLabel26)
                     .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(286, Short.MAX_VALUE))
+                .addContainerGap(250, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel14Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(221, 221, 221))
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -665,9 +676,11 @@ public class GUIProject extends javax.swing.JFrame {
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel26)
-                .addGap(113, 113, 113)
+                .addGap(68, 68, 68)
                 .addComponent(jPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(301, Short.MAX_VALUE))
+                .addGap(48, 48, 48)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(134, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jd_krusprimLayout = new javax.swing.GroupLayout(jd_krusprim.getContentPane());
@@ -1134,7 +1147,9 @@ public class GUIProject extends javax.swing.JFrame {
         tf_pathtree.setText(pathTree);
         TreeNode root;
         try {
+            this.ta_evaluacion.setText("");
             root = createTree(pathTree);
+            this.ta_evaluacion.setText("Evaluacion: " + root.evaluarTree(root));
         } catch (IOException ex) {
             Logger.getLogger(GUIProject.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1159,7 +1174,8 @@ public class GUIProject extends javax.swing.JFrame {
         // TODO add your handling code here:
         String str = tf_math.getText();
 
-        //String s = "  (4/2*  3*4)  +(10/5)^2";
+        if(!tf_math.getText().isEmpty()/* || isDigit(tf_math.getText())*/){
+            //String s = "  (4/2*  3*4)  +(10/5)^2";
         //String infix = "5-5";
         String s2 = str.replaceAll(" ", "");
         String format = "";
@@ -1184,6 +1200,10 @@ public class GUIProject extends javax.swing.JFrame {
         System.out.println("");
 
         jl_answer.setText(Double.toString(respuesta));
+        }else{
+            JOptionPane.showMessageDialog(this.jd_resolucion, "Error");
+        }
+        
 
 
     }//GEN-LAST:event_jLabel17MouseClicked
@@ -1298,6 +1318,7 @@ public class GUIProject extends javax.swing.JFrame {
         // TODO add your handling code here:
         String path = load();
         FloydMayweather fm = new FloydMayweather();
+        floyd_ta.setText("");
 
         try {
             String texto = fm.Floyd(path);
@@ -1351,7 +1372,7 @@ public class GUIProject extends javax.swing.JFrame {
         jd_krusprim.pack();
         jd_krusprim.setLocationRelativeTo(null);
         jd_krusprim.setVisible(true);
-        PrimTest2 prim = new PrimTest2();
+        // prim = new PrimTest2();
     }//GEN-LAST:event_jLabel22MouseClicked
 
     private void jLabel34MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel34MouseClicked
@@ -1379,9 +1400,28 @@ public class GUIProject extends javax.swing.JFrame {
     private void jLabel35MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel35MouseClicked
         // TODO add your handling code here:
         String path = load();
-        PrimTest2 prim = new PrimTest2();
-        KruskalTest kruskal = new KruskalTest();
-        kruskal.Krusky(path);
+        
+        
+        //PrimTest2 prim = new PrimTest2();
+        try {
+            ta_prim.setText("");
+            GrafoMatriz mat = createMatriz(path, false);
+            Prim prim = new Prim(mat.getMatrizAdy());
+            
+            ArrayList<int[]> aristas = prim.prim(0);
+           
+            
+            for (int i = 0; i < aristas.size(); i++) {
+                ta_prim.append(aristas.get(i)[0] + " -> " + aristas.get(i)[1] + " : " + aristas.get(i)[2] + "\n");
+            }
+            
+            
+            //PrimTest2.Prim(path);
+        } catch (IOException ex) {
+            Logger.getLogger(GUIProject.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        /*KruskalTest kruskal = new KruskalTest();
+        kruskal.Krusky(path);*/
     }//GEN-LAST:event_jLabel35MouseClicked
 
     private void jb_dijkstraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_dijkstraMouseClicked
@@ -1518,6 +1558,7 @@ public class GUIProject extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JButton jb_dijkstra;
     private javax.swing.JComboBox<String> jc_origen;
     private javax.swing.JDialog jd_bicoloreable;
@@ -1544,6 +1585,7 @@ public class GUIProject extends javax.swing.JFrame {
     private javax.swing.JTextArea ta_binary;
     private javax.swing.JTextArea ta_evaluacion;
     private javax.swing.JTextArea ta_original;
+    private javax.swing.JTextArea ta_prim;
     private javax.swing.JTextField tf_math;
     private javax.swing.JTextField tf_pathtree;
     // End of variables declaration//GEN-END:variables
@@ -1640,7 +1682,7 @@ public class GUIProject extends javax.swing.JFrame {
                 //System.out.println("agregando ( al stack");
                 s.push(infix1);
             } else if (infix1.equals(")")) {//no se agrega al stack pero elimina el primer parentesis "(" encontrado y agrega los operadores al string final
-                System.out.println("encontro )");
+                //System.out.println("encontro )");
                 while (!s.empty() && !s.peek().equals("(")) {
                     //String operador = s.pop();
                     //System.out.println("agregando operador: " + operador + "al stringbuilder");
@@ -1808,7 +1850,7 @@ public class GUIProject extends javax.swing.JFrame {
 
     public TreeNode createTree(String path) throws IOException {
 
-        TreeNode root = new TreeNode();
+        TreeNode rootTree = new TreeNode();
         BufferedReader br = new BufferedReader(new FileReader(path));
         try {
             String line = br.readLine();
@@ -1828,7 +1870,7 @@ public class GUIProject extends javax.swing.JFrame {
 
             ArrayList<Integer> nodosUnicos = new ArrayList();
 
-            TreeNode rootTree = null;
+            rootTree = null;
             ArrayList<TreeNode> padreNotFoundNodo = new ArrayList();
             ArrayList<Integer> padreNotFoundPadre = new ArrayList();
             ArrayList<Integer> padres = new ArrayList();
@@ -1937,7 +1979,7 @@ public class GUIProject extends javax.swing.JFrame {
             br.close();
         }
 
-        return root;
+        return rootTree;
     }
 
     public TreeNode findPadre(TreeNode raiz, int n) {
@@ -1949,7 +1991,7 @@ public class GUIProject extends javax.swing.JFrame {
 
         if (n == raiz.getNumNodo()) {
             find = raiz;
-            System.out.println("returned " + raiz.getNumNodo());
+            //System.out.println("returned " + raiz.getNumNodo());
             foundTree = raiz;
             return find;
         }

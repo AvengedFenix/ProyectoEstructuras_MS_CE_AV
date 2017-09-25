@@ -18,7 +18,7 @@ public class TreeNode {
     private int numNodo;
     
     
-    Person persona;
+    // persona;
 
     boolean visited = false;
     
@@ -29,9 +29,9 @@ public class TreeNode {
         this.order = order;
     }
     
-    public TreeNode(Person persona) {
+    /*public TreeNode(Person persona) {
         this.persona = persona;
-    }
+    }*/
 
     public TreeNode(int order, int numNodo, TreeNode parent) {
         this.order = order;
@@ -46,6 +46,10 @@ public class TreeNode {
     
     public TreeNode(double evaluacion){
         this.evaluacion = evaluacion;
+    }
+    
+    public TreeNode(int numNodo){
+        this.numNodo = numNodo;
     }
 
     public TreeNode() {
@@ -175,7 +179,7 @@ public class TreeNode {
                 }
                 
                 if(padre.allChildrenVisited()){
-                    padre.Evaluar();
+                    padre.Eval();
                     return padre;
                 }
             }
@@ -205,10 +209,10 @@ public class TreeNode {
             for(int i = 0; i < nodo.getChildren().size(); i++){
                 evaluarPostorden(nodo.getChildren().get(i));
             }
-            System.out.print("( " + nodo.getPersona().getEvaluation() + " )" + " ");
+            System.out.print("( " + nodo.getEvaluacion() + " )" + " ");
             System.out.println(nodo.allChildrenVisited());
             nodo.setVisited(true);
-            if(nodo.allChildrenVisited()) nodo.Evaluar();
+            if(nodo.allChildrenVisited()) nodo.Eval();
         }
     }
     
@@ -236,7 +240,7 @@ public class TreeNode {
     public void setEvaluacion(double x){
         this.evaluacion = x;
     }
-    
+    /*
     public void Evaluar(){
         double x = 0;
         double cont = 0;
@@ -251,7 +255,7 @@ public class TreeNode {
         }else{
             System.out.println("El nodo no tiene hijos");
         }
-    }
+    }*/
     
     public boolean allChildrenVisited(){
         if(!this.children.isEmpty()){
@@ -287,13 +291,13 @@ public class TreeNode {
         return cont;
     }
     
-    public Person getPersona(){
+    /*public Person getPersona(){
         return this.persona;
     }
     
     public void setPersona(Person persona){
         this.persona = persona;
-    }
+    }*/
     
     public void setNumNodo(int n){
         this.numNodo = n;
@@ -329,7 +333,7 @@ public class TreeNode {
             }
             //System.out.println("( " + nodo.getPersona().getName() + ": " + nodo.getPersona().getEvaluacion() + " )" + " ");
             //if(nodo.isParent()) nodo.Evaluar();
-            if(nodo.isParent()) nodo.Evaluar();
+            if(nodo.isParent()) nodo.Eval();
         }
     }
     
